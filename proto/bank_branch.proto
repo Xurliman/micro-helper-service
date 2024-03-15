@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package = "./proto";
+
+service BranchBranchService {
+  rpc Create(CreateBranchBranchRequest) returns (SuccessResponse);
+  rpc Read(SingleBranchBranchRequest) returns (BranchBranchProfileResponse);
+  rpc Update(SingleBranchBranchRequest) returns (SuccessResponse);
+  rpc Delete(SingleBranchBranchRequest) returns (SuccessResponse);
+}
+
+message CreateBranchBranchRequest{
+  string name = 1;
+  string code = 2;
+}
+
+message SingleBranchBranchRequest{
+  string id = 1;
+}
+
+message BranchBranchProfileResponse{
+  string id = 1;
+  string name = 2;
+  string code = 3;
+}
+
+message SuccessResponse{
+  string response = 1;
+}

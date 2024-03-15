@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package="./proto";
+
+service BankService {
+  rpc Create(CreateBankRequest) returns (SuccessResponse);
+  rpc Read(SingleBankRequest) returns (BankProfileResponse);
+  rpc Update(SingleBankRequest) returns (SuccessResponse);
+  rpc Delete(SingleBankRequest) returns (SuccessResponse);
+}
+
+message CreateBankRequest{
+  string name = 1;
+  string code = 2;
+}
+
+message SingleBankRequest{
+  string id = 1;
+}
+
+message BankProfileResponse{
+  string id = 1;
+  string name = 2;
+  string code = 3;
+}
+
+message SuccessResponse{
+  string response = 1;
+}

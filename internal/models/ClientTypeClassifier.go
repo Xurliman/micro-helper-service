@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type ClientTypeClassifier struct {
 	gorm.Model
 

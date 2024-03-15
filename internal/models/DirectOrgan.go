@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type DirectOrgan struct {
 	gorm.Model
 

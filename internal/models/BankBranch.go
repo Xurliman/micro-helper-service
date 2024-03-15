@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type BankBranch struct {
 	gorm.Model
 
@@ -14,4 +16,5 @@ type BankBranch struct {
 	CrudDates  string
 	//CreatedAt  string
 	//UpdatedAt  string
+  
 }

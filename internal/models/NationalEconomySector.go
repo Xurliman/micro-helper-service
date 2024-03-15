@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type NationalEconomySector struct {
 	gorm.Model
 

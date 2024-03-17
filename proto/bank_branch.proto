@@ -1,4 +1,5 @@
 syntax = "proto3";
+<<<<<<< HEAD
 option go_package = "./proto";
 
 service BranchBranchService {
@@ -9,15 +10,35 @@ service BranchBranchService {
 }
 
 message CreateBranchBranchRequest{
+=======
+option go_package="./proto";
+
+service BankBranchService {
+  rpc Create(CreateBankBranchRequest) returns (SuccessResponse);
+  rpc Read(SingleBankBranchRequest) returns (BankBranchProfileResponse);
+  rpc Update(SingleBankBranchRequest) returns (SuccessResponse);
+  rpc Delete(SingleBankBranchRequest) returns (SuccessResponse);
+}
+
+message CreateBankBranchRequest{
+>>>>>>> 72d7e68 (created necessary files & folders)
   string name = 1;
   string code = 2;
 }
 
+<<<<<<< HEAD
 message SingleBranchBranchRequest{
   string id = 1;
 }
 
 message BranchBranchProfileResponse{
+=======
+message SingleBankBranchRequest{
+  string id = 1;
+}
+
+message BankBranchProfileResponse{
+>>>>>>> 72d7e68 (created necessary files & folders)
   string id = 1;
   string name = 2;
   string code = 3;

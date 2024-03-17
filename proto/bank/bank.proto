@@ -2,15 +2,15 @@ syntax = "proto3";
 option go_package="./proto/bank";
 
 service BankService {
-  rpc Create(CreateBankRequest) returns (SuccessResponse);
+  rpc Create(CreateBankRequest) returns (BankProfileResponse);
   rpc Read(SingleBankRequest) returns (BankProfileResponse);
-  rpc Update(SingleBankRequest) returns (SuccessResponse);
+  rpc Update(UpdateBankRequest) returns (SuccessResponse);
   rpc Delete(SingleBankRequest) returns (SuccessResponse);
 }
 
 message CreateBankRequest{
   string name = 1;
-  string code = 2;
+  int64 code = 2;
 }
 
 message SingleBankRequest{
@@ -18,11 +18,17 @@ message SingleBankRequest{
 }
 
 message BankProfileResponse{
-  string id = 1;
+  int64 id = 1;
   string name = 2;
-  string code = 3;
+  int64 code = 3;
 }
 
 message SuccessResponse{
   string response = 1;
+}
+
+
+message UpdateBankRequest{
+  int64 id = 1;
+  string name = 2;
 }

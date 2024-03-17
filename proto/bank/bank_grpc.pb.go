@@ -22,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BankServiceClient interface {
-	Create(ctx context.Context, in *CreateBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Create(ctx context.Context, in *CreateBankRequest, opts ...grpc.CallOption) (*BankProfileResponse, error)
 	Read(ctx context.Context, in *SingleBankRequest, opts ...grpc.CallOption) (*BankProfileResponse, error)
-	Update(ctx context.Context, in *SingleBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
 
@@ -36,8 +36,8 @@ func NewBankServiceClient(cc grpc.ClientConnInterface) BankServiceClient {
 	return &bankServiceClient{cc}
 }
 
-func (c *bankServiceClient) Create(ctx context.Context, in *CreateBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *bankServiceClient) Create(ctx context.Context, in *CreateBankRequest, opts ...grpc.CallOption) (*BankProfileResponse, error) {
+	out := new(BankProfileResponse)
 	err := c.cc.Invoke(ctx, "/BankService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *bankServiceClient) Read(ctx context.Context, in *SingleBankRequest, opt
 	return out, nil
 }
 
-func (c *bankServiceClient) Update(ctx context.Context, in *SingleBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
+func (c *bankServiceClient) Update(ctx context.Context, in *UpdateBankRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
 	out := new(SuccessResponse)
 	err := c.cc.Invoke(ctx, "/BankService/Update", in, out, opts...)
 	if err != nil {
@@ -76,9 +76,9 @@ func (c *bankServiceClient) Delete(ctx context.Context, in *SingleBankRequest, o
 // All implementations must embed UnimplementedBankServiceServer
 // for forward compatibility
 type BankServiceServer interface {
-	Create(context.Context, *CreateBankRequest) (*SuccessResponse, error)
+	Create(context.Context, *CreateBankRequest) (*BankProfileResponse, error)
 	Read(context.Context, *SingleBankRequest) (*BankProfileResponse, error)
-	Update(context.Context, *SingleBankRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateBankRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleBankRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedBankServiceServer()
 }
@@ -87,13 +87,13 @@ type BankServiceServer interface {
 type UnimplementedBankServiceServer struct {
 }
 
-func (UnimplementedBankServiceServer) Create(context.Context, *CreateBankRequest) (*SuccessResponse, error) {
+func (UnimplementedBankServiceServer) Create(context.Context, *CreateBankRequest) (*BankProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedBankServiceServer) Read(context.Context, *SingleBankRequest) (*BankProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
 }
-func (UnimplementedBankServiceServer) Update(context.Context, *SingleBankRequest) (*SuccessResponse, error) {
+func (UnimplementedBankServiceServer) Update(context.Context, *UpdateBankRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedBankServiceServer) Delete(context.Context, *SingleBankRequest) (*SuccessResponse, error) {
@@ -149,7 +149,7 @@ func _BankService_Read_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _BankService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleBankRequest)
+	in := new(UpdateBankRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -161,7 +161,7 @@ func _BankService_Update_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/BankService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BankServiceServer).Update(ctx, req.(*SingleBankRequest))
+		return srv.(BankServiceServer).Update(ctx, req.(*UpdateBankRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

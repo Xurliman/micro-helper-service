@@ -2,16 +2,11 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
-	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"gorm.io/gorm"
 )
 
 type BankRepo struct {
 	db *gorm.DB
-}
-
-func New(db *gorm.DB) interfaces.BankRepoInterface {
-	return &BankRepo{db: db}
 }
 
 func (repo *BankRepo) Create(bank models.Bank) (models.Bank, error) {

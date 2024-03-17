@@ -9,19 +9,19 @@ type CountryRepo struct {
 	db *gorm.DB
 }
 
-func (repo CountryRepo) Create(country models.Country) (models.Country, error) {
+func (repo *CountryRepo) Create(country models.Country) (models.Country, error) {
 	err := repo.db.Create(&country).Error
 	return country, err
 }
 
-func (repo CountryRepo) Get(id string) (models.Country, error) {
+func (repo *CountryRepo) Get(id string) (models.Country, error) {
 	var country models.Country
 	err := repo.db.Where("id = ?", id).First(&country).Error
 
 	return country, err
 }
 
-func (repo CountryRepo) Update(country models.Country) (models.Country, error) {
+func (repo *CountryRepo) Update(country models.Country) (models.Country, error) {
 	var dbCountry models.Country
 	if err := repo.db.Where("id = ?", country.ID).First(&country).Error; err != nil {
 		return dbCountry, err
@@ -40,14 +40,14 @@ func (repo CountryRepo) Update(country models.Country) (models.Country, error) {
 	return dbCountry, err
 }
 
-func (repo CountryRepo) GetByCode(code string) (models.Country, error) {
+func (repo *CountryRepo) GetByCode(code string) (models.Country, error) {
 	var country models.Country
 	err := repo.db.Where("code = ?", code).First(&country).Error
 
 	return country, err
 }
 
-func (repo CountryRepo) Delete(id string) error {
+func (repo *CountryRepo) Delete(id string) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Country{}).Error
 	return err
 }

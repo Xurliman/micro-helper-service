@@ -4,19 +4,19 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 )
 
-type BankInterface interface {
-	Create(bank models.Bank) error
-	Get(id string) error
-	Update(bank models.Bank) error
-	Delete(id string) error
-}
-
-type BankBranchInterface interface {
-	Create(branch models.BankBranch) error
-	Get(id string) error
-	Update(branch models.BankBranch) error
-	Delete(id string) error
-}
+//type BankInterface interface {
+//	Create(bank models.Bank) error
+//	Get(id string) error
+//	Update(bank models.Bank) error
+//	Delete(id string) error
+//}
+//
+//type BankBranchInterface interface {
+//	Create(branch models.BankBranch) error
+//	Get(id string) error
+//	Update(branch models.BankBranch) error
+//	Delete(id string) error
+//}
 
 type ClientTypeClassifierInterface interface {
 	Create(classifier models.ClientTypeClassifier) error

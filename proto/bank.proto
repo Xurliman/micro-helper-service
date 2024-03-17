@@ -11,6 +11,12 @@ service BankService {
 message CreateBankRequest{
   string name = 1;
   string code = 2;
+  string short_name = 3;
+  int64 country_id = 4;
+  string open_date = 5;
+  string close_date = 6;
+  string activation_date = 7;
+  string deactivation_date = 8;
 }
 
 message SingleBankRequest{

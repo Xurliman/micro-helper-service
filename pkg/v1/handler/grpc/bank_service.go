@@ -46,9 +46,28 @@ func (service *BankService) Get(context context.Context, request *proto.SingleBa
 }
 
 func (service *BankService) transformBankRPC(request *proto.CreateBankRequest) models.Bank {
-	return models.Bank{Name: request.GetName(), Code: request.GetCode()}
+	return models.Bank{
+		Name:             request.GetName(),
+		Code:             request.GetCode(),
+		ShortName:        request.GetShortName(),
+		CountryID:        request.GetCountryId(),
+		OpenDate:         request.GetOpenDate(),
+		CloseDate:        request.GetCloseDate(),
+		ActivationDate:   request.GetActivationDate(),
+		DeactivationDate: request.GetDeactivationDate(),
+	}
 }
 
 func (service *BankService) transformBankModel(bank models.Bank) *proto.BankProfileResponse {
-	return &proto.BankProfileResponse{Id: int64(bank.ID), Name: bank.Name, Code: bank.Code}
+	return &proto.BankProfileResponse{
+		Id:               int64(bank.ID),
+		Name:             bank.Name,
+		Code:             bank.Code,
+		ShortName:        bank.ShortName,
+		CountryId:        bank.CountryID,
+		OpenDate:         bank.OpenDate,
+		CloseDate:        bank.CloseDate,
+		ActivationDate:   bank.ActivationDate,
+		DeactivationDate: bank.DeactivationDate,
+	}
 }

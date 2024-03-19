@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"gorm.io/gorm"
 )
 
@@ -50,4 +51,8 @@ func (repo *BankRepo) GetByCode(code string) (models.Bank, error) {
 	err := repo.db.Where("code = ?", code).First(&bank).Error
 
 	return bank, err
+}
+
+func NewBank(db *gorm.DB) interfaces.BankRepoInterface {
+	return &BankRepo{db: db}
 }

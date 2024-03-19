@@ -12,7 +12,7 @@ type BankCase struct {
 	repo interfaces.BankRepoInterface
 }
 
-func New(repo interfaces.BankRepoInterface) interfaces.BankCaseInterface {
+func NewBank(repo interfaces.BankRepoInterface) interfaces.BankCaseInterface {
 	return &BankCase{repo: repo}
 }
 

@@ -13,6 +13,6 @@ type Bank struct {
 	CloseDate        string
 	ActivationDate   string
 	DeactivationDate string
-	CreatedAt        string
-	UpdatedAt        string
+	//CreatedAt        string
+	//UpdatedAt        string
 }

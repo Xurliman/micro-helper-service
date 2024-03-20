@@ -14,7 +14,7 @@ func (repo *ClientTypeClassifierRepo) Create(classifier models.ClientTypeClassif
 	return classifier, err
 }
 
-func (repo *ClientTypeClassifierRepo) Get(id string) (models.ClientTypeClassifier, error) {
+func (repo *ClientTypeClassifierRepo) Get(id int64) (models.ClientTypeClassifier, error) {
 	var classifier models.ClientTypeClassifier
 	err := repo.db.Where("id = ?", id).First(&classifier).Error
 
@@ -48,7 +48,7 @@ func (repo *ClientTypeClassifierRepo) GetByCode(code string) (models.ClientTypeC
 	return classifier, err
 }
 
-func (repo *ClientTypeClassifierRepo) Delete(id string) error {
+func (repo *ClientTypeClassifierRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.ClientTypeClassifier{}).Error
 	return err
 }

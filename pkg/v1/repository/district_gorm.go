@@ -14,7 +14,7 @@ func (repo *DistrictRepo) Create(district models.District) (models.District, err
 	return district, err
 }
 
-func (repo *DistrictRepo) Get(id string) (models.District, error) {
+func (repo *DistrictRepo) Get(id int64) (models.District, error) {
 	var district models.District
 	err := repo.db.Where("id = ?", id).First(&district).Error
 
@@ -45,7 +45,7 @@ func (repo *DistrictRepo) GetByCode(code string) (models.District, error) {
 	return district, err
 }
 
-func (repo *DistrictRepo) Delete(id string) error {
+func (repo *DistrictRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.District{}).Error
 	return err
 }

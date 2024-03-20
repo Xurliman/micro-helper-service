@@ -20,7 +20,7 @@ func (bankBranchCase BankBranchCase) Create(bankBranch models.BankBranch) (model
 	return bankBranchCase.repo.Create(bankBranch)
 }
 
-func (bankBranchCase BankBranchCase) Get(id string) (models.BankBranch, error) {
+func (bankBranchCase BankBranchCase) Get(id int64) (models.BankBranch, error) {
 	var bankBranch models.BankBranch
 	var err error
 
@@ -39,7 +39,7 @@ func (bankBranchCase BankBranchCase) Update(updateBankBranch models.BankBranch) 
 	var bankBranch models.BankBranch
 	var err error
 
-	bankBranch, err = bankBranchCase.repo.Get(strconv.Itoa(int(updateBankBranch.ID)))
+	bankBranch, err = bankBranchCase.repo.Get(int64(updateBankBranch.ID))
 	if err != nil {
 		return models.BankBranch{}, err
 	}
@@ -55,7 +55,7 @@ func (bankBranchCase BankBranchCase) Update(updateBankBranch models.BankBranch) 
 	return bankBranch, err
 }
 
-func (bankBranchCase BankBranchCase) Delete(id string) error {
+func (bankBranchCase BankBranchCase) Delete(id int64) error {
 	var err error
 
 	_, err = bankBranchCase.repo.Get(id)

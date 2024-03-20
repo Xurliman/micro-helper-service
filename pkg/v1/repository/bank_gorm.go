@@ -15,7 +15,7 @@ func (repo *BankRepo) Create(bank models.Bank) (models.Bank, error) {
 	return bank, err
 }
 
-func (repo *BankRepo) Get(id string) (models.Bank, error) {
+func (repo *BankRepo) Get(id int64) (models.Bank, error) {
 	var bank models.Bank
 	err := repo.db.Where("id = ?", id).First(&bank).Error
 
@@ -41,7 +41,7 @@ func (repo *BankRepo) Update(bank models.Bank) (models.Bank, error) {
 	return dbBank, err
 }
 
-func (repo *BankRepo) Delete(id string) error {
+func (repo *BankRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Bank{}).Error
 	return err
 }

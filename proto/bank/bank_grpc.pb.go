@@ -4,7 +4,7 @@
 // - protoc             v4.25.3
 // source: bank.proto
 
-package bank
+package proto_bank
 
 import (
 	context "context"

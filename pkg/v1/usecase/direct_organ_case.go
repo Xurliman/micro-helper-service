@@ -20,7 +20,7 @@ func (directOrganCase *DirectOrganCase) Create(directOrgan models.DirectOrgan) (
 	return directOrganCase.repo.Create(directOrgan)
 }
 
-func (directOrganCase *DirectOrganCase) Get(id string) (models.DirectOrgan, error) {
+func (directOrganCase *DirectOrganCase) Get(id int64) (models.DirectOrgan, error) {
 	var directOrgan models.DirectOrgan
 	var err error
 
@@ -39,7 +39,7 @@ func (directOrganCase *DirectOrganCase) Update(updateDirectOrgan models.DirectOr
 	var directOrgan models.DirectOrgan
 	var err error
 
-	directOrgan, err = directOrganCase.repo.Get(strconv.Itoa(int(updateDirectOrgan.ID)))
+	directOrgan, err = directOrganCase.repo.Get(int64(updateDirectOrgan.ID))
 	if err != nil {
 		return models.DirectOrgan{}, err
 	}
@@ -55,7 +55,7 @@ func (directOrganCase *DirectOrganCase) Update(updateDirectOrgan models.DirectOr
 	return directOrgan, err
 }
 
-func (directOrganCase *DirectOrganCase) Delete(id string) error {
+func (directOrganCase *DirectOrganCase) Delete(id int64) error {
 	var err error
 
 	_, err = directOrganCase.repo.Get(id)

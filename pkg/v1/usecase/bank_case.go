@@ -24,7 +24,7 @@ func (bankCase *BankCase) Create(bank models.Bank) (models.Bank, error) {
 	return bankCase.repo.Create(bank)
 }
 
-func (bankCase *BankCase) Get(id string) (models.Bank, error) {
+func (bankCase *BankCase) Get(id int64) (models.Bank, error) {
 	var bank models.Bank
 	var err error
 
@@ -43,7 +43,7 @@ func (bankCase *BankCase) Update(updateBank models.Bank) (models.Bank, error) {
 	var bank models.Bank
 	var err error
 
-	bank, err = bankCase.repo.Get(strconv.Itoa(int(updateBank.ID)))
+	bank, err = bankCase.repo.Get(int64(updateBank.ID))
 	if err != nil {
 		return models.Bank{}, err
 	}
@@ -59,7 +59,7 @@ func (bankCase *BankCase) Update(updateBank models.Bank) (models.Bank, error) {
 	return bank, err
 }
 
-func (bankCase *BankCase) Delete(id string) error {
+func (bankCase *BankCase) Delete(id int64) error {
 	var err error
 
 	_, err = bankCase.repo.Get(id)

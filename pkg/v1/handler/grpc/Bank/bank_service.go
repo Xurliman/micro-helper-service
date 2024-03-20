@@ -1,9 +1,8 @@
-package grpc
+package Bank
 
 import (
 	"context"
 	"errors"
-
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/bank"
@@ -35,14 +34,16 @@ func (service *BankService) Create(context context.Context, request *proto.Creat
 
 func (service *BankService) Get(context context.Context, request *proto.SingleBankRequest) (*proto.BankProfileResponse, error) {
 	id := request.GetId()
-	if id == "" {
+	if id == 0 {
 		return &proto.BankProfileResponse{}, errors.New("id cannot be blank")
 	}
-	user, err := service.bankCase.Get(id)
+
+	bank, err := service.bankCase.Get(id)
 	if err != nil {
 		return &proto.BankProfileResponse{}, err
 	}
-	return service.transformBankModel(user), nil
+
+	return service.transformBankModel(bank), nil
 }
 
 func (service *BankService) transformBankRPC(request *proto.CreateBankRequest) models.Bank {

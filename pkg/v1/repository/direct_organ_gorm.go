@@ -14,7 +14,7 @@ func (repo *DirectOrganRepo) Create(directOrgan models.DirectOrgan) (models.Dire
 	return directOrgan, err
 }
 
-func (repo *DirectOrganRepo) Get(id string) (models.DirectOrgan, error) {
+func (repo *DirectOrganRepo) Get(id int64) (models.DirectOrgan, error) {
 	var directOrgan models.DirectOrgan
 	err := repo.db.Where("id = ?", id).First(&directOrgan).Error
 
@@ -44,7 +44,7 @@ func (repo *DirectOrganRepo) GetByCode(code string) (models.DirectOrgan, error) 
 	return directOrgan, err
 }
 
-func (repo *DirectOrganRepo) Delete(id string) error {
+func (repo *DirectOrganRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.DirectOrgan{}).Error
 	return err
 }

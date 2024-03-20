@@ -8,11 +8,11 @@ type ClientTypeClassifier struct {
 	Code             int64
 	Name             string
 	ShortName        string
-	ClientType       int
+	ClientType       int32
 	ActivationDate   string
 	DeactivationDate string
-	CBUReferenceKey  int
-	OldCode          int
-	OldName          int
+	CBUReferenceKey  int32
+	OldCode          int32
+	OldName          string
 	//NameUz           int
 }

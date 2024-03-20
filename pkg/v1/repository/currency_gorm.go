@@ -14,7 +14,7 @@ func (repo *CurrencyRepo) Create(currency models.Currency) (models.Currency, err
 	return currency, err
 }
 
-func (repo *CurrencyRepo) Get(id string) (models.Currency, error) {
+func (repo *CurrencyRepo) Get(id int64) (models.Currency, error) {
 	var currency models.Currency
 	err := repo.db.Where("id = ?", id).First(&currency).Error
 
@@ -44,7 +44,7 @@ func (repo *CurrencyRepo) GetByCode(code string) (models.Currency, error) {
 	return currency, err
 }
 
-func (repo *CurrencyRepo) Delete(id string) error {
+func (repo *CurrencyRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Currency{}).Error
 	return err
 }

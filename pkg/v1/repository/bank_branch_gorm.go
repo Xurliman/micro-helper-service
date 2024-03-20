@@ -14,7 +14,7 @@ func (repo *BankBranchRepo) Create(bankBranch models.BankBranch) (models.BankBra
 	return bankBranch, err
 }
 
-func (repo *BankBranchRepo) Get(id string) (models.BankBranch, error) {
+func (repo *BankBranchRepo) Get(id int64) (models.BankBranch, error) {
 	var bankBranch models.BankBranch
 	err := repo.db.Where("id = ?", id).First(&bankBranch).Error
 
@@ -41,7 +41,7 @@ func (repo *BankBranchRepo) Update(bankBranch models.BankBranch) (models.BankBra
 	return dbBankBranch, err
 }
 
-func (repo *BankBranchRepo) Delete(id string) error {
+func (repo *BankBranchRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.BankBranch{}).Error
 	return err
 }

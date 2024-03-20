@@ -20,7 +20,7 @@ func (currencyCase *CurrencyCase) Create(currency models.Currency) (models.Curre
 	return currencyCase.repo.Create(currency)
 }
 
-func (currencyCase *CurrencyCase) Get(id string) (models.Currency, error) {
+func (currencyCase *CurrencyCase) Get(id int64) (models.Currency, error) {
 	var currency models.Currency
 	var err error
 
@@ -39,7 +39,7 @@ func (currencyCase *CurrencyCase) Update(updateCurrency models.Currency) (models
 	var currency models.Currency
 	var err error
 
-	currency, err = currencyCase.repo.Get(strconv.Itoa(int(updateCurrency.ID)))
+	currency, err = currencyCase.repo.Get(int64(updateCurrency.ID))
 	if err != nil {
 		return models.Currency{}, err
 	}
@@ -55,7 +55,7 @@ func (currencyCase *CurrencyCase) Update(updateCurrency models.Currency) (models
 	return currency, err
 }
 
-func (currencyCase *CurrencyCase) Delete(id string) error {
+func (currencyCase *CurrencyCase) Delete(id int64) error {
 	var err error
 
 	_, err = currencyCase.repo.Get(id)

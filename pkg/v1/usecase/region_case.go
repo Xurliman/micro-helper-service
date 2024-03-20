@@ -20,7 +20,7 @@ func (regionCase RegionCase) Create(region models.Region) (models.Region, error)
 	return regionCase.repo.Create(region)
 }
 
-func (regionCase RegionCase) Get(id string) (models.Region, error) {
+func (regionCase RegionCase) Get(id int64) (models.Region, error) {
 	var region models.Region
 	var err error
 
@@ -39,7 +39,7 @@ func (regionCase RegionCase) Update(updateRegion models.Region) (models.Region, 
 	var region models.Region
 	var err error
 
-	region, err = regionCase.repo.Get(strconv.Itoa(int(updateRegion.ID)))
+	region, err = regionCase.repo.Get(int64(updateRegion.ID))
 	if err != nil {
 		return models.Region{}, err
 	}
@@ -55,7 +55,7 @@ func (regionCase RegionCase) Update(updateRegion models.Region) (models.Region, 
 	return region, err
 }
 
-func (regionCase RegionCase) Delete(id string) error {
+func (regionCase RegionCase) Delete(id int64) error {
 	var err error
 
 	_, err = regionCase.repo.Get(id)

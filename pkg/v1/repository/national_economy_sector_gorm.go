@@ -14,7 +14,7 @@ func (repo *NationalEconomySectorRepo) Create(nationalEconomySector models.Natio
 	return nationalEconomySector, err
 }
 
-func (repo *NationalEconomySectorRepo) Get(id string) (models.NationalEconomySector, error) {
+func (repo *NationalEconomySectorRepo) Get(id int64) (models.NationalEconomySector, error) {
 	var nationalEconomySector models.NationalEconomySector
 	err := repo.db.Where("id = ?", id).First(&nationalEconomySector).Error
 
@@ -46,7 +46,7 @@ func (repo *NationalEconomySectorRepo) GetByCode(code string) (models.NationalEc
 	return nationalEconomySector, err
 }
 
-func (repo *NationalEconomySectorRepo) Delete(id string) error {
+func (repo *NationalEconomySectorRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.NationalEconomySector{}).Error
 	return err
 }

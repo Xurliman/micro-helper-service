@@ -4,7 +4,7 @@
 // - protoc             v4.25.3
 // source: bank_branch.proto
 
-package bank_branch
+package proto_bank_branch
 
 import (
 	context "context"
@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BankBranchServiceClient interface {
-	Create(ctx context.Context, in *CreateBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Create(ctx context.Context, in *CreateBankBranchRequest, opts ...grpc.CallOption) (*BankBranchProfileResponse, error)
 	Read(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*BankBranchProfileResponse, error)
 	Update(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
@@ -36,8 +36,8 @@ func NewBankBranchServiceClient(cc grpc.ClientConnInterface) BankBranchServiceCl
 	return &bankBranchServiceClient{cc}
 }
 
-func (c *bankBranchServiceClient) Create(ctx context.Context, in *CreateBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *bankBranchServiceClient) Create(ctx context.Context, in *CreateBankBranchRequest, opts ...grpc.CallOption) (*BankBranchProfileResponse, error) {
+	out := new(BankBranchProfileResponse)
 	err := c.cc.Invoke(ctx, "/BankBranchService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func (c *bankBranchServiceClient) Delete(ctx context.Context, in *SingleBankBran
 // All implementations must embed UnimplementedBankBranchServiceServer
 // for forward compatibility
 type BankBranchServiceServer interface {
-	Create(context.Context, *CreateBankBranchRequest) (*SuccessResponse, error)
+	Create(context.Context, *CreateBankBranchRequest) (*BankBranchProfileResponse, error)
 	Read(context.Context, *SingleBankBranchRequest) (*BankBranchProfileResponse, error)
 	Update(context.Context, *SingleBankBranchRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleBankBranchRequest) (*SuccessResponse, error)
@@ -87,7 +87,7 @@ type BankBranchServiceServer interface {
 type UnimplementedBankBranchServiceServer struct {
 }
 
-func (UnimplementedBankBranchServiceServer) Create(context.Context, *CreateBankBranchRequest) (*SuccessResponse, error) {
+func (UnimplementedBankBranchServiceServer) Create(context.Context, *CreateBankBranchRequest) (*BankBranchProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedBankBranchServiceServer) Read(context.Context, *SingleBankBranchRequest) (*BankBranchProfileResponse, error) {

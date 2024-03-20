@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package="./proto/bank";
+option go_package="proto.bank";
 
 service BankService {
   rpc Create(CreateBankRequest) returns (BankProfileResponse);
@@ -20,7 +20,7 @@ message CreateBankRequest{
 }
 
 message SingleBankRequest{
-  string id = 1;
+  int64 id = 1;
 }
 
 message BankProfileResponse{

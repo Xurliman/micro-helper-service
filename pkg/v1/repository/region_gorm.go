@@ -14,7 +14,7 @@ func (repo *RegionRepo) Create(region models.Region) (models.Region, error) {
 	return region, err
 }
 
-func (repo *RegionRepo) Get(id string) (models.Region, error) {
+func (repo *RegionRepo) Get(id int64) (models.Region, error) {
 	var region models.Region
 	err := repo.db.Where("id = ?", id).First(&region).Error
 
@@ -45,7 +45,7 @@ func (repo *RegionRepo) GetByCode(code string) (models.Region, error) {
 	return region, err
 }
 
-func (repo *RegionRepo) Delete(id string) error {
+func (repo *RegionRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Region{}).Error
 	return err
 }

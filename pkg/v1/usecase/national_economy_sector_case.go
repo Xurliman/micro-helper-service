@@ -20,7 +20,7 @@ func (nationalEconomySectorCase NationalEconomySectorCase) Create(nationalEconom
 	return nationalEconomySectorCase.repo.Create(nationalEconomySector)
 }
 
-func (nationalEconomySectorCase NationalEconomySectorCase) Get(id string) (models.NationalEconomySector, error) {
+func (nationalEconomySectorCase NationalEconomySectorCase) Get(id int64) (models.NationalEconomySector, error) {
 	var nationalEconomySector models.NationalEconomySector
 	var err error
 
@@ -39,7 +39,7 @@ func (nationalEconomySectorCase NationalEconomySectorCase) Update(updateNational
 	var nationalEconomySector models.NationalEconomySector
 	var err error
 
-	nationalEconomySector, err = nationalEconomySectorCase.repo.Get(strconv.Itoa(int(updateNationalEconomySector.ID)))
+	nationalEconomySector, err = nationalEconomySectorCase.repo.Get(int64(updateNationalEconomySector.ID))
 	if err != nil {
 		return models.NationalEconomySector{}, err
 	}
@@ -55,7 +55,7 @@ func (nationalEconomySectorCase NationalEconomySectorCase) Update(updateNational
 	return nationalEconomySector, err
 }
 
-func (nationalEconomySectorCase NationalEconomySectorCase) Delete(id string) error {
+func (nationalEconomySectorCase NationalEconomySectorCase) Delete(id int64) error {
 	var err error
 
 	_, err = nationalEconomySectorCase.repo.Get(id)

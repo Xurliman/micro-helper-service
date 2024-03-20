@@ -20,7 +20,7 @@ func (districtCase *DistrictCase) Create(district models.District) (models.Distr
 	return districtCase.repo.Create(district)
 }
 
-func (districtCase *DistrictCase) Get(id string) (models.District, error) {
+func (districtCase *DistrictCase) Get(id int64) (models.District, error) {
 	var district models.District
 	var err error
 
@@ -39,7 +39,7 @@ func (districtCase *DistrictCase) Update(updateDistrict models.District) (models
 	var district models.District
 	var err error
 
-	district, err = districtCase.repo.Get(strconv.Itoa(int(updateDistrict.ID)))
+	district, err = districtCase.repo.Get(int64(updateDistrict.ID))
 	if err != nil {
 		return models.District{}, err
 	}
@@ -55,7 +55,7 @@ func (districtCase *DistrictCase) Update(updateDistrict models.District) (models
 	return district, err
 }
 
-func (districtCase *DistrictCase) Delete(id string) error {
+func (districtCase *DistrictCase) Delete(id int64) error {
 	var err error
 
 	_, err = districtCase.repo.Get(id)

@@ -20,7 +20,7 @@ func (countryCase *CountryCase) Create(country models.Country) (models.Country, 
 	return countryCase.repo.Create(country)
 }
 
-func (countryCase *CountryCase) Get(id string) (models.Country, error) {
+func (countryCase *CountryCase) Get(id int64) (models.Country, error) {
 	var country models.Country
 	var err error
 
@@ -39,7 +39,7 @@ func (countryCase *CountryCase) Update(updateCountry models.Country) (models.Cou
 	var country models.Country
 	var err error
 
-	country, err = countryCase.repo.Get(strconv.Itoa(int(updateCountry.ID)))
+	country, err = countryCase.repo.Get(int64(updateCountry.ID))
 	if err != nil {
 		return models.Country{}, err
 	}
@@ -55,7 +55,7 @@ func (countryCase *CountryCase) Update(updateCountry models.Country) (models.Cou
 	return country, err
 }
 
-func (countryCase *CountryCase) Delete(id string) error {
+func (countryCase *CountryCase) Delete(id int64) error {
 	var err error
 
 	_, err = countryCase.repo.Get(id)

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	database "github.com/Xurliman/banking-microservice/internal/db"
 	"github.com/Xurliman/banking-microservice/internal/models"
-	handler "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc"
+	handler "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc/Bank"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/Xurliman/banking-microservice/pkg/v1/repository"
 	"github.com/Xurliman/banking-microservice/pkg/v1/usecase"

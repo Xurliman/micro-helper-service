@@ -20,7 +20,7 @@ func (classifierCase *ClientTypeClassifierCase) Create(classifier models.ClientT
 	return classifierCase.repo.Create(classifier)
 }
 
-func (classifierCase *ClientTypeClassifierCase) Get(id string) (models.ClientTypeClassifier, error) {
+func (classifierCase *ClientTypeClassifierCase) Get(id int64) (models.ClientTypeClassifier, error) {
 	var classifier models.ClientTypeClassifier
 	var err error
 
@@ -39,7 +39,7 @@ func (classifierCase *ClientTypeClassifierCase) Update(updateClassifier models.C
 	var classifier models.ClientTypeClassifier
 	var err error
 
-	classifier, err = classifierCase.repo.Get(strconv.Itoa(int(updateClassifier.ID)))
+	classifier, err = classifierCase.repo.Get(int64(updateClassifier.ID))
 	if err != nil {
 		return models.ClientTypeClassifier{}, err
 	}
@@ -55,7 +55,7 @@ func (classifierCase *ClientTypeClassifierCase) Update(updateClassifier models.C
 	return classifier, err
 }
 
-func (classifierCase *ClientTypeClassifierCase) Delete(id string) error {
+func (classifierCase *ClientTypeClassifierCase) Delete(id int64) error {
 	var err error
 
 	_, err = classifierCase.repo.Get(id)

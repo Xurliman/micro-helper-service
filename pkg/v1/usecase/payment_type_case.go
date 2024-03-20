@@ -20,7 +20,7 @@ func (paymentTypeCase PaymentTypeCase) Create(paymentType models.PaymentType) (m
 	return paymentTypeCase.repo.Create(paymentType)
 }
 
-func (paymentTypeCase PaymentTypeCase) Get(id string) (models.PaymentType, error) {
+func (paymentTypeCase PaymentTypeCase) Get(id int64) (models.PaymentType, error) {
 	var paymentType models.PaymentType
 	var err error
 
@@ -39,7 +39,7 @@ func (paymentTypeCase PaymentTypeCase) Update(updatePaymentType models.PaymentTy
 	var paymentType models.PaymentType
 	var err error
 
-	paymentType, err = paymentTypeCase.repo.Get(strconv.Itoa(int(updatePaymentType.ID)))
+	paymentType, err = paymentTypeCase.repo.Get(int64(updatePaymentType.ID))
 	if err != nil {
 		return models.PaymentType{}, err
 	}
@@ -55,7 +55,7 @@ func (paymentTypeCase PaymentTypeCase) Update(updatePaymentType models.PaymentTy
 	return paymentType, err
 }
 
-func (paymentTypeCase PaymentTypeCase) Delete(id string) error {
+func (paymentTypeCase PaymentTypeCase) Delete(id int64) error {
 	var err error
 
 	_, err = paymentTypeCase.repo.Get(id)

@@ -14,7 +14,7 @@ func (repo *PaymentTypeRepo) Create(paymentType models.PaymentType) (models.Paym
 	return paymentType, err
 }
 
-func (repo *PaymentTypeRepo) Get(id string) (models.PaymentType, error) {
+func (repo *PaymentTypeRepo) Get(id int64) (models.PaymentType, error) {
 	var paymentType models.PaymentType
 	err := repo.db.Where("id = ?", id).First(&paymentType).Error
 
@@ -45,7 +45,7 @@ func (repo *PaymentTypeRepo) GetByCode(code string) (models.PaymentType, error) 
 	return paymentType, err
 }
 
-func (repo *PaymentTypeRepo) Delete(id string) error {
+func (repo *PaymentTypeRepo) Delete(id int64) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.PaymentType{}).Error
 	return err
 }

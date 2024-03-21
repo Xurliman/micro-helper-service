@@ -1,0 +1,53 @@
+syntax = "proto3";
+option go_package="proto.country";
+
+service CountryService {
+  rpc Create(CreateCountryRequest) returns (CountryProfileResponse);
+  rpc Read(SingleCountryRequest) returns (CountryProfileResponse);
+  rpc Update(UpdateCountryRequest) returns (SuccessResponse);
+  rpc Delete(SingleCountryRequest) returns (SuccessResponse);
+}
+
+message CreateCountryRequest{
+  int64 code = 1;
+  string name = 2;
+  string short_name = 3;
+  int64 currency_id = 4;
+  string code_alpha2 = 5;
+  string code_alpha3 = 6;
+  int64 territory_code = 7;
+  string crud_dates = 8;
+}
+
+message SingleCountryRequest{
+  int64 id = 1;
+}
+
+message CountryProfileResponse{
+  int64 id = 1;
+  int64 code = 2;
+  string name = 3;
+  string short_name = 4;
+  int64 currency_id = 5;
+  string code_alpha2 = 6;
+  string code_alpha3 = 7;
+  int64 territory_code = 8;
+  string crud_dates = 9;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+
+message UpdateCountryRequest{
+  int64 id = 1;
+  int64 code = 2;
+  string name = 3;
+  string short_name = 4;
+  int64 currency_id = 5;
+  string code_alpha2 = 6;
+  string code_alpha3 = 7;
+  int64 territory_code = 8;
+  string crud_dates = 9;
+}

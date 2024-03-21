@@ -1,0 +1,47 @@
+syntax = "proto3";
+option go_package="proto.bank";
+
+service DistrictService {
+  rpc Create(CreateDistrictRequest) returns (DistrictProfileResponse);
+  rpc Read(SingleDistrictRequest) returns (DistrictProfileResponse);
+  rpc Update(UpdateDistrictRequest) returns (SuccessResponse);
+  rpc Delete(SingleDistrictRequest) returns (SuccessResponse);
+}
+
+message CreateDistrictRequest{
+  int64 code = 1;
+  string name = 2;
+  int64 region_id = 3;
+  string activation_date = 4;
+  string deactivation_date = 5;
+  int64 old_code = 6;
+}
+
+message SingleDistrictRequest{
+  int64 id = 1;
+}
+
+message DistrictProfileResponse{
+  int64 id = 1;
+  string name = 2;
+  int64 code = 3;
+  int64 region_id = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  int64 old_code = 7;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+
+message UpdateDistrictRequest{
+  int64 id = 1;
+  string name = 2;
+  int64 code = 3;
+  int64 region_id = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  int64 old_code = 7;
+}

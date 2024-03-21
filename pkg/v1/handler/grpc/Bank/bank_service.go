@@ -37,8 +37,8 @@ func (service *BankService) Get(context context.Context, request *proto.SingleBa
 	if id == 0 {
 		return &proto.BankProfileResponse{}, errors.New("id cannot be blank")
 	}
-
 	bank, err := service.bankCase.Get(id)
+
 	if err != nil {
 		return &proto.BankProfileResponse{}, err
 	}

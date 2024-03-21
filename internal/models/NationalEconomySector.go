@@ -11,5 +11,5 @@ type NationalEconomySector struct {
 	CBUGroupCode     int64
 	ActivationDate   string
 	DeactivationDate string
-	CBUReferenceKey  int
+	CBUReferenceKey  int32
 }

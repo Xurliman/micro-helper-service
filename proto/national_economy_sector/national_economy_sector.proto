@@ -1,0 +1,52 @@
+syntax = "proto3";
+option go_package="proto.bank";
+
+service NationalEconomySectorService {
+  rpc Create(CreateNationalEconomySectorRequest) returns (NationalEconomySectorProfileResponse);
+  rpc Read(SingleNationalEconomySectorRequest) returns (NationalEconomySectorProfileResponse);
+  rpc Update(UpdateNationalEconomySectorRequest) returns (SuccessResponse);
+  rpc Delete(SingleNationalEconomySectorRequest) returns (SuccessResponse);
+}
+
+message CreateNationalEconomySectorRequest{
+  int64 code = 1;
+  string name = 2;
+  int64 cbu_code = 3;
+  int64 cbu_group_code = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  int32 cbu_reference_key = 7;
+}
+
+message SingleNationalEconomySectorRequest{
+  int64 id = 1;
+}
+
+message NationalEconomySectorProfileResponse{
+  int64 id = 1;
+  string name = 2;
+  int64 code = 3;
+  string short_name = 4;
+  int64 country_id = 5;
+  string open_date = 6;
+  string close_date = 7;
+  string activation_date = 8;
+  string deactivation_date = 9;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+
+message UpdateNationalEconomySectorRequest{
+  int64 id = 1;
+  string name = 2;
+  int64 code = 3;
+  string short_name = 4;
+  int64 country_id = 5;
+  string open_date = 6;
+  string close_date = 7;
+  string activation_date = 8;
+  string deactivation_date = 9;
+}

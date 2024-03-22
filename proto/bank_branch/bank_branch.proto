@@ -53,3 +53,13 @@ message UpdateBankBranchRequest {
   string close_date = 9;
   string crud_dates = 10;
 }
+
+
+/*
+protoc \
+--proto_path=proto/bank_branch \
+--go_out=proto/bank_branch \
+--go_opt=paths=source_relative proto/bank_branch/bank_branch.proto \
+--go-grpc_out=proto/bank_branch \
+--go-grpc_opt=paths=source_relative proto/bank_branch/bank_branch.proto
+*/

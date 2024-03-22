@@ -22,10 +22,11 @@ message SingleDirectOrganRequest{
 
 message DirectOrganProfileResponse{
   int64 id = 1;
-  string name = 2;
-  int64 code = 3;
-  string crud_dates = 4;
-  int64 cbu_code = 5;
+  int64 code = 2;
+  string name = 3;
+  string short_name = 4;
+  string crud_dates = 5;
+  int64 cbu_code = 6;
 }
 
 message SuccessResponse{
@@ -35,8 +36,19 @@ message SuccessResponse{
 
 message UpdateDirectOrganRequest{
   int64 id = 1;
-  string name = 2;
-  int64 code = 3;
-  string crud_dates = 4;
-  int64 cbu_code = 5;
+  int64 code = 2;
+  string name = 3;
+  string short_name = 4;
+  string crud_dates = 5;
+  int64 cbu_code = 6;
 }
+
+
+/*
+protoc \
+--proto_path=proto/direct_organ \
+--go_out=proto/direct_organ \
+--go_opt=paths=source_relative proto/direct_organ/direct_organ.proto \
+--go-grpc_out=proto/direct_organ \
+--go-grpc_opt=paths=source_relative proto/direct_organ/direct_organ.proto
+*/

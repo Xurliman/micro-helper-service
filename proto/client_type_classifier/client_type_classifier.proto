@@ -53,3 +53,13 @@ message UpdateClientTypeClassifierRequest {
   int32 old_code = 9;
   string old_name = 10;
 }
+
+
+/*
+protoc \
+--proto_path=proto/client_type_classifier \
+--go_out=proto/client_type_classifier \
+--go_opt=paths=source_relative proto/client_type_classifier/client_type_classifier.proto \
+--go-grpc_out=proto/client_type_classifier \
+--go-grpc_opt=paths=source_relative proto/client_type_classifier/client_type_classifier.proto
+*/

@@ -45,3 +45,13 @@ message UpdateDistrictRequest{
   string deactivation_date = 6;
   int64 old_code = 7;
 }
+
+
+/*
+protoc \
+--proto_path=proto/district \
+--go_out=proto/district \
+--go_opt=paths=source_relative proto/district/district.proto \
+--go-grpc_out=proto/district \
+--go-grpc_opt=paths=source_relative proto/district/district.proto
+*/

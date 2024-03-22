@@ -24,14 +24,13 @@ message SingleNationalEconomySectorRequest{
 
 message NationalEconomySectorProfileResponse{
   int64 id = 1;
-  string name = 2;
-  int64 code = 3;
-  string short_name = 4;
-  int64 country_id = 5;
-  string open_date = 6;
-  string close_date = 7;
-  string activation_date = 8;
-  string deactivation_date = 9;
+  int64 code = 2;
+  string name = 3;
+  int64 cbu_code = 4;
+  int64 cbu_group_code = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  int32 cbu_reference_key = 8;
 }
 
 message SuccessResponse{
@@ -41,12 +40,21 @@ message SuccessResponse{
 
 message UpdateNationalEconomySectorRequest{
   int64 id = 1;
-  string name = 2;
-  int64 code = 3;
-  string short_name = 4;
-  int64 country_id = 5;
-  string open_date = 6;
-  string close_date = 7;
-  string activation_date = 8;
-  string deactivation_date = 9;
+  int64 code = 2;
+  string name = 3;
+  int64 cbu_code = 4;
+  int64 cbu_group_code = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  int32 cbu_reference_key = 8;
 }
+
+
+/*
+protoc \
+--proto_path=proto/national_economy_sector \
+--go_out=proto/national_economy_sector \
+--go_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto \
+--go-grpc_out=proto/national_economy_sector \
+--go-grpc_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto
+*/

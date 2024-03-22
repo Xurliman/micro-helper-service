@@ -1,0 +1,56 @@
+syntax = "proto3";
+option go_package="proto.bank";
+
+service PaymentTypeService {
+  rpc Create(CreatePaymentTypeRequest) returns (PaymentTypeProfileResponse);
+  rpc Read(SinglePaymentTypeRequest) returns (PaymentTypeProfileResponse);
+  rpc Update(UpdatePaymentTypeRequest) returns (SuccessResponse);
+  rpc Delete(SinglePaymentTypeRequest) returns (SuccessResponse);
+}
+
+message CreatePaymentTypeRequest{
+  int64 code = 1;
+  string name = 2;
+  string activation_date = 3;
+  string deactivation_date = 4;
+  string old_name = 5;
+  int64 old_code = 6;
+}
+
+message SinglePaymentTypeRequest{
+  int64 id = 1;
+}
+
+message PaymentTypeProfileResponse{
+  int64 id = 1;
+  int64 code = 2;
+  string name = 3;
+  string activation_date = 4;
+  string deactivation_date = 5;
+  string old_name = 6;
+  int64 old_code = 7;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+
+message UpdatePaymentTypeRequest{
+  int64 id = 1;
+  int64 code = 2;
+  string name = 3;
+  string activation_date = 4;
+  string deactivation_date = 5;
+  string old_name = 6;
+  int64 old_code = 7;
+}
+
+/*
+protoc \
+--proto_path=proto/payment_type \
+--go_out=proto/payment_type \
+--go_opt=paths=source_relative proto/payment_type/payment_type.proto \
+--go-grpc_out=proto/payment_type \
+--go-grpc_opt=paths=source_relative proto/payment_type/payment_type.proto
+*/

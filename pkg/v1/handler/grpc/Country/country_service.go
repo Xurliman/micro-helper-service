@@ -37,13 +37,13 @@ func (service *CountryService) Get(context context.Context, request *proto.Singl
 	if id == 0 {
 		return &proto.CountryProfileResponse{}, errors.New("id cannot be blank")
 	}
-	bank, err := service.countryCase.Get(id)
+	country, err := service.countryCase.Get(id)
 
 	if err != nil {
 		return &proto.CountryProfileResponse{}, err
 	}
 
-	return service.transformCountryModel(bank), nil
+	return service.transformCountryModel(country), nil
 }
 
 func (service *CountryService) transformCountryRpc(request *proto.CreateCountryRequest) models.Country {

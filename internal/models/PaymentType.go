@@ -8,8 +8,8 @@ type PaymentType struct {
 	Code             int64
 	Name             string
 	ActivationDate   string
-	DeactivationDate int64
-	OldCode          string
+	DeactivationDate string
+	OldCode          int64
 	OldName          string
 	//NameUz          string
 }

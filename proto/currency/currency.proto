@@ -42,3 +42,13 @@ message UpdateCurrencyRequest{
   int64 scale = 5;
   string scale_name = 6;
 }
+
+
+/*
+protoc \
+--proto_path=proto/currency \
+--go_out=proto/currency \
+--go_opt=paths=source_relative proto/currency/currency.proto \
+--go-grpc_out=proto/currency \
+--go-grpc_opt=paths=source_relative proto/currency/currency.proto
+*/

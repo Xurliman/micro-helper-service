@@ -2,7 +2,7 @@ package tests
 
 import (
 	"context"
-	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector"
+	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector_old"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"testing"

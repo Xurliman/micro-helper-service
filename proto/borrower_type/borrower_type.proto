@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+service BorrowerTypeService {
+  rpc List(ListBorrowerTypeRequest) returns (ListBorrowerTypeResponse);
+  rpc Create(CreateBorrowerTypeRequest) returns (BorrowerTypeResponse);
+  rpc Get(SingleBorrowerTypeRequest) returns (BorrowerTypeResponse);
+  rpc Update(SingleBorrowerTypeRequest) returns (SuccessResponse);
+  rpc Delete(SingleBorrowerTypeRequest) returns (SuccessResponse);
+}
+
+message ListBorrowerTypeRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListBorrowerTypeResponse {
+  repeated BorrowerTypeResponse borrower_type = 1;
+}
+
+message CreateBorrowerTypeRequest {
+  string code = 1;
+  string name = 2;
+  string old_code = 3;
+  string old_name = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  string flex_fin_id = 7;
+  string name_uz = 8;
+
+}
+
+message BorrowerTypeResponse {
+  string code = 1;
+  string name = 2;
+  string old_code = 3;
+  string old_name = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  string flex_fin_id = 7;
+  string name_uz = 8;
+  string deleted_at = 9;
+}
+
+message SingleBorrowerTypeRequest {
+  oneof borrower_type_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message SuccessResponse {
+  string response = 1;
+}

@@ -1,11 +1,21 @@
 syntax = "proto3";
-option go_package="proto.bank.branch";
+option go_package = "proto.bank.branch";
 
 service BankBranchService {
+  rpc List(ListBankBranchRequest) returns (ListBankBranchResponse);
   rpc Create(CreateBankBranchRequest) returns (BankBranchProfileResponse);
-  rpc Read(SingleBankBranchRequest) returns (BankBranchProfileResponse);
+  rpc Get(SingleBankBranchRequest) returns (BankBranchProfileResponse);
   rpc Update(UpdateBankBranchRequest) returns (SuccessResponse);
   rpc Delete(SingleBankBranchRequest) returns (SuccessResponse);
+}
+
+message ListBankBranchRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListBankBranchResponse {
+  repeated BankBranchProfileResponse bank_branches = 1;
 }
 
 message CreateBankBranchRequest{
@@ -17,11 +27,13 @@ message CreateBankBranchRequest{
   string address = 6;
   string open_date = 7;
   string close_date = 8;
-  string crud_dates = 9;
 }
 
 message SingleBankBranchRequest{
-  int64 id = 1;
+  oneof bank_branch_identifier {
+    string id = 1;
+    string code = 2;
+  }
 }
 
 message BankBranchProfileResponse{
@@ -34,7 +46,7 @@ message BankBranchProfileResponse{
   string address = 7;
   string open_date = 8;
   string close_date = 9;
-  string crud_dates = 10;
+  string deleted_at = 10;
 }
 
 message SuccessResponse{
@@ -51,7 +63,6 @@ message UpdateBankBranchRequest {
   string address = 7;
   string open_date = 8;
   string close_date = 9;
-  string crud_dates = 10;
 }
 
 

@@ -1,16 +1,16 @@
 package models
 
-import "gorm.io/gorm"
-
 type Country struct {
-	gorm.Model
+	Model
 
-	Code          int64
-	Name          string
-	ShortName     string
-	CurrencyID    int64
-	CodeAlpha2    string
-	CodeAlpha3    string
-	TerritoryCode int64
-	CrudDates     string
+	Code             int64 `gorm:"unique;not null"`
+	Name             string
+	ShortName        string
+	CurrencyId       int64
+	CodeAlpha2       string
+	CodeAlpha3       string
+	TerritoryCode    int64
+	ActivationDate   string
+	DeactivationDate string
+	FlexFinId        string
 }

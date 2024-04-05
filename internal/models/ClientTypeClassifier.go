@@ -1,11 +1,9 @@
 package models
 
-import "gorm.io/gorm"
-
 type ClientTypeClassifier struct {
-	gorm.Model
+	Model
 
-	Code             int64
+	Code             int64 `gorm:"unique;not null"`
 	Name             string
 	ShortName        string
 	ClientType       int32
@@ -14,5 +12,6 @@ type ClientTypeClassifier struct {
 	CBUReferenceKey  int32
 	OldCode          int32
 	OldName          string
-	//NameUz           int
+	NameUz           string
+	FlexFinId        string
 }

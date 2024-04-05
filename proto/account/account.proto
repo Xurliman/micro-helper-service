@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+service AccountService {
+  rpc List(ListAccountRequest) returns (ListAccountResponse);
+  rpc Create(CreateAccountRequest) returns (AccountResponse);
+  rpc Get(SingleAccountRequest) returns (AccountResponse);
+  rpc Update(SingleAccountRequest) returns (SuccessResponse);
+  rpc Delete(SingleAccountRequest) returns (SuccessResponse);
+}
+
+message ListAccountRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListAccountResponse {
+  repeated AccountResponse accounts = 1;
+}
+
+message CreateAccountRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message AccountResponse {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  string deleted_at = 4;
+}
+
+message SingleAccountRequest {
+  oneof account_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message SuccessResponse {
+  string response = 1;
+}

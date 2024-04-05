@@ -1,11 +1,9 @@
 package models
 
-import "gorm.io/gorm"
-
 type Bank struct {
-	gorm.Model
+	Model
 
-	Code             int64
+	Code             int64 `gorm:"unique;not null"`
 	Name             string
 	ShortName        string
 	CountryID        int64
@@ -13,6 +11,5 @@ type Bank struct {
 	CloseDate        string
 	ActivationDate   string
 	DeactivationDate string
-	//CreatedAt        string
-	//UpdatedAt        string
+	FlexFinId        string
 }

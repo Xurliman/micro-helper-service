@@ -14,9 +14,10 @@ type BankService struct {
 	proto.UnimplementedBankServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, bankCase interfaces.BankCaseInterface) {
+func NewServer(grpcServer *grpc.Server, bankCase interfaces.BankCaseInterface) *BankService {
 	bankGrpc := &BankService{bankCase: bankCase}
 	proto.RegisterBankServiceServer(grpcServer, bankGrpc)
+	return bankGrpc
 }
 
 func (service *BankService) Create(context context.Context, request *proto.CreateBankRequest) (*proto.BankProfileResponse, error) {
@@ -61,7 +62,7 @@ func (service *BankService) transformBankRPC(request *proto.CreateBankRequest) m
 
 func (service *BankService) transformBankModel(bank models.Bank) *proto.BankProfileResponse {
 	return &proto.BankProfileResponse{
-		Id:               int64(bank.ID),
+		Id:               bank.ID,
 		Name:             bank.Name,
 		Code:             bank.Code,
 		ShortName:        bank.ShortName,

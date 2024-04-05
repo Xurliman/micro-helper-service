@@ -1,15 +1,14 @@
 package models
 
-import "gorm.io/gorm"
+type NationalEconomySectorOld struct {
+	Model
 
-type NationalEconomySector struct {
-	gorm.Model
-
-	Code             int64
+	Code             int64 `gorm:"unique;not null"`
 	Name             string
 	CBUCode          int64
 	CBUGroupCode     int64
 	ActivationDate   string
 	DeactivationDate string
 	CBUReferenceKey  int32
+	FlexFinId        string
 }

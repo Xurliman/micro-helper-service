@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v4.25.3
-// source: national_economy_sector.proto
+// source: national_economy_sector_old.proto
 
 package proto_bank
 

@@ -1,11 +1,22 @@
 syntax = "proto3";
-option go_package="proto.country";
+option go_package = "proto.country";
 
 service CountryService {
+
+  rpc List(ListCountryRequest) returns (ListCountryResponse);
   rpc Create(CreateCountryRequest) returns (CountryProfileResponse);
-  rpc Read(SingleCountryRequest) returns (CountryProfileResponse);
+  rpc Get(SingleCountryRequest) returns (CountryProfileResponse);
   rpc Update(UpdateCountryRequest) returns (SuccessResponse);
   rpc Delete(SingleCountryRequest) returns (SuccessResponse);
+}
+
+message ListCountryRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListCountryResponse {
+  repeated CountryProfileResponse countries = 1;
 }
 
 message CreateCountryRequest{
@@ -16,11 +27,13 @@ message CreateCountryRequest{
   string code_alpha2 = 5;
   string code_alpha3 = 6;
   int64 territory_code = 7;
-  string crud_dates = 8;
 }
 
 message SingleCountryRequest{
-  int64 id = 1;
+  oneof country_identifier {
+    int64 id = 1;
+    int64 code = 2;
+  }
 }
 
 message CountryProfileResponse{
@@ -32,7 +45,7 @@ message CountryProfileResponse{
   string code_alpha2 = 6;
   string code_alpha3 = 7;
   int64 territory_code = 8;
-  string crud_dates = 9;
+  string deleted_at = 9;
 }
 
 message SuccessResponse{
@@ -49,7 +62,6 @@ message UpdateCountryRequest{
   string code_alpha2 = 6;
   string code_alpha3 = 7;
   int64 territory_code = 8;
-  string crud_dates = 9;
 }
 
 

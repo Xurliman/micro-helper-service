@@ -3,7 +3,7 @@ package models
 type Region struct {
 	Model
 
-	Code             int64 `gorm:"unique;not null"`
+	Code             string `gorm:"unique;not null"`
 	Name             string
 	CountryId        int64
 	ActivationDate   string

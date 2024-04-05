@@ -3,7 +3,7 @@ package models
 type PaymentType struct {
 	Model
 
-	Code             int64 `gorm:"unique;not null"`
+	Code             string `gorm:"unique;not null"`
 	Name             string
 	ActivationDate   string
 	DeactivationDate string

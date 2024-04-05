@@ -3,7 +3,7 @@ package models
 type Bank struct {
 	Model
 
-	Code             int64 `gorm:"unique;not null"`
+	Code             string `gorm:"unique;not null"`
 	Name             string
 	ShortName        string
 	CountryID        int64

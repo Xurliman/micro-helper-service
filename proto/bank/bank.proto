@@ -1,11 +1,21 @@
 syntax = "proto3";
-option go_package="proto.bank";
+option go_package = "proto.bank";
 
 service BankService {
+  rpc List(ListBankRequest) returns (ListBankResponse);
   rpc Create(CreateBankRequest) returns (BankProfileResponse);
-  rpc Read(SingleBankRequest) returns (BankProfileResponse);
+  rpc Get(SingleBankRequest) returns (BankProfileResponse);
   rpc Update(UpdateBankRequest) returns (SuccessResponse);
   rpc Delete(SingleBankRequest) returns (SuccessResponse);
+}
+
+message ListBankRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListBankResponse {
+  repeated BankProfileResponse banks = 1;
 }
 
 message CreateBankRequest{
@@ -20,11 +30,14 @@ message CreateBankRequest{
 }
 
 message SingleBankRequest{
-  int64 id = 1;
+  oneof bank_identifier {
+    string id = 1;
+    string code = 2;
+  }
 }
 
 message BankProfileResponse{
-  int64 id = 1;
+  string id = 1;
   string name = 2;
   int64 code = 3;
   string short_name = 4;
@@ -33,6 +46,7 @@ message BankProfileResponse{
   string close_date = 7;
   string activation_date = 8;
   string deactivation_date = 9;
+  string deleted_at = 10;
 }
 
 message SuccessResponse{

@@ -1,18 +1,56 @@
 package database
 
 import (
+	"fmt"
+	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/joho/godotenv"
 	"log"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 func DbConn() *gorm.DB {
+	godotenv.Load()
+	dbUser := os.Getenv("DB_USERNAME")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+
+	connection := fmt.Sprintf("host=localhost user=%s dbname=%s password=%s port=5432 sslmode=disable", dbUser, dbName, dbPassword)
+
 	db, err := gorm.Open(
-		postgres.Open("host=localhost user=postgres dbname=medium password=xurjumon port=5432 sslmode=disable"), &gorm.Config{},
+		postgres.Open(connection), &gorm.Config{},
 	)
 	if err != nil {
 		log.Fatalf("There was error connecting to the database: %v", err)
 	}
-	return db
+	DB = db
+	AutoMigrate(db)
+	return DB
+}
+
+func AutoMigrate(connection *gorm.DB) {
+	connection.Debug().AutoMigrate(
+		&models.Account{},
+		&models.Bank{},
+		&models.BankBranch{},
+		&models.BorrowerType{},
+		&models.ClientTypeClassifier{},
+		&models.Country{},
+		&models.Currency{},
+		&models.DirectOrgan{},
+		&models.District{},
+		&models.EducationType{},
+		&models.NationalEconomySectorNew{},
+		&models.NationalEconomySectorOld{},
+		&models.PassportType{},
+		&models.PaymentType{},
+		&models.Region{},
+		&models.RegistrationPlace{},
+		&models.ResidencyType{},
+		&models.TaxOrganisation{},
+	)
 }

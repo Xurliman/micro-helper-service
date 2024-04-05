@@ -2,10 +2,20 @@ syntax = "proto3";
 option go_package = "proto.client.type.classifier";
 
 service ClientTypeClassifierService {
+  rpc List(ListClientTypeClassifierRequest) returns (ListClientTypeClassifierResponse);
   rpc Create(CreateClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
   rpc Read(SingleClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
   rpc Update(UpdateClientTypeClassifierRequest) returns (SuccessResponse);
   rpc Delete(SingleClientTypeClassifierRequest) returns (SuccessResponse);
+}
+
+message ListClientTypeClassifierRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListClientTypeClassifierResponse {
+  repeated ClientTypeClassifierProfileResponse client_type_classifier = 1;
 }
 
 message CreateClientTypeClassifierRequest {
@@ -21,7 +31,10 @@ message CreateClientTypeClassifierRequest {
 }
 
 message SingleClientTypeClassifierRequest {
-  int64 id = 1;
+  oneof client_type_classifier_identifier {
+    int64 id = 1;
+    int64 code = 2;
+  }
 }
 
 message ClientTypeClassifierProfileResponse {
@@ -35,6 +48,7 @@ message ClientTypeClassifierProfileResponse {
   int32 cbu_reference_key = 8;
   int32 old_code = 9;
   string old_name = 10;
+  string deleted_at = 11;
 }
 
 message SuccessResponse {

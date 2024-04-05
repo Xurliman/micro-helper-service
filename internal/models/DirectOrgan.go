@@ -1,13 +1,14 @@
 package models
 
-import "gorm.io/gorm"
-
 type DirectOrgan struct {
-	gorm.Model
+	Model
 
-	Code      int64
-	Name      string
-	ShortName string
-	CrudDates string
-	CBUCode   int64
+	Code             int64 `gorm:"unique;not null"`
+	Name             string
+	ShortName        string
+	CrudDates        string
+	CBUCode          int64
+	ActivationDate   string
+	DeactivationDate string
+	FlexFinId        string
 }

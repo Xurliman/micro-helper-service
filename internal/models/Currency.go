@@ -1,13 +1,14 @@
 package models
 
-import "gorm.io/gorm"
-
 type Currency struct {
-	gorm.Model
+	Model
 
-	Code      int64
-	Name      string
-	ShortName string
-	Scale     int64
-	ScaleName string
+	Code             int64 `gorm:"unique;not null"`
+	Name             string
+	ShortName        string
+	Scale            int64
+	ScaleName        string
+	ActivationDate   string
+	DeactivationDate string
+	FlexFinId        string
 }

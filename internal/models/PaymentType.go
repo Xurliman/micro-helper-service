@@ -1,15 +1,14 @@
 package models
 
-import "gorm.io/gorm"
-
 type PaymentType struct {
-	gorm.Model
+	Model
 
-	Code             int64
+	Code             int64 `gorm:"unique;not null"`
 	Name             string
 	ActivationDate   string
 	DeactivationDate string
 	OldCode          int64
 	OldName          string
-	//NameUz          string
+	NameUz           string
+	FlexFinId        string
 }

@@ -2,10 +2,20 @@ syntax = "proto3";
 option go_package="proto.currency";
 
 service CurrencyService {
+  rpc List(ListCurrencyRequest) returns (ListCurrencyResponse);
   rpc Create(CreateCurrencyRequest) returns (CurrencyProfileResponse);
-  rpc Read(SingleCurrencyRequest) returns (CurrencyProfileResponse);
+  rpc Get(SingleCurrencyRequest) returns (CurrencyProfileResponse);
   rpc Update(UpdateCurrencyRequest) returns (SuccessResponse);
   rpc Delete(SingleCurrencyRequest) returns (SuccessResponse);
+}
+
+message ListCurrencyRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListCurrencyResponse {
+  repeated CurrencyProfileResponse currencies = 1;
 }
 
 message CreateCurrencyRequest{
@@ -17,7 +27,10 @@ message CreateCurrencyRequest{
 }
 
 message SingleCurrencyRequest{
-  int64 id = 1;
+  oneof currency_identifier {
+    int64 id = 1;
+    int64 code = 2;
+  }
 }
 
 message CurrencyProfileResponse{
@@ -27,6 +40,7 @@ message CurrencyProfileResponse{
   string short_name = 4;
   int64 scale = 5;
   string scale_name = 6;
+  string deleted_at = 7;
 }
 
 message SuccessResponse{

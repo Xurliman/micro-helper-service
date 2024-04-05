@@ -1,14 +1,14 @@
 package models
 
-import "gorm.io/gorm"
-
 type Region struct {
-	gorm.Model
+	Model
 
-	Code             int64
+	Code             int64 `gorm:"unique;not null"`
 	Name             string
-	CountryID        int64
+	CountryId        int64
 	ActivationDate   string
 	DeactivationDate string
+	OldCode          string
 	OldName          string
+	FlexFinId        string
 }

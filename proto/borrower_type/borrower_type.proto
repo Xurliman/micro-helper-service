@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "proto.borrower_type";
 
 service BorrowerTypeService {
   rpc List(ListBorrowerTypeRequest) returns (ListBorrowerTypeResponse);
@@ -51,3 +52,12 @@ message SingleBorrowerTypeRequest {
 message SuccessResponse {
   string response = 1;
 }
+
+/*
+protoc \
+--proto_path=proto/borrower_type \
+--go_out=proto/borrower_type \
+--go_opt=paths=source_relative proto/borrower_type/borrower_type.proto \
+--go-grpc_out=proto/borrower_type \
+--go-grpc_opt=paths=source_relative proto/borrower_type/borrower_type.proto
+*/

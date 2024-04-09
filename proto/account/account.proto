@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "proto.account";
 
 service AccountService {
   rpc List(ListAccountRequest) returns (ListAccountResponse);
@@ -40,3 +41,12 @@ message SingleAccountRequest {
 message SuccessResponse {
   string response = 1;
 }
+
+/*
+protoc \
+--proto_path=proto/account \
+--go_out=proto/account \
+--go_opt=paths=source_relative proto/account/account.proto \
+--go-grpc_out=proto/account \
+--go-grpc_opt=paths=source_relative proto/account/account.proto
+*/

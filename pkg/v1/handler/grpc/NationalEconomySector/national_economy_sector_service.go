@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
-	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector_old"
+	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector_new"
 	"google.golang.org/grpc"
 )
 

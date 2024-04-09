@@ -2,7 +2,6 @@ syntax = "proto3";
 option go_package = "proto.country";
 
 service CountryService {
-
   rpc List(ListCountryRequest) returns (ListCountryResponse);
   rpc Create(CreateCountryRequest) returns (CountryProfileResponse);
   rpc Get(SingleCountryRequest) returns (CountryProfileResponse);
@@ -20,7 +19,7 @@ message ListCountryResponse {
 }
 
 message CreateCountryRequest{
-  int64 code = 1;
+  string code = 1;
   string name = 2;
   string short_name = 3;
   int64 currency_id = 4;
@@ -32,13 +31,13 @@ message CreateCountryRequest{
 message SingleCountryRequest{
   oneof country_identifier {
     int64 id = 1;
-    int64 code = 2;
+    string code = 2;
   }
 }
 
 message CountryProfileResponse{
   int64 id = 1;
-  int64 code = 2;
+  string code = 2;
   string name = 3;
   string short_name = 4;
   int64 currency_id = 5;
@@ -55,7 +54,7 @@ message SuccessResponse{
 
 message UpdateCountryRequest{
   int64 id = 1;
-  int64 code = 2;
+  string code = 2;
   string name = 3;
   string short_name = 4;
   int64 currency_id = 5;

@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: national_economy_sector_old.proto
 
-package proto_bank
+package proto_national_economy_sector_old
 
 import (
 	context "context"
@@ -18,195 +18,195 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// NationalEconomySectorServiceClient is the client API for NationalEconomySectorService service.
+// NationalEconomySectorOldServiceClient is the client API for NationalEconomySectorOldService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NationalEconomySectorServiceClient interface {
-	Create(ctx context.Context, in *CreateNationalEconomySectorRequest, opts ...grpc.CallOption) (*NationalEconomySectorProfileResponse, error)
-	Read(ctx context.Context, in *SingleNationalEconomySectorRequest, opts ...grpc.CallOption) (*NationalEconomySectorProfileResponse, error)
-	Update(ctx context.Context, in *UpdateNationalEconomySectorRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleNationalEconomySectorRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+type NationalEconomySectorOldServiceClient interface {
+	Create(ctx context.Context, in *CreateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
+	Read(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
+	Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
 
-type nationalEconomySectorServiceClient struct {
+type nationalEconomySectorOldServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewNationalEconomySectorServiceClient(cc grpc.ClientConnInterface) NationalEconomySectorServiceClient {
-	return &nationalEconomySectorServiceClient{cc}
+func NewNationalEconomySectorOldServiceClient(cc grpc.ClientConnInterface) NationalEconomySectorOldServiceClient {
+	return &nationalEconomySectorOldServiceClient{cc}
 }
 
-func (c *nationalEconomySectorServiceClient) Create(ctx context.Context, in *CreateNationalEconomySectorRequest, opts ...grpc.CallOption) (*NationalEconomySectorProfileResponse, error) {
-	out := new(NationalEconomySectorProfileResponse)
-	err := c.cc.Invoke(ctx, "/NationalEconomySectorService/Create", in, out, opts...)
+func (c *nationalEconomySectorOldServiceClient) Create(ctx context.Context, in *CreateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error) {
+	out := new(NationalEconomySectorOldProfileResponse)
+	err := c.cc.Invoke(ctx, "/NationalEconomySectorOldService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nationalEconomySectorServiceClient) Read(ctx context.Context, in *SingleNationalEconomySectorRequest, opts ...grpc.CallOption) (*NationalEconomySectorProfileResponse, error) {
-	out := new(NationalEconomySectorProfileResponse)
-	err := c.cc.Invoke(ctx, "/NationalEconomySectorService/Read", in, out, opts...)
+func (c *nationalEconomySectorOldServiceClient) Read(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error) {
+	out := new(NationalEconomySectorOldProfileResponse)
+	err := c.cc.Invoke(ctx, "/NationalEconomySectorOldService/Read", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nationalEconomySectorServiceClient) Update(ctx context.Context, in *UpdateNationalEconomySectorRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
+func (c *nationalEconomySectorOldServiceClient) Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
 	out := new(SuccessResponse)
-	err := c.cc.Invoke(ctx, "/NationalEconomySectorService/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/NationalEconomySectorOldService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nationalEconomySectorServiceClient) Delete(ctx context.Context, in *SingleNationalEconomySectorRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
+func (c *nationalEconomySectorOldServiceClient) Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
 	out := new(SuccessResponse)
-	err := c.cc.Invoke(ctx, "/NationalEconomySectorService/Delete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/NationalEconomySectorOldService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// NationalEconomySectorServiceServer is the server API for NationalEconomySectorService service.
-// All implementations must embed UnimplementedNationalEconomySectorServiceServer
+// NationalEconomySectorOldServiceServer is the server API for NationalEconomySectorOldService service.
+// All implementations must embed UnimplementedNationalEconomySectorOldServiceServer
 // for forward compatibility
-type NationalEconomySectorServiceServer interface {
-	Create(context.Context, *CreateNationalEconomySectorRequest) (*NationalEconomySectorProfileResponse, error)
-	Read(context.Context, *SingleNationalEconomySectorRequest) (*NationalEconomySectorProfileResponse, error)
-	Update(context.Context, *UpdateNationalEconomySectorRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleNationalEconomySectorRequest) (*SuccessResponse, error)
-	mustEmbedUnimplementedNationalEconomySectorServiceServer()
+type NationalEconomySectorOldServiceServer interface {
+	Create(context.Context, *CreateNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
+	Read(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
+	Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error)
+	Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*SuccessResponse, error)
+	mustEmbedUnimplementedNationalEconomySectorOldServiceServer()
 }
 
-// UnimplementedNationalEconomySectorServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedNationalEconomySectorServiceServer struct {
+// UnimplementedNationalEconomySectorOldServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedNationalEconomySectorOldServiceServer struct {
 }
 
-func (UnimplementedNationalEconomySectorServiceServer) Create(context.Context, *CreateNationalEconomySectorRequest) (*NationalEconomySectorProfileResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Create(context.Context, *CreateNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedNationalEconomySectorServiceServer) Read(context.Context, *SingleNationalEconomySectorRequest) (*NationalEconomySectorProfileResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Read(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
 }
-func (UnimplementedNationalEconomySectorServiceServer) Update(context.Context, *UpdateNationalEconomySectorRequest) (*SuccessResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedNationalEconomySectorServiceServer) Delete(context.Context, *SingleNationalEconomySectorRequest) (*SuccessResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedNationalEconomySectorServiceServer) mustEmbedUnimplementedNationalEconomySectorServiceServer() {
+func (UnimplementedNationalEconomySectorOldServiceServer) mustEmbedUnimplementedNationalEconomySectorOldServiceServer() {
 }
 
-// UnsafeNationalEconomySectorServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NationalEconomySectorServiceServer will
+// UnsafeNationalEconomySectorOldServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NationalEconomySectorOldServiceServer will
 // result in compilation errors.
-type UnsafeNationalEconomySectorServiceServer interface {
-	mustEmbedUnimplementedNationalEconomySectorServiceServer()
+type UnsafeNationalEconomySectorOldServiceServer interface {
+	mustEmbedUnimplementedNationalEconomySectorOldServiceServer()
 }
 
-func RegisterNationalEconomySectorServiceServer(s grpc.ServiceRegistrar, srv NationalEconomySectorServiceServer) {
-	s.RegisterService(&NationalEconomySectorService_ServiceDesc, srv)
+func RegisterNationalEconomySectorOldServiceServer(s grpc.ServiceRegistrar, srv NationalEconomySectorOldServiceServer) {
+	s.RegisterService(&NationalEconomySectorOldService_ServiceDesc, srv)
 }
 
-func _NationalEconomySectorService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateNationalEconomySectorRequest)
+func _NationalEconomySectorOldService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorServiceServer).Create(ctx, in)
+		return srv.(NationalEconomySectorOldServiceServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/NationalEconomySectorService/Create",
+		FullMethod: "/NationalEconomySectorOldService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorServiceServer).Create(ctx, req.(*CreateNationalEconomySectorRequest))
+		return srv.(NationalEconomySectorOldServiceServer).Create(ctx, req.(*CreateNationalEconomySectorOldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NationalEconomySectorService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleNationalEconomySectorRequest)
+func _NationalEconomySectorOldService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorServiceServer).Read(ctx, in)
+		return srv.(NationalEconomySectorOldServiceServer).Read(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/NationalEconomySectorService/Read",
+		FullMethod: "/NationalEconomySectorOldService/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorServiceServer).Read(ctx, req.(*SingleNationalEconomySectorRequest))
+		return srv.(NationalEconomySectorOldServiceServer).Read(ctx, req.(*SingleNationalEconomySectorOldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NationalEconomySectorService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateNationalEconomySectorRequest)
+func _NationalEconomySectorOldService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorServiceServer).Update(ctx, in)
+		return srv.(NationalEconomySectorOldServiceServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/NationalEconomySectorService/Update",
+		FullMethod: "/NationalEconomySectorOldService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorServiceServer).Update(ctx, req.(*UpdateNationalEconomySectorRequest))
+		return srv.(NationalEconomySectorOldServiceServer).Update(ctx, req.(*UpdateNationalEconomySectorOldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NationalEconomySectorService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleNationalEconomySectorRequest)
+func _NationalEconomySectorOldService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorServiceServer).Delete(ctx, in)
+		return srv.(NationalEconomySectorOldServiceServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/NationalEconomySectorService/Delete",
+		FullMethod: "/NationalEconomySectorOldService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorServiceServer).Delete(ctx, req.(*SingleNationalEconomySectorRequest))
+		return srv.(NationalEconomySectorOldServiceServer).Delete(ctx, req.(*SingleNationalEconomySectorOldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// NationalEconomySectorService_ServiceDesc is the grpc.ServiceDesc for NationalEconomySectorService service.
+// NationalEconomySectorOldService_ServiceDesc is the grpc.ServiceDesc for NationalEconomySectorOldService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var NationalEconomySectorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "NationalEconomySectorService",
-	HandlerType: (*NationalEconomySectorServiceServer)(nil),
+var NationalEconomySectorOldService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "NationalEconomySectorOldService",
+	HandlerType: (*NationalEconomySectorOldServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Create",
-			Handler:    _NationalEconomySectorService_Create_Handler,
+			Handler:    _NationalEconomySectorOldService_Create_Handler,
 		},
 		{
 			MethodName: "Read",
-			Handler:    _NationalEconomySectorService_Read_Handler,
+			Handler:    _NationalEconomySectorOldService_Read_Handler,
 		},
 		{
 			MethodName: "Update",
-			Handler:    _NationalEconomySectorService_Update_Handler,
+			Handler:    _NationalEconomySectorOldService_Update_Handler,
 		},
 		{
 			MethodName: "Delete",
-			Handler:    _NationalEconomySectorService_Delete_Handler,
+			Handler:    _NationalEconomySectorOldService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

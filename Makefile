@@ -16,7 +16,6 @@ proto: $(PROTO_FILE_NAMES)
 
 $(PROTO_FILE_NAMES):
 	@echo "Generating Protocol Buffer files for $(@)..."
-	@echo $(@)!!
 	protoc \
 	--proto_path=proto/$(@) \
     --go_out=proto/$(@) \

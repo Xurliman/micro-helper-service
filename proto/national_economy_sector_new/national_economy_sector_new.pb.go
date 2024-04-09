@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.21.12
-// source: national_economy_sector_old.proto
+// source: national_economy_sector_new.proto
 
-package proto_national_economy_sector_old
+package proto_national_economy_sector_new
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateNationalEconomySectorOldRequest struct {
+type CreateNationalEconomySectorNewRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -34,23 +34,23 @@ type CreateNationalEconomySectorOldRequest struct {
 	CbuReferenceKey  int32  `protobuf:"varint,7,opt,name=cbu_reference_key,json=cbuReferenceKey,proto3" json:"cbu_reference_key,omitempty"`
 }
 
-func (x *CreateNationalEconomySectorOldRequest) Reset() {
-	*x = CreateNationalEconomySectorOldRequest{}
+func (x *CreateNationalEconomySectorNewRequest) Reset() {
+	*x = CreateNationalEconomySectorNewRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_national_economy_sector_old_proto_msgTypes[0]
+		mi := &file_national_economy_sector_new_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *CreateNationalEconomySectorOldRequest) String() string {
+func (x *CreateNationalEconomySectorNewRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateNationalEconomySectorOldRequest) ProtoMessage() {}
+func (*CreateNationalEconomySectorNewRequest) ProtoMessage() {}
 
-func (x *CreateNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_national_economy_sector_old_proto_msgTypes[0]
+func (x *CreateNationalEconomySectorNewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_national_economy_sector_new_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,61 +61,61 @@ func (x *CreateNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateNationalEconomySectorOldRequest.ProtoReflect.Descriptor instead.
-func (*CreateNationalEconomySectorOldRequest) Descriptor() ([]byte, []int) {
-	return file_national_economy_sector_old_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use CreateNationalEconomySectorNewRequest.ProtoReflect.Descriptor instead.
+func (*CreateNationalEconomySectorNewRequest) Descriptor() ([]byte, []int) {
+	return file_national_economy_sector_new_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetCode() int64 {
+func (x *CreateNationalEconomySectorNewRequest) GetCode() int64 {
 	if x != nil {
 		return x.Code
 	}
 	return 0
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetName() string {
+func (x *CreateNationalEconomySectorNewRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetCbuCode() int64 {
+func (x *CreateNationalEconomySectorNewRequest) GetCbuCode() int64 {
 	if x != nil {
 		return x.CbuCode
 	}
 	return 0
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetCbuGroupCode() int64 {
+func (x *CreateNationalEconomySectorNewRequest) GetCbuGroupCode() int64 {
 	if x != nil {
 		return x.CbuGroupCode
 	}
 	return 0
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetActivationDate() string {
+func (x *CreateNationalEconomySectorNewRequest) GetActivationDate() string {
 	if x != nil {
 		return x.ActivationDate
 	}
 	return ""
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetDeactivationDate() string {
+func (x *CreateNationalEconomySectorNewRequest) GetDeactivationDate() string {
 	if x != nil {
 		return x.DeactivationDate
 	}
 	return ""
 }
 
-func (x *CreateNationalEconomySectorOldRequest) GetCbuReferenceKey() int32 {
+func (x *CreateNationalEconomySectorNewRequest) GetCbuReferenceKey() int32 {
 	if x != nil {
 		return x.CbuReferenceKey
 	}
 	return 0
 }
 
-type SingleNationalEconomySectorOldRequest struct {
+type SingleNationalEconomySectorNewRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -123,23 +123,23 @@ type SingleNationalEconomySectorOldRequest struct {
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *SingleNationalEconomySectorOldRequest) Reset() {
-	*x = SingleNationalEconomySectorOldRequest{}
+func (x *SingleNationalEconomySectorNewRequest) Reset() {
+	*x = SingleNationalEconomySectorNewRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_national_economy_sector_old_proto_msgTypes[1]
+		mi := &file_national_economy_sector_new_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *SingleNationalEconomySectorOldRequest) String() string {
+func (x *SingleNationalEconomySectorNewRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SingleNationalEconomySectorOldRequest) ProtoMessage() {}
+func (*SingleNationalEconomySectorNewRequest) ProtoMessage() {}
 
-func (x *SingleNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_national_economy_sector_old_proto_msgTypes[1]
+func (x *SingleNationalEconomySectorNewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_national_economy_sector_new_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,19 +150,19 @@ func (x *SingleNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SingleNationalEconomySectorOldRequest.ProtoReflect.Descriptor instead.
-func (*SingleNationalEconomySectorOldRequest) Descriptor() ([]byte, []int) {
-	return file_national_economy_sector_old_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use SingleNationalEconomySectorNewRequest.ProtoReflect.Descriptor instead.
+func (*SingleNationalEconomySectorNewRequest) Descriptor() ([]byte, []int) {
+	return file_national_economy_sector_new_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SingleNationalEconomySectorOldRequest) GetId() int64 {
+func (x *SingleNationalEconomySectorNewRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-type NationalEconomySectorOldProfileResponse struct {
+type NationalEconomySectorNewProfileResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -177,23 +177,23 @@ type NationalEconomySectorOldProfileResponse struct {
 	CbuReferenceKey  int32  `protobuf:"varint,8,opt,name=cbu_reference_key,json=cbuReferenceKey,proto3" json:"cbu_reference_key,omitempty"`
 }
 
-func (x *NationalEconomySectorOldProfileResponse) Reset() {
-	*x = NationalEconomySectorOldProfileResponse{}
+func (x *NationalEconomySectorNewProfileResponse) Reset() {
+	*x = NationalEconomySectorNewProfileResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_national_economy_sector_old_proto_msgTypes[2]
+		mi := &file_national_economy_sector_new_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *NationalEconomySectorOldProfileResponse) String() string {
+func (x *NationalEconomySectorNewProfileResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NationalEconomySectorOldProfileResponse) ProtoMessage() {}
+func (*NationalEconomySectorNewProfileResponse) ProtoMessage() {}
 
-func (x *NationalEconomySectorOldProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_national_economy_sector_old_proto_msgTypes[2]
+func (x *NationalEconomySectorNewProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_national_economy_sector_new_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -204,61 +204,61 @@ func (x *NationalEconomySectorOldProfileResponse) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NationalEconomySectorOldProfileResponse.ProtoReflect.Descriptor instead.
-func (*NationalEconomySectorOldProfileResponse) Descriptor() ([]byte, []int) {
-	return file_national_economy_sector_old_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use NationalEconomySectorNewProfileResponse.ProtoReflect.Descriptor instead.
+func (*NationalEconomySectorNewProfileResponse) Descriptor() ([]byte, []int) {
+	return file_national_economy_sector_new_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetId() int64 {
+func (x *NationalEconomySectorNewProfileResponse) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetCode() int64 {
+func (x *NationalEconomySectorNewProfileResponse) GetCode() int64 {
 	if x != nil {
 		return x.Code
 	}
 	return 0
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetName() string {
+func (x *NationalEconomySectorNewProfileResponse) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetCbuCode() int64 {
+func (x *NationalEconomySectorNewProfileResponse) GetCbuCode() int64 {
 	if x != nil {
 		return x.CbuCode
 	}
 	return 0
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetCbuGroupCode() int64 {
+func (x *NationalEconomySectorNewProfileResponse) GetCbuGroupCode() int64 {
 	if x != nil {
 		return x.CbuGroupCode
 	}
 	return 0
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetActivationDate() string {
+func (x *NationalEconomySectorNewProfileResponse) GetActivationDate() string {
 	if x != nil {
 		return x.ActivationDate
 	}
 	return ""
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetDeactivationDate() string {
+func (x *NationalEconomySectorNewProfileResponse) GetDeactivationDate() string {
 	if x != nil {
 		return x.DeactivationDate
 	}
 	return ""
 }
 
-func (x *NationalEconomySectorOldProfileResponse) GetCbuReferenceKey() int32 {
+func (x *NationalEconomySectorNewProfileResponse) GetCbuReferenceKey() int32 {
 	if x != nil {
 		return x.CbuReferenceKey
 	}
@@ -276,7 +276,7 @@ type SuccessResponse struct {
 func (x *SuccessResponse) Reset() {
 	*x = SuccessResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_national_economy_sector_old_proto_msgTypes[3]
+		mi := &file_national_economy_sector_new_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -289,7 +289,7 @@ func (x *SuccessResponse) String() string {
 func (*SuccessResponse) ProtoMessage() {}
 
 func (x *SuccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_national_economy_sector_old_proto_msgTypes[3]
+	mi := &file_national_economy_sector_new_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -302,7 +302,7 @@ func (x *SuccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuccessResponse.ProtoReflect.Descriptor instead.
 func (*SuccessResponse) Descriptor() ([]byte, []int) {
-	return file_national_economy_sector_old_proto_rawDescGZIP(), []int{3}
+	return file_national_economy_sector_new_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SuccessResponse) GetResponse() string {
@@ -312,7 +312,7 @@ func (x *SuccessResponse) GetResponse() string {
 	return ""
 }
 
-type UpdateNationalEconomySectorOldRequest struct {
+type UpdateNationalEconomySectorNewRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -327,23 +327,23 @@ type UpdateNationalEconomySectorOldRequest struct {
 	CbuReferenceKey  int32  `protobuf:"varint,8,opt,name=cbu_reference_key,json=cbuReferenceKey,proto3" json:"cbu_reference_key,omitempty"`
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) Reset() {
-	*x = UpdateNationalEconomySectorOldRequest{}
+func (x *UpdateNationalEconomySectorNewRequest) Reset() {
+	*x = UpdateNationalEconomySectorNewRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_national_economy_sector_old_proto_msgTypes[4]
+		mi := &file_national_economy_sector_new_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) String() string {
+func (x *UpdateNationalEconomySectorNewRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateNationalEconomySectorOldRequest) ProtoMessage() {}
+func (*UpdateNationalEconomySectorNewRequest) ProtoMessage() {}
 
-func (x *UpdateNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_national_economy_sector_old_proto_msgTypes[4]
+func (x *UpdateNationalEconomySectorNewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_national_economy_sector_new_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -354,75 +354,75 @@ func (x *UpdateNationalEconomySectorOldRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateNationalEconomySectorOldRequest.ProtoReflect.Descriptor instead.
-func (*UpdateNationalEconomySectorOldRequest) Descriptor() ([]byte, []int) {
-	return file_national_economy_sector_old_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use UpdateNationalEconomySectorNewRequest.ProtoReflect.Descriptor instead.
+func (*UpdateNationalEconomySectorNewRequest) Descriptor() ([]byte, []int) {
+	return file_national_economy_sector_new_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetId() int64 {
+func (x *UpdateNationalEconomySectorNewRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetCode() int64 {
+func (x *UpdateNationalEconomySectorNewRequest) GetCode() int64 {
 	if x != nil {
 		return x.Code
 	}
 	return 0
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetName() string {
+func (x *UpdateNationalEconomySectorNewRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetCbuCode() int64 {
+func (x *UpdateNationalEconomySectorNewRequest) GetCbuCode() int64 {
 	if x != nil {
 		return x.CbuCode
 	}
 	return 0
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetCbuGroupCode() int64 {
+func (x *UpdateNationalEconomySectorNewRequest) GetCbuGroupCode() int64 {
 	if x != nil {
 		return x.CbuGroupCode
 	}
 	return 0
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetActivationDate() string {
+func (x *UpdateNationalEconomySectorNewRequest) GetActivationDate() string {
 	if x != nil {
 		return x.ActivationDate
 	}
 	return ""
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetDeactivationDate() string {
+func (x *UpdateNationalEconomySectorNewRequest) GetDeactivationDate() string {
 	if x != nil {
 		return x.DeactivationDate
 	}
 	return ""
 }
 
-func (x *UpdateNationalEconomySectorOldRequest) GetCbuReferenceKey() int32 {
+func (x *UpdateNationalEconomySectorNewRequest) GetCbuReferenceKey() int32 {
 	if x != nil {
 		return x.CbuReferenceKey
 	}
 	return 0
 }
 
-var File_national_economy_sector_old_proto protoreflect.FileDescriptor
+var File_national_economy_sector_new_proto protoreflect.FileDescriptor
 
-var file_national_economy_sector_old_proto_rawDesc = []byte{
+var file_national_economy_sector_new_proto_rawDesc = []byte{
 	0x0a, 0x21, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x5f, 0x65, 0x63, 0x6f, 0x6e, 0x6f,
-	0x6d, 0x79, 0x5f, 0x73, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x5f, 0x6f, 0x6c, 0x64, 0x2e, 0x70, 0x72,
+	0x6d, 0x79, 0x5f, 0x73, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x5f, 0x6e, 0x65, 0x77, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x22, 0x92, 0x02, 0x0a, 0x25, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4e, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63,
-	0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a,
+	0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a,
 	0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64,
 	0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x63, 0x62, 0x75, 0x5f, 0x63, 0x6f, 0x64,
@@ -439,10 +439,10 @@ var file_national_economy_sector_old_proto_rawDesc = []byte{
 	0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x63, 0x62, 0x75, 0x52, 0x65, 0x66, 0x65,
 	0x72, 0x65, 0x6e, 0x63, 0x65, 0x4b, 0x65, 0x79, 0x22, 0x37, 0x0a, 0x25, 0x53, 0x69, 0x6e, 0x67,
 	0x6c, 0x65, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d,
-	0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
 	0x64, 0x22, 0xa4, 0x02, 0x0a, 0x27, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63,
-	0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x50, 0x72,
+	0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x50, 0x72,
 	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a,
 	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a,
 	0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64,
@@ -464,7 +464,7 @@ var file_national_economy_sector_old_proto_rawDesc = []byte{
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x72,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xa2, 0x02, 0x0a, 0x25, 0x55, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d,
-	0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
 	0x64, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20,
@@ -482,61 +482,61 @@ var file_national_economy_sector_old_proto_rawDesc = []byte{
 	0x65, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x63, 0x62, 0x75,
 	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x4b, 0x65, 0x79, 0x32, 0xdf, 0x02, 0x0a,
 	0x1f, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79,
-	0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0x5a, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x26, 0x2e, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f,
-	0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x28, 0x2e, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f,
-	0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x50, 0x72, 0x6f,
+	0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x50, 0x72, 0x6f,
 	0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58, 0x0a, 0x04,
 	0x52, 0x65, 0x61, 0x64, 0x12, 0x26, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4e, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74,
-	0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x4e,
+	0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x4e,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65,
-	0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65,
+	0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65, 0x77, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x06, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
 	0x12, 0x26, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61,
-	0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4f, 0x6c,
-	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65,
+	0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x4e, 0x65,
+	0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x06, 0x44, 0x65,
 	0x6c, 0x65, 0x74, 0x65, 0x12, 0x26, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4e, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x53, 0x65, 0x63, 0x74,
-	0x6f, 0x72, 0x4f, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x53,
+	0x6f, 0x72, 0x4e, 0x65, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x53,
 	0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x23,
 	0x5a, 0x21, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c,
 	0x2e, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x79, 0x2e, 0x73, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x2e,
-	0x6f, 0x6c, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x65, 0x77, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_national_economy_sector_old_proto_rawDescOnce sync.Once
-	file_national_economy_sector_old_proto_rawDescData = file_national_economy_sector_old_proto_rawDesc
+	file_national_economy_sector_new_proto_rawDescOnce sync.Once
+	file_national_economy_sector_new_proto_rawDescData = file_national_economy_sector_new_proto_rawDesc
 )
 
-func file_national_economy_sector_old_proto_rawDescGZIP() []byte {
-	file_national_economy_sector_old_proto_rawDescOnce.Do(func() {
-		file_national_economy_sector_old_proto_rawDescData = protoimpl.X.CompressGZIP(file_national_economy_sector_old_proto_rawDescData)
+func file_national_economy_sector_new_proto_rawDescGZIP() []byte {
+	file_national_economy_sector_new_proto_rawDescOnce.Do(func() {
+		file_national_economy_sector_new_proto_rawDescData = protoimpl.X.CompressGZIP(file_national_economy_sector_new_proto_rawDescData)
 	})
-	return file_national_economy_sector_old_proto_rawDescData
+	return file_national_economy_sector_new_proto_rawDescData
 }
 
-var file_national_economy_sector_old_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_national_economy_sector_old_proto_goTypes = []interface{}{
-	(*CreateNationalEconomySectorOldRequest)(nil),   // 0: CreateNationalEconomySectorOldRequest
-	(*SingleNationalEconomySectorOldRequest)(nil),   // 1: SingleNationalEconomySectorOldRequest
-	(*NationalEconomySectorOldProfileResponse)(nil), // 2: NationalEconomySectorOldProfileResponse
+var file_national_economy_sector_new_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_national_economy_sector_new_proto_goTypes = []interface{}{
+	(*CreateNationalEconomySectorNewRequest)(nil),   // 0: CreateNationalEconomySectorNewRequest
+	(*SingleNationalEconomySectorNewRequest)(nil),   // 1: SingleNationalEconomySectorNewRequest
+	(*NationalEconomySectorNewProfileResponse)(nil), // 2: NationalEconomySectorNewProfileResponse
 	(*SuccessResponse)(nil),                         // 3: SuccessResponse
-	(*UpdateNationalEconomySectorOldRequest)(nil),   // 4: UpdateNationalEconomySectorOldRequest
+	(*UpdateNationalEconomySectorNewRequest)(nil),   // 4: UpdateNationalEconomySectorNewRequest
 }
-var file_national_economy_sector_old_proto_depIdxs = []int32{
-	0, // 0: NationalEconomySectorOldService.Create:input_type -> CreateNationalEconomySectorOldRequest
-	1, // 1: NationalEconomySectorOldService.Read:input_type -> SingleNationalEconomySectorOldRequest
-	4, // 2: NationalEconomySectorOldService.Update:input_type -> UpdateNationalEconomySectorOldRequest
-	1, // 3: NationalEconomySectorOldService.Delete:input_type -> SingleNationalEconomySectorOldRequest
-	2, // 4: NationalEconomySectorOldService.Create:output_type -> NationalEconomySectorOldProfileResponse
-	2, // 5: NationalEconomySectorOldService.Read:output_type -> NationalEconomySectorOldProfileResponse
-	3, // 6: NationalEconomySectorOldService.Update:output_type -> SuccessResponse
-	3, // 7: NationalEconomySectorOldService.Delete:output_type -> SuccessResponse
+var file_national_economy_sector_new_proto_depIdxs = []int32{
+	0, // 0: NationalEconomySectorNewService.Create:input_type -> CreateNationalEconomySectorNewRequest
+	1, // 1: NationalEconomySectorNewService.Read:input_type -> SingleNationalEconomySectorNewRequest
+	4, // 2: NationalEconomySectorNewService.Update:input_type -> UpdateNationalEconomySectorNewRequest
+	1, // 3: NationalEconomySectorNewService.Delete:input_type -> SingleNationalEconomySectorNewRequest
+	2, // 4: NationalEconomySectorNewService.Create:output_type -> NationalEconomySectorNewProfileResponse
+	2, // 5: NationalEconomySectorNewService.Read:output_type -> NationalEconomySectorNewProfileResponse
+	3, // 6: NationalEconomySectorNewService.Update:output_type -> SuccessResponse
+	3, // 7: NationalEconomySectorNewService.Delete:output_type -> SuccessResponse
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -544,14 +544,14 @@ var file_national_economy_sector_old_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_national_economy_sector_old_proto_init() }
-func file_national_economy_sector_old_proto_init() {
-	if File_national_economy_sector_old_proto != nil {
+func init() { file_national_economy_sector_new_proto_init() }
+func file_national_economy_sector_new_proto_init() {
+	if File_national_economy_sector_new_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_national_economy_sector_old_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateNationalEconomySectorOldRequest); i {
+		file_national_economy_sector_new_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateNationalEconomySectorNewRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -562,8 +562,8 @@ func file_national_economy_sector_old_proto_init() {
 				return nil
 			}
 		}
-		file_national_economy_sector_old_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SingleNationalEconomySectorOldRequest); i {
+		file_national_economy_sector_new_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SingleNationalEconomySectorNewRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -574,8 +574,8 @@ func file_national_economy_sector_old_proto_init() {
 				return nil
 			}
 		}
-		file_national_economy_sector_old_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NationalEconomySectorOldProfileResponse); i {
+		file_national_economy_sector_new_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NationalEconomySectorNewProfileResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -586,7 +586,7 @@ func file_national_economy_sector_old_proto_init() {
 				return nil
 			}
 		}
-		file_national_economy_sector_old_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_national_economy_sector_new_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SuccessResponse); i {
 			case 0:
 				return &v.state
@@ -598,8 +598,8 @@ func file_national_economy_sector_old_proto_init() {
 				return nil
 			}
 		}
-		file_national_economy_sector_old_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNationalEconomySectorOldRequest); i {
+		file_national_economy_sector_new_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNationalEconomySectorNewRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -615,18 +615,18 @@ func file_national_economy_sector_old_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_national_economy_sector_old_proto_rawDesc,
+			RawDescriptor: file_national_economy_sector_new_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_national_economy_sector_old_proto_goTypes,
-		DependencyIndexes: file_national_economy_sector_old_proto_depIdxs,
-		MessageInfos:      file_national_economy_sector_old_proto_msgTypes,
+		GoTypes:           file_national_economy_sector_new_proto_goTypes,
+		DependencyIndexes: file_national_economy_sector_new_proto_depIdxs,
+		MessageInfos:      file_national_economy_sector_new_proto_msgTypes,
 	}.Build()
-	File_national_economy_sector_old_proto = out.File
-	file_national_economy_sector_old_proto_rawDesc = nil
-	file_national_economy_sector_old_proto_goTypes = nil
-	file_national_economy_sector_old_proto_depIdxs = nil
+	File_national_economy_sector_new_proto = out.File
+	file_national_economy_sector_new_proto_rawDesc = nil
+	file_national_economy_sector_new_proto_goTypes = nil
+	file_national_economy_sector_new_proto_depIdxs = nil
 }

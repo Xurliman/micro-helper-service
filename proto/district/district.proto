@@ -1,11 +1,21 @@
 syntax = "proto3";
-option go_package="proto.bank";
+option go_package="proto.district";
 
 service DistrictService {
+  rpc List(ListDistrictRequest) returns (ListDistrictResponse);
   rpc Create(CreateDistrictRequest) returns (DistrictProfileResponse);
-  rpc Read(SingleDistrictRequest) returns (DistrictProfileResponse);
+  rpc Get(SingleDistrictRequest) returns (DistrictProfileResponse);
   rpc Update(UpdateDistrictRequest) returns (SuccessResponse);
   rpc Delete(SingleDistrictRequest) returns (SuccessResponse);
+}
+
+message ListDistrictRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListDistrictResponse {
+  repeated DistrictProfileResponse districts = 1;
 }
 
 message CreateDistrictRequest{

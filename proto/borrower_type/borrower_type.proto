@@ -1,10 +1,10 @@
 syntax = "proto3";
-option go_package = "proto.borrower_type";
+option go_package = "proto.borrower.type";
 
 service BorrowerTypeService {
   rpc List(ListBorrowerTypeRequest) returns (ListBorrowerTypeResponse);
-  rpc Create(CreateBorrowerTypeRequest) returns (BorrowerTypeResponse);
-  rpc Get(SingleBorrowerTypeRequest) returns (BorrowerTypeResponse);
+  rpc Create(CreateBorrowerTypeRequest) returns (BorrowerTypeProfileResponse);
+  rpc Get(SingleBorrowerTypeRequest) returns (BorrowerTypeProfileResponse);
   rpc Update(SingleBorrowerTypeRequest) returns (SuccessResponse);
   rpc Delete(SingleBorrowerTypeRequest) returns (SuccessResponse);
 }
@@ -15,7 +15,7 @@ message ListBorrowerTypeRequest {
 }
 
 message ListBorrowerTypeResponse {
-  repeated BorrowerTypeResponse borrower_type = 1;
+  repeated BorrowerTypeProfileResponse borrower_type = 1;
 }
 
 message CreateBorrowerTypeRequest {
@@ -30,7 +30,7 @@ message CreateBorrowerTypeRequest {
 
 }
 
-message BorrowerTypeResponse {
+message BorrowerTypeProfileResponse {
   string code = 1;
   string name = 2;
   string old_code = 3;
@@ -53,6 +53,16 @@ message SuccessResponse {
   string response = 1;
 }
 
+message UpdateBorrowerTypeRequest {
+  string code = 1;
+  string name = 2;
+  string old_code = 3;
+  string old_name = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  string flex_fin_id = 7;
+  string name_uz = 8;
+}
 /*
 protoc \
 --proto_path=proto/borrower_type \

@@ -3,9 +3,9 @@ option go_package = "proto.account";
 
 service AccountService {
   rpc List(ListAccountRequest) returns (ListAccountResponse);
-  rpc Create(CreateAccountRequest) returns (AccountResponse);
-  rpc Get(SingleAccountRequest) returns (AccountResponse);
-  rpc Update(SingleAccountRequest) returns (SuccessResponse);
+  rpc Create(CreateAccountRequest) returns (AccountProfileResponse);
+  rpc Get(SingleAccountRequest) returns (AccountProfileResponse);
+  rpc Update(UpdateAccountRequest) returns (SuccessResponse);
   rpc Delete(SingleAccountRequest) returns (SuccessResponse);
 }
 
@@ -15,20 +15,13 @@ message ListAccountRequest {
 }
 
 message ListAccountResponse {
-  repeated AccountResponse accounts = 1;
+  repeated AccountProfileResponse accounts = 1;
 }
 
 message CreateAccountRequest {
   string code = 1;
   string name = 2;
   string description = 3;
-}
-
-message AccountResponse {
-  string code = 1;
-  string name = 2;
-  string description = 3;
-  string deleted_at = 4;
 }
 
 message SingleAccountRequest {
@@ -38,8 +31,21 @@ message SingleAccountRequest {
   }
 }
 
+message AccountProfileResponse {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  string deleted_at = 4;
+}
+
 message SuccessResponse {
   string response = 1;
+}
+
+message UpdateAccountRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
 }
 
 /*

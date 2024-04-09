@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: payment_type.proto
 
-package proto_bank
+package proto_payment_type
 
 import (
 	context "context"

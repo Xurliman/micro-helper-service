@@ -1,23 +1,35 @@
 syntax = "proto3";
-option go_package="proto.bank";
+option go_package="proto.direct.organ";
 
 service DirectOrganService {
+  rpc List(ListDirectOrganRequest) returns (ListDirectOrganResponse);
   rpc Create(CreateDirectOrganRequest) returns (DirectOrganProfileResponse);
-  rpc Read(SingleDirectOrganRequest) returns (DirectOrganProfileResponse);
+  rpc Get(SingleDirectOrganRequest) returns (DirectOrganProfileResponse);
   rpc Update(UpdateDirectOrganRequest) returns (SuccessResponse);
   rpc Delete(SingleDirectOrganRequest) returns (SuccessResponse);
+}
+
+message ListDirectOrganRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListDirectOrganResponse {
+  repeated DirectOrganProfileResponse direct_organs = 1;
 }
 
 message CreateDirectOrganRequest{
   int64 code = 1;
   string name = 2;
   string short_name = 3;
-  string crud_dates = 4;
-  int64 cbu_code = 5;
+  int64 cbu_code = 4;
 }
 
 message SingleDirectOrganRequest{
-  int64 id = 1;
+  oneof direct_organ {
+    int64 id = 1;
+    string code = 2;
+  }
 }
 
 message DirectOrganProfileResponse{
@@ -25,22 +37,19 @@ message DirectOrganProfileResponse{
   int64 code = 2;
   string name = 3;
   string short_name = 4;
-  string crud_dates = 5;
-  int64 cbu_code = 6;
+  int64 cbu_code = 5;
 }
 
 message SuccessResponse{
   string response = 1;
 }
 
-
 message UpdateDirectOrganRequest{
   int64 id = 1;
   int64 code = 2;
   string name = 3;
   string short_name = 4;
-  string crud_dates = 5;
-  int64 cbu_code = 6;
+  int64 cbu_code = 5;
 }
 
 

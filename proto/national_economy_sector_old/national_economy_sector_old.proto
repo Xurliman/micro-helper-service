@@ -1,14 +1,14 @@
 syntax = "proto3";
-option go_package="proto.bank";
+option go_package="proto.national.economy.sector.old";
 
-service NationalEconomySectorService {
-  rpc Create(CreateNationalEconomySectorRequest) returns (NationalEconomySectorProfileResponse);
-  rpc Read(SingleNationalEconomySectorRequest) returns (NationalEconomySectorProfileResponse);
-  rpc Update(UpdateNationalEconomySectorRequest) returns (SuccessResponse);
-  rpc Delete(SingleNationalEconomySectorRequest) returns (SuccessResponse);
+service NationalEconomySectorOldService {
+  rpc Create(CreateNationalEconomySectorOldRequest) returns (NationalEconomySectorOldProfileResponse);
+  rpc Read(SingleNationalEconomySectorOldRequest) returns (NationalEconomySectorOldProfileResponse);
+  rpc Update(UpdateNationalEconomySectorOldRequest) returns (SuccessResponse);
+  rpc Delete(SingleNationalEconomySectorOldRequest) returns (SuccessResponse);
 }
 
-message CreateNationalEconomySectorRequest{
+message CreateNationalEconomySectorOldRequest{
   int64 code = 1;
   string name = 2;
   int64 cbu_code = 3;
@@ -18,11 +18,11 @@ message CreateNationalEconomySectorRequest{
   int32 cbu_reference_key = 7;
 }
 
-message SingleNationalEconomySectorRequest{
+message SingleNationalEconomySectorOldRequest{
   int64 id = 1;
 }
 
-message NationalEconomySectorProfileResponse{
+message NationalEconomySectorOldProfileResponse{
   int64 id = 1;
   int64 code = 2;
   string name = 3;
@@ -38,7 +38,7 @@ message SuccessResponse{
 }
 
 
-message UpdateNationalEconomySectorRequest{
+message UpdateNationalEconomySectorOldRequest{
   int64 id = 1;
   int64 code = 2;
   string name = 3;
@@ -48,7 +48,6 @@ message UpdateNationalEconomySectorRequest{
   string deactivation_date = 7;
   int32 cbu_reference_key = 8;
 }
-
 
 /*
 protoc \

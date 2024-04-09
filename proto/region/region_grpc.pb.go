@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: region.proto
 
-package proto_bank
+package proto_region
 
 import (
 	context "context"

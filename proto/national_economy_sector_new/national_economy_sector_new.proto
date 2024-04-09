@@ -1,0 +1,92 @@
+syntax = "proto3";
+option go_package="proto.national.economy.sector.new";
+
+service NationalEconomySectorNewService {
+  rpc Create(CreateNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
+  rpc Read(SingleNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
+  rpc Update(UpdateNationalEconomySectorNewRequest) returns (SuccessResponse);
+  rpc Delete(SingleNationalEconomySectorNewRequest) returns (SuccessResponse);
+}
+
+message CreateNationalEconomySectorNewRequest{
+  string code = 1;
+  string name = 2;
+  string name_uz = 3;
+  int32 section = 4;
+  string section_code = 5;
+  string section_name = 6;
+  string section_name_uz = 7;
+  string group_code = 8;
+  string group_name = 9;
+  string group_name_uz = 10;
+  string group1_code = 11;
+  string group1_name = 12;
+  string group1_name_uz = 13;
+  string group2_code = 14;
+  string group2_name = 15;
+  string group2_name_uz = 16;
+  string activation_date = 17;
+  string deactivation_date = 18;
+}
+
+message SingleNationalEconomySectorNewRequest{
+  int64 id = 1;
+}
+
+message NationalEconomySectorNewProfileResponse{
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string name_uz = 4;
+  int32 section = 5;
+  string section_code = 6;
+  string section_name = 7;
+  string section_name_uz = 8;
+  string group_code = 9;
+  string group_name = 10;
+  string group_name_uz = 11;
+  string group1_code = 12;
+  string group1_name = 13;
+  string group1_name_uz = 14;
+  string group2_code = 15;
+  string group2_name = 16;
+  string group2_name_uz = 17;
+  string activation_date = 18;
+  string deactivation_date = 19;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+
+message UpdateNationalEconomySectorNewRequest{
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string name_uz = 4;
+  int32 section = 5;
+  string section_code = 6;
+  string section_name = 7;
+  string section_name_uz = 8;
+  string group_code = 9;
+  string group_name = 10;
+  string group_name_uz = 11;
+  string group1_code = 12;
+  string group1_name = 13;
+  string group1_name_uz = 14;
+  string group2_code = 15;
+  string group2_name = 16;
+  string group2_name_uz = 17;
+  string activation_date = 18;
+  string deactivation_date = 19;
+}
+
+/*
+protoc \
+--proto_path=proto/national_economy_sector \
+--go_out=proto/national_economy_sector \
+--go_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto \
+--go-grpc_out=proto/national_economy_sector \
+--go-grpc_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto
+*/

@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: district.proto
 
-package proto_bank
+package proto_district
 
 import (
 	context "context"

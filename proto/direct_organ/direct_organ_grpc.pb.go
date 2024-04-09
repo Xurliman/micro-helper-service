@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: direct_organ.proto
 
-package proto_bank
+package proto_direct_organ
 
 import (
 	context "context"

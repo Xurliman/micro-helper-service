@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package="proto.bank";
+option go_package="proto.payment.type";
 
 service PaymentTypeService {
   rpc Create(CreatePaymentTypeRequest) returns (PaymentTypeProfileResponse);

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func (repo *ClientTypeClassifierRepo) Create(classifier models.ClientTypeClassif
 	return classifier, err
 }
 
-func (repo *ClientTypeClassifierRepo) Get(id int64) (models.ClientTypeClassifier, error) {
+func (repo *ClientTypeClassifierRepo) Get(id uuid.UUID) (models.ClientTypeClassifier, error) {
 	var classifier models.ClientTypeClassifier
 	err := repo.db.Where("id = ?", id).First(&classifier).Error
 
@@ -36,6 +37,8 @@ func (repo *ClientTypeClassifierRepo) Update(classifier models.ClientTypeClassif
 	dbClassifier.CBUReferenceKey = classifier.CBUReferenceKey
 	dbClassifier.OldCode = classifier.OldCode
 	dbClassifier.OldName = classifier.OldName
+	dbClassifier.NameUz = classifier.NameUz
+	dbClassifier.FlexFinId = classifier.FlexFinId
 
 	err := repo.db.Save(dbClassifier).Error
 	return dbClassifier, err
@@ -48,7 +51,7 @@ func (repo *ClientTypeClassifierRepo) GetByCode(code string) (models.ClientTypeC
 	return classifier, err
 }
 
-func (repo *ClientTypeClassifierRepo) Delete(id int64) error {
+func (repo *ClientTypeClassifierRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.ClientTypeClassifier{}).Error
 	return err
 }

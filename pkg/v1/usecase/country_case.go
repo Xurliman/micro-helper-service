@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type CountryCase struct {
@@ -13,14 +14,14 @@ type CountryCase struct {
 }
 
 func (countryCase *CountryCase) Create(country models.Country) (models.Country, error) {
-	if _, err := countryCase.repo.GetByCode(strconv.FormatInt(country.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := countryCase.repo.GetByCode(country.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Country{}, errors.New("the code has already been taken")
 	}
 
 	return countryCase.repo.Create(country)
 }
 
-func (countryCase *CountryCase) Get(id int64) (models.Country, error) {
+func (countryCase *CountryCase) Get(id uuid.UUID) (models.Country, error) {
 	var country models.Country
 	var err error
 
@@ -39,7 +40,7 @@ func (countryCase *CountryCase) Update(updateCountry models.Country) (models.Cou
 	var country models.Country
 	var err error
 
-	country, err = countryCase.repo.Get(int64(updateCountry.ID))
+	country, err = countryCase.repo.Get(updateCountry.ID)
 	if err != nil {
 		return models.Country{}, err
 	}
@@ -55,7 +56,7 @@ func (countryCase *CountryCase) Update(updateCountry models.Country) (models.Cou
 	return country, err
 }
 
-func (countryCase *CountryCase) Delete(id int64) error {
+func (countryCase *CountryCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = countryCase.repo.Get(id)

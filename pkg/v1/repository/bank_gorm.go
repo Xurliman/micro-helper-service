@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -15,7 +16,7 @@ func (repo *BankRepo) Create(bank models.Bank) (models.Bank, error) {
 	return bank, err
 }
 
-func (repo *BankRepo) Get(id int64) (models.Bank, error) {
+func (repo *BankRepo) Get(id uuid.UUID) (models.Bank, error) {
 	var bank models.Bank
 	err := repo.db.Where("id = ?", id).First(&bank).Error
 
@@ -36,12 +37,13 @@ func (repo *BankRepo) Update(bank models.Bank) (models.Bank, error) {
 	dbBank.CloseDate = bank.CloseDate
 	dbBank.ActivationDate = bank.ActivationDate
 	dbBank.DeactivationDate = bank.DeactivationDate
+	dbBank.FlexFinId = bank.FlexFinId
 
 	err := repo.db.Save(dbBank).Error
 	return dbBank, err
 }
 
-func (repo *BankRepo) Delete(id int64) error {
+func (repo *BankRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Bank{}).Error
 	return err
 }

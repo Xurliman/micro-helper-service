@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func (repo *BankBranchRepo) Create(bankBranch models.BankBranch) (models.BankBra
 	return bankBranch, err
 }
 
-func (repo *BankBranchRepo) Get(id int64) (models.BankBranch, error) {
+func (repo *BankBranchRepo) Get(id uuid.UUID) (models.BankBranch, error) {
 	var bankBranch models.BankBranch
 	err := repo.db.Where("id = ?", id).First(&bankBranch).Error
 
@@ -29,19 +30,21 @@ func (repo *BankBranchRepo) Update(bankBranch models.BankBranch) (models.BankBra
 
 	dbBankBranch.Code = bankBranch.Code
 	dbBankBranch.Name = bankBranch.Name
-	dbBankBranch.BankID = bankBranch.BankID
-	dbBankBranch.RegionID = bankBranch.RegionID
-	dbBankBranch.DistrictID = bankBranch.DistrictID
+	dbBankBranch.BankId = bankBranch.BankId
+	dbBankBranch.RegionId = bankBranch.RegionId
+	dbBankBranch.DistrictId = bankBranch.DistrictId
 	dbBankBranch.Address = bankBranch.Address
 	dbBankBranch.OpenDate = bankBranch.OpenDate
 	dbBankBranch.CloseDate = bankBranch.CloseDate
-	dbBankBranch.CrudDates = bankBranch.CrudDates
+	dbBankBranch.ActivationDate = bankBranch.ActivationDate
+	dbBankBranch.DeactivationDate = bankBranch.DeactivationDate
+	dbBankBranch.FlexFinId = bankBranch.FlexFinId
 
 	err := repo.db.Save(dbBankBranch).Error
 	return dbBankBranch, err
 }
 
-func (repo *BankBranchRepo) Delete(id int64) error {
+func (repo *BankBranchRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.BankBranch{}).Error
 	return err
 }

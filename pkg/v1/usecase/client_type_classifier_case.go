@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type ClientTypeClassifierCase struct {
@@ -13,14 +14,14 @@ type ClientTypeClassifierCase struct {
 }
 
 func (classifierCase *ClientTypeClassifierCase) Create(classifier models.ClientTypeClassifier) (models.ClientTypeClassifier, error) {
-	if _, err := classifierCase.repo.GetByCode(strconv.FormatInt(classifier.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := classifierCase.repo.GetByCode(classifier.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.ClientTypeClassifier{}, errors.New("the code has already been taken")
 	}
 
 	return classifierCase.repo.Create(classifier)
 }
 
-func (classifierCase *ClientTypeClassifierCase) Get(id int64) (models.ClientTypeClassifier, error) {
+func (classifierCase *ClientTypeClassifierCase) Get(id uuid.UUID) (models.ClientTypeClassifier, error) {
 	var classifier models.ClientTypeClassifier
 	var err error
 
@@ -39,7 +40,7 @@ func (classifierCase *ClientTypeClassifierCase) Update(updateClassifier models.C
 	var classifier models.ClientTypeClassifier
 	var err error
 
-	classifier, err = classifierCase.repo.Get(int64(updateClassifier.ID))
+	classifier, err = classifierCase.repo.Get(updateClassifier.ID)
 	if err != nil {
 		return models.ClientTypeClassifier{}, err
 	}
@@ -55,7 +56,7 @@ func (classifierCase *ClientTypeClassifierCase) Update(updateClassifier models.C
 	return classifier, err
 }
 
-func (classifierCase *ClientTypeClassifierCase) Delete(id int64) error {
+func (classifierCase *ClientTypeClassifierCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = classifierCase.repo.Get(id)

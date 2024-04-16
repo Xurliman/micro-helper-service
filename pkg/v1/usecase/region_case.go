@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type RegionCase struct {
@@ -13,14 +14,14 @@ type RegionCase struct {
 }
 
 func (regionCase RegionCase) Create(region models.Region) (models.Region, error) {
-	if _, err := regionCase.repo.GetByCode(strconv.FormatInt(region.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := regionCase.repo.GetByCode(region.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Region{}, errors.New("the code has already been taken")
 	}
 
 	return regionCase.repo.Create(region)
 }
 
-func (regionCase RegionCase) Get(id int64) (models.Region, error) {
+func (regionCase RegionCase) Get(id uuid.UUID) (models.Region, error) {
 	var region models.Region
 	var err error
 
@@ -39,7 +40,7 @@ func (regionCase RegionCase) Update(updateRegion models.Region) (models.Region, 
 	var region models.Region
 	var err error
 
-	region, err = regionCase.repo.Get(int64(updateRegion.ID))
+	region, err = regionCase.repo.Get(updateRegion.ID)
 	if err != nil {
 		return models.Region{}, err
 	}
@@ -55,7 +56,7 @@ func (regionCase RegionCase) Update(updateRegion models.Region) (models.Region, 
 	return region, err
 }
 
-func (regionCase RegionCase) Delete(id int64) error {
+func (regionCase RegionCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = regionCase.repo.Get(id)

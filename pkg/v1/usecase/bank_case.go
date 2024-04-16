@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type BankCase struct {
@@ -17,14 +18,14 @@ func NewBank(repo interfaces.BankRepoInterface) interfaces.BankCaseInterface {
 }
 
 func (bankCase *BankCase) Create(bank models.Bank) (models.Bank, error) {
-	if _, err := bankCase.repo.GetByCode(strconv.FormatInt(bank.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := bankCase.repo.GetByCode(bank.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Bank{}, errors.New("the code has already been taken")
 	}
 
 	return bankCase.repo.Create(bank)
 }
 
-func (bankCase *BankCase) Get(id int64) (models.Bank, error) {
+func (bankCase *BankCase) Get(id uuid.UUID) (models.Bank, error) {
 	var bank models.Bank
 	var err error
 
@@ -43,7 +44,7 @@ func (bankCase *BankCase) Update(updateBank models.Bank) (models.Bank, error) {
 	var bank models.Bank
 	var err error
 
-	bank, err = bankCase.repo.Get(int64(updateBank.ID))
+	bank, err = bankCase.repo.Get(updateBank.ID)
 	if err != nil {
 		return models.Bank{}, err
 	}
@@ -59,7 +60,7 @@ func (bankCase *BankCase) Update(updateBank models.Bank) (models.Bank, error) {
 	return bank, err
 }
 
-func (bankCase *BankCase) Delete(id int64) error {
+func (bankCase *BankCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = bankCase.repo.Get(id)

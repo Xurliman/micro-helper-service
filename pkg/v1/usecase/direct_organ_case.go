@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type DirectOrganCase struct {
@@ -13,14 +14,14 @@ type DirectOrganCase struct {
 }
 
 func (directOrganCase *DirectOrganCase) Create(directOrgan models.DirectOrgan) (models.DirectOrgan, error) {
-	if _, err := directOrganCase.repo.GetByCode(strconv.FormatInt(directOrgan.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := directOrganCase.repo.GetByCode(directOrgan.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.DirectOrgan{}, errors.New("the code has already been taken")
 	}
 
 	return directOrganCase.repo.Create(directOrgan)
 }
 
-func (directOrganCase *DirectOrganCase) Get(id int64) (models.DirectOrgan, error) {
+func (directOrganCase *DirectOrganCase) Get(id uuid.UUID) (models.DirectOrgan, error) {
 	var directOrgan models.DirectOrgan
 	var err error
 
@@ -39,7 +40,7 @@ func (directOrganCase *DirectOrganCase) Update(updateDirectOrgan models.DirectOr
 	var directOrgan models.DirectOrgan
 	var err error
 
-	directOrgan, err = directOrganCase.repo.Get(int64(updateDirectOrgan.ID))
+	directOrgan, err = directOrganCase.repo.Get(updateDirectOrgan.ID)
 	if err != nil {
 		return models.DirectOrgan{}, err
 	}
@@ -55,7 +56,7 @@ func (directOrganCase *DirectOrganCase) Update(updateDirectOrgan models.DirectOr
 	return directOrgan, err
 }
 
-func (directOrganCase *DirectOrganCase) Delete(id int64) error {
+func (directOrganCase *DirectOrganCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = directOrganCase.repo.Get(id)

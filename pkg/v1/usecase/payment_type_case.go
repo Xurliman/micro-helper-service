@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type PaymentTypeCase struct {
@@ -13,14 +14,14 @@ type PaymentTypeCase struct {
 }
 
 func (paymentTypeCase PaymentTypeCase) Create(paymentType models.PaymentType) (models.PaymentType, error) {
-	if _, err := paymentTypeCase.repo.GetByCode(strconv.FormatInt(paymentType.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := paymentTypeCase.repo.GetByCode(paymentType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.PaymentType{}, errors.New("the code has already been taken")
 	}
 
 	return paymentTypeCase.repo.Create(paymentType)
 }
 
-func (paymentTypeCase PaymentTypeCase) Get(id int64) (models.PaymentType, error) {
+func (paymentTypeCase PaymentTypeCase) Get(id uuid.UUID) (models.PaymentType, error) {
 	var paymentType models.PaymentType
 	var err error
 
@@ -39,7 +40,7 @@ func (paymentTypeCase PaymentTypeCase) Update(updatePaymentType models.PaymentTy
 	var paymentType models.PaymentType
 	var err error
 
-	paymentType, err = paymentTypeCase.repo.Get(int64(updatePaymentType.ID))
+	paymentType, err = paymentTypeCase.repo.Get(updatePaymentType.ID)
 	if err != nil {
 		return models.PaymentType{}, err
 	}
@@ -55,7 +56,7 @@ func (paymentTypeCase PaymentTypeCase) Update(updatePaymentType models.PaymentTy
 	return paymentType, err
 }
 
-func (paymentTypeCase PaymentTypeCase) Delete(id int64) error {
+func (paymentTypeCase PaymentTypeCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = paymentTypeCase.repo.Get(id)

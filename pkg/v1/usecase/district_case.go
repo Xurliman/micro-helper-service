@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type DistrictCase struct {
@@ -13,14 +14,14 @@ type DistrictCase struct {
 }
 
 func (districtCase *DistrictCase) Create(district models.District) (models.District, error) {
-	if _, err := districtCase.repo.GetByCode(strconv.FormatInt(district.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := districtCase.repo.GetByCode(district.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.District{}, errors.New("the code has already been taken")
 	}
 
 	return districtCase.repo.Create(district)
 }
 
-func (districtCase *DistrictCase) Get(id int64) (models.District, error) {
+func (districtCase *DistrictCase) Get(id uuid.UUID) (models.District, error) {
 	var district models.District
 	var err error
 
@@ -39,7 +40,7 @@ func (districtCase *DistrictCase) Update(updateDistrict models.District) (models
 	var district models.District
 	var err error
 
-	district, err = districtCase.repo.Get(int64(updateDistrict.ID))
+	district, err = districtCase.repo.Get(updateDistrict.ID)
 	if err != nil {
 		return models.District{}, err
 	}
@@ -55,7 +56,7 @@ func (districtCase *DistrictCase) Update(updateDistrict models.District) (models
 	return district, err
 }
 
-func (districtCase *DistrictCase) Delete(id int64) error {
+func (districtCase *DistrictCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = districtCase.repo.Get(id)

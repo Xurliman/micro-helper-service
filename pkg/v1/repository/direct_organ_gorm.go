@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func (repo *DirectOrganRepo) Create(directOrgan models.DirectOrgan) (models.Dire
 	return directOrgan, err
 }
 
-func (repo *DirectOrganRepo) Get(id int64) (models.DirectOrgan, error) {
+func (repo *DirectOrganRepo) Get(id uuid.UUID) (models.DirectOrgan, error) {
 	var directOrgan models.DirectOrgan
 	err := repo.db.Where("id = ?", id).First(&directOrgan).Error
 
@@ -30,8 +31,10 @@ func (repo *DirectOrganRepo) Update(directOrgan models.DirectOrgan) (models.Dire
 	dbDirectOrgan.Code = directOrgan.Code
 	dbDirectOrgan.Name = directOrgan.Name
 	dbDirectOrgan.ShortName = directOrgan.ShortName
-	dbDirectOrgan.CrudDates = directOrgan.CrudDates
 	dbDirectOrgan.CBUCode = directOrgan.CBUCode
+	dbDirectOrgan.ActivationDate = directOrgan.ActivationDate
+	dbDirectOrgan.DeactivationDate = directOrgan.DeactivationDate
+	dbDirectOrgan.FlexFinId = directOrgan.FlexFinId
 
 	err := repo.db.Save(dbDirectOrgan).Error
 	return dbDirectOrgan, err
@@ -44,7 +47,7 @@ func (repo *DirectOrganRepo) GetByCode(code string) (models.DirectOrgan, error) 
 	return directOrgan, err
 }
 
-func (repo *DirectOrganRepo) Delete(id int64) error {
+func (repo *DirectOrganRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.DirectOrgan{}).Error
 	return err
 }

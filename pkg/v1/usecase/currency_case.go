@@ -2,10 +2,11 @@ package usecase
 
 import (
 	"errors"
+
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 type CurrencyCase struct {
@@ -13,14 +14,14 @@ type CurrencyCase struct {
 }
 
 func (currencyCase *CurrencyCase) Create(currency models.Currency) (models.Currency, error) {
-	if _, err := currencyCase.repo.GetByCode(strconv.FormatInt(currency.Code, 10)); !errors.Is(err, gorm.ErrRecordNotFound) {
+	if _, err := currencyCase.repo.GetByCode(currency.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Currency{}, errors.New("the code has already been taken")
 	}
 
 	return currencyCase.repo.Create(currency)
 }
 
-func (currencyCase *CurrencyCase) Get(id int64) (models.Currency, error) {
+func (currencyCase *CurrencyCase) Get(id uuid.UUID) (models.Currency, error) {
 	var currency models.Currency
 	var err error
 
@@ -39,7 +40,7 @@ func (currencyCase *CurrencyCase) Update(updateCurrency models.Currency) (models
 	var currency models.Currency
 	var err error
 
-	currency, err = currencyCase.repo.Get(int64(updateCurrency.ID))
+	currency, err = currencyCase.repo.Get(updateCurrency.ID)
 	if err != nil {
 		return models.Currency{}, err
 	}
@@ -55,7 +56,7 @@ func (currencyCase *CurrencyCase) Update(updateCurrency models.Currency) (models
 	return currency, err
 }
 
-func (currencyCase *CurrencyCase) Delete(id int64) error {
+func (currencyCase *CurrencyCase) Delete(id uuid.UUID) error {
 	var err error
 
 	_, err = currencyCase.repo.Get(id)

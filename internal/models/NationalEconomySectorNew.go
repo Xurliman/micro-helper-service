@@ -21,4 +21,6 @@ type NationalEconomySectorNew struct {
 	Group2NameUz     string
 	ActivationDate   string
 	DeactivationDate string
+	CBUReferenceKey  int32
+	FlexFinId        string
 }

@@ -6,7 +6,6 @@ type DirectOrgan struct {
 	Code             string `gorm:"unique;not null"`
 	Name             string
 	ShortName        string
-	CrudDates        string
 	CBUCode          int64
 	ActivationDate   string
 	DeactivationDate string

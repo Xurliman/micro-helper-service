@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func (repo *PaymentTypeRepo) Create(paymentType models.PaymentType) (models.Paym
 	return paymentType, err
 }
 
-func (repo *PaymentTypeRepo) Get(id int64) (models.PaymentType, error) {
+func (repo *PaymentTypeRepo) Get(id uuid.UUID) (models.PaymentType, error) {
 	var paymentType models.PaymentType
 	err := repo.db.Where("id = ?", id).First(&paymentType).Error
 
@@ -33,6 +34,8 @@ func (repo *PaymentTypeRepo) Update(paymentType models.PaymentType) (models.Paym
 	dbPaymentType.DeactivationDate = paymentType.DeactivationDate
 	dbPaymentType.OldCode = paymentType.OldCode
 	dbPaymentType.OldName = paymentType.OldName
+	dbPaymentType.NameUz = paymentType.NameUz
+	dbPaymentType.FlexFinId = paymentType.FlexFinId
 
 	err := repo.db.Save(dbPaymentType).Error
 	return dbPaymentType, err
@@ -45,7 +48,7 @@ func (repo *PaymentTypeRepo) GetByCode(code string) (models.PaymentType, error) 
 	return paymentType, err
 }
 
-func (repo *PaymentTypeRepo) Delete(id int64) error {
+func (repo *PaymentTypeRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.PaymentType{}).Error
 	return err
 }

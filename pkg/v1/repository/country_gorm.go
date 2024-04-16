@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func (repo *CountryRepo) Create(country models.Country) (models.Country, error) 
 	return country, err
 }
 
-func (repo *CountryRepo) Get(id int64) (models.Country, error) {
+func (repo *CountryRepo) Get(id uuid.UUID) (models.Country, error) {
 	var country models.Country
 	err := repo.db.Where("id = ?", id).First(&country).Error
 
@@ -30,11 +31,13 @@ func (repo *CountryRepo) Update(country models.Country) (models.Country, error) 
 	dbCountry.Code = country.Code
 	dbCountry.Name = country.Name
 	dbCountry.ShortName = country.ShortName
-	dbCountry.CurrencyID = country.CurrencyID
+	dbCountry.CurrencyId = country.CurrencyId
 	dbCountry.CodeAlpha2 = country.CodeAlpha2
 	dbCountry.CodeAlpha3 = country.CodeAlpha3
 	dbCountry.TerritoryCode = country.TerritoryCode
-	dbCountry.CrudDates = country.CrudDates
+	dbCountry.ActivationDate = country.ActivationDate
+	dbCountry.DeactivationDate = country.DeactivationDate
+	dbCountry.FlexFinId = country.FlexFinId
 
 	err := repo.db.Save(dbCountry).Error
 	return dbCountry, err
@@ -47,7 +50,7 @@ func (repo *CountryRepo) GetByCode(code string) (models.Country, error) {
 	return country, err
 }
 
-func (repo *CountryRepo) Delete(id int64) error {
+func (repo *CountryRepo) Delete(id uuid.UUID) error {
 	err := repo.db.Where("id = ?", id).Delete(&models.Country{}).Error
 	return err
 }

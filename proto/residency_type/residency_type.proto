@@ -1,0 +1,60 @@
+syntax = "proto3";
+option go_package = "proto.residency.type";
+
+service ResidencyTypeService {
+  rpc List(ListResidencyTypeRequest) returns (ListResidencyTypeResponse);
+  rpc Create(CreateResidencyTypeRequest) returns (ResidencyTypeProfileResponse);
+  rpc Get(SingleResidencyTypeRequest) returns (ResidencyTypeProfileResponse);
+  rpc Update(UpdateResidencyTypeRequest) returns (SuccessResponse);
+  rpc Delete(SingleResidencyTypeRequest) returns (SuccessResponse);
+}
+
+message ListResidencyTypeRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListResidencyTypeResponse {
+  repeated ResidencyTypeProfileResponse residency_types = 1;
+}
+
+message CreateResidencyTypeRequest {
+  string code = 1;
+  string name = 2;
+  string activation_date = 3;
+  string deactivation_date = 4;
+  string flex_fin_id = 5;
+  string name_uz = 6;
+}
+
+message SingleResidencyTypeRequest {
+  oneof residency_type_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message ResidencyTypeProfileResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string activation_date = 4;
+  string deactivation_date = 5;
+  string flex_fin_id = 6;
+  string name_uz = 7;
+  string deleted_at = 8;
+}
+
+message SuccessResponse {
+  string response = 1;
+}
+
+message UpdateResidencyTypeRequest {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string activation_date = 4;
+  string deactivation_date = 5;
+  string flex_fin_id = 6;
+  string name_uz = 7;
+}

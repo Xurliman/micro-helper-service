@@ -6,6 +6,7 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/bank_branch"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +22,7 @@ func NewServer(grpcServer *grpc.Server, bankBranchCase interfaces.BankBranchCase
 
 func (service *BankBranchService) Create(context context.Context, request *proto.CreateBankBranchRequest) (*proto.BankBranchProfileResponse, error) {
 	data := service.transformBankBranchRpc(request)
-	if data.Code == 0 || data.Name == "" {
+	if data.Code == "" || data.Name == "" {
 		return &proto.BankBranchProfileResponse{}, errors.New("please provide all fields")
 	}
 	bankBranch, err := service.bankBranchCase.Create(data)
@@ -33,11 +34,11 @@ func (service *BankBranchService) Create(context context.Context, request *proto
 
 func (service *BankBranchService) Get(context context.Context, request *proto.SingleBankBranchRequest) (*proto.BankBranchProfileResponse, error) {
 	id := request.GetId()
-	if id == 0 {
+	if id == "" {
 		return &proto.BankBranchProfileResponse{}, errors.New("id cannot be blank")
 	}
 
-	bankBranch, err := service.bankBranchCase.Get(id)
+	bankBranch, err := service.bankBranchCase.Get(uuid.MustParse(id))
 	if err != nil {
 		return &proto.BankBranchProfileResponse{}, err
 	}
@@ -47,29 +48,33 @@ func (service *BankBranchService) Get(context context.Context, request *proto.Si
 
 func (service *BankBranchService) transformBankBranchRpc(request *proto.CreateBankBranchRequest) models.BankBranch {
 	return models.BankBranch{
-		Code:       request.GetCode(),
-		Name:       request.GetName(),
-		BankID:     request.GetBankId(),
-		RegionID:   request.GetRegionId(),
-		DistrictID: request.GetDistrictId(),
-		Address:    request.GetAddress(),
-		OpenDate:   request.GetOpenDate(),
-		CloseDate:  request.GetCloseDate(),
-		CrudDates:  request.GetCrudDates(),
+		Code:             request.GetCode(),
+		Name:             request.GetName(),
+		BankId:           request.GetBankId(),
+		RegionId:         request.GetRegionId(),
+		DistrictId:       request.GetDistrictId(),
+		Address:          request.GetAddress(),
+		OpenDate:         request.GetOpenDate(),
+		CloseDate:        request.GetCloseDate(),
+		ActivationDate:   request.GetActivationDate(),
+		DeactivationDate: request.GetDeactivationDate(),
+		FlexFinId:        request.GetFlexFinId(),
 	}
 }
 
 func (service *BankBranchService) transformBankBranchModel(bankBranch models.BankBranch) *proto.BankBranchProfileResponse {
 	return &proto.BankBranchProfileResponse{
-		Id:         int64(bankBranch.ID),
-		Name:       bankBranch.Name,
-		Code:       bankBranch.Code,
-		BankId:     bankBranch.BankID,
-		RegionId:   bankBranch.RegionID,
-		DistrictId: bankBranch.DistrictID,
-		Address:    bankBranch.Address,
-		OpenDate:   bankBranch.OpenDate,
-		CloseDate:  bankBranch.CloseDate,
-		CrudDates:  bankBranch.CrudDates,
+		Id:               bankBranch.ID.String(),
+		Name:             bankBranch.Name,
+		Code:             bankBranch.Code,
+		BankId:           bankBranch.BankId,
+		RegionId:         bankBranch.RegionId,
+		DistrictId:       bankBranch.DistrictId,
+		Address:          bankBranch.Address,
+		OpenDate:         bankBranch.OpenDate,
+		CloseDate:        bankBranch.CloseDate,
+		ActivationDate:   bankBranch.ActivationDate,
+		DeactivationDate: bankBranch.DeactivationDate,
+		FlexFinId:        bankBranch.FlexFinId,
 	}
 }

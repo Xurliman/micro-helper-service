@@ -22,6 +22,7 @@ message CreateAccountRequest {
   string code = 1;
   string name = 2;
   string description = 3;
+  string flex_fin_id = 4;
 }
 
 message SingleAccountRequest {
@@ -32,10 +33,12 @@ message SingleAccountRequest {
 }
 
 message AccountProfileResponse {
-  string code = 1;
-  string name = 2;
-  string description = 3;
-  string deleted_at = 4;
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string flex_fin_id = 5;
+  string deleted_at = 6;
 }
 
 message SuccessResponse {
@@ -43,16 +46,9 @@ message SuccessResponse {
 }
 
 message UpdateAccountRequest {
-  string code = 1;
-  string name = 2;
-  string description = 3;
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string flex_fin_id = 5;
 }
-
-/*
-protoc \
---proto_path=proto/account \
---go_out=proto/account \
---go_opt=paths=source_relative proto/account/account.proto \
---go-grpc_out=proto/account \
---go-grpc_opt=paths=source_relative proto/account/account.proto
-*/

@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	RegionService_List_FullMethodName   = "/RegionService/List"
 	RegionService_Create_FullMethodName = "/RegionService/Create"
-	RegionService_Read_FullMethodName   = "/RegionService/Read"
+	RegionService_Get_FullMethodName    = "/RegionService/Get"
 	RegionService_Update_FullMethodName = "/RegionService/Update"
 	RegionService_Delete_FullMethodName = "/RegionService/Delete"
 )
@@ -29,8 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RegionServiceClient interface {
+	List(ctx context.Context, in *ListRegionRequest, opts ...grpc.CallOption) (*ListRegionResponse, error)
 	Create(ctx context.Context, in *CreateRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error)
-	Read(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error)
+	Get(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error)
 	Update(ctx context.Context, in *UpdateRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -43,6 +45,15 @@ func NewRegionServiceClient(cc grpc.ClientConnInterface) RegionServiceClient {
 	return &regionServiceClient{cc}
 }
 
+func (c *regionServiceClient) List(ctx context.Context, in *ListRegionRequest, opts ...grpc.CallOption) (*ListRegionResponse, error) {
+	out := new(ListRegionResponse)
+	err := c.cc.Invoke(ctx, RegionService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *regionServiceClient) Create(ctx context.Context, in *CreateRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error) {
 	out := new(RegionProfileResponse)
 	err := c.cc.Invoke(ctx, RegionService_Create_FullMethodName, in, out, opts...)
@@ -52,9 +63,9 @@ func (c *regionServiceClient) Create(ctx context.Context, in *CreateRegionReques
 	return out, nil
 }
 
-func (c *regionServiceClient) Read(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error) {
+func (c *regionServiceClient) Get(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error) {
 	out := new(RegionProfileResponse)
-	err := c.cc.Invoke(ctx, RegionService_Read_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, RegionService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,8 +94,9 @@ func (c *regionServiceClient) Delete(ctx context.Context, in *SingleRegionReques
 // All implementations must embed UnimplementedRegionServiceServer
 // for forward compatibility
 type RegionServiceServer interface {
+	List(context.Context, *ListRegionRequest) (*ListRegionResponse, error)
 	Create(context.Context, *CreateRegionRequest) (*RegionProfileResponse, error)
-	Read(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error)
+	Get(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error)
 	Update(context.Context, *UpdateRegionRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleRegionRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedRegionServiceServer()
@@ -94,11 +106,14 @@ type RegionServiceServer interface {
 type UnimplementedRegionServiceServer struct {
 }
 
+func (UnimplementedRegionServiceServer) List(context.Context, *ListRegionRequest) (*ListRegionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
 func (UnimplementedRegionServiceServer) Create(context.Context, *CreateRegionRequest) (*RegionProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedRegionServiceServer) Read(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedRegionServiceServer) Get(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedRegionServiceServer) Update(context.Context, *UpdateRegionRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -119,6 +134,24 @@ func RegisterRegionServiceServer(s grpc.ServiceRegistrar, srv RegionServiceServe
 	s.RegisterService(&RegionService_ServiceDesc, srv)
 }
 
+func _RegionService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegionServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RegionService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegionServiceServer).List(ctx, req.(*ListRegionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RegionService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateRegionRequest)
 	if err := dec(in); err != nil {
@@ -137,20 +170,20 @@ func _RegionService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RegionService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RegionService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SingleRegionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegionServiceServer).Read(ctx, in)
+		return srv.(RegionServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RegionService_Read_FullMethodName,
+		FullMethod: RegionService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegionServiceServer).Read(ctx, req.(*SingleRegionRequest))
+		return srv.(RegionServiceServer).Get(ctx, req.(*SingleRegionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -199,12 +232,16 @@ var RegionService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RegionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "List",
+			Handler:    _RegionService_List_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _RegionService_Create_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _RegionService_Read_Handler,
+			MethodName: "Get",
+			Handler:    _RegionService_Get_Handler,
 		},
 		{
 			MethodName: "Update",

@@ -27,6 +27,7 @@ message CreateBankRequest{
   string close_date = 6;
   string activation_date = 7;
   string deactivation_date = 8;
+  string flex_fin_id = 9;
 }
 
 message SingleBankRequest{
@@ -46,7 +47,8 @@ message BankProfileResponse{
   string close_date = 7;
   string activation_date = 8;
   string deactivation_date = 9;
-  string deleted_at = 10;
+  string flex_fin_id = 10;
+  string deleted_at = 11;
 }
 
 message SuccessResponse{
@@ -54,7 +56,7 @@ message SuccessResponse{
 }
 
 message UpdateBankRequest{
-  int64 id = 1;
+  string id = 1;
   string name = 2;
   string code = 3;
   string short_name = 4;
@@ -63,14 +65,5 @@ message UpdateBankRequest{
   string close_date = 7;
   string activation_date = 8;
   string deactivation_date = 9;
+  string flex_fin_id = 10;
 }
-
-
-/*
-protoc \
---proto_path=proto/bank \
---go_out=proto/bank \
---go_opt=paths=source_relative proto/bank/bank.proto \
---go-grpc_out=proto/bank \
---go-grpc_opt=paths=source_relative proto/bank/bank.proto
-*/

@@ -19,25 +19,32 @@ message ListDirectOrganResponse {
 }
 
 message CreateDirectOrganRequest{
-  int64 code = 1;
+  string code = 1;
   string name = 2;
   string short_name = 3;
   int64 cbu_code = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  string flex_fin_id = 7;
 }
 
 message SingleDirectOrganRequest{
-  oneof direct_organ {
-    int64 id = 1;
+  oneof direct_organ_identifier {
+    string id = 1;
     string code = 2;
   }
 }
 
 message DirectOrganProfileResponse{
-  int64 id = 1;
-  int64 code = 2;
+  string id = 1;
+  string code = 2;
   string name = 3;
   string short_name = 4;
   int64 cbu_code = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
+  string deleted_at = 9;
 }
 
 message SuccessResponse{
@@ -45,19 +52,12 @@ message SuccessResponse{
 }
 
 message UpdateDirectOrganRequest{
-  int64 id = 1;
-  int64 code = 2;
+  string id = 1;
+  string code = 2;
   string name = 3;
   string short_name = 4;
   int64 cbu_code = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
 }
-
-
-/*
-protoc \
---proto_path=proto/direct_organ \
---go_out=proto/direct_organ \
---go_opt=paths=source_relative proto/direct_organ/direct_organ.proto \
---go-grpc_out=proto/direct_organ \
---go-grpc_opt=paths=source_relative proto/direct_organ/direct_organ.proto
-*/

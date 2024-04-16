@@ -23,14 +23,16 @@ func TestCreateCountry(t *testing.T) {
 	country := proto.NewCountryServiceClient(conn)
 
 	request := &proto.CreateCountryRequest{
-		Code:          12345,
-		Name:          "test",
-		ShortName:     "tt",
-		CurrencyId:    1,
-		CodeAlpha2:    "Kolner Str. 200",
-		CodeAlpha3:    "2024-02-20",
-		TerritoryCode: 2024,
-		CrudDates:     "2024-03-20",
+		Code:             "12345",
+		Name:             "test",
+		ShortName:        "tt",
+		CurrencyId:       1,
+		CodeAlpha2:       "Kolner Str. 200",
+		CodeAlpha3:       "2024-02-20",
+		TerritoryCode:    2024,
+		ActivationDate:   "2024-03-20",
+		DeactivationDate: "2024-03-20",
+		FlexFinId:        "23",
 	}
 
 	res, err := country.Create(context.Background(), request)
@@ -46,7 +48,7 @@ func TestCreateCountry(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

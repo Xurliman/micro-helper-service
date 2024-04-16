@@ -2,10 +2,20 @@ syntax = "proto3";
 option go_package="proto.national.economy.sector.new";
 
 service NationalEconomySectorNewService {
+  rpc List(CreateNationalEconomySectorNewRequest) returns (ListNationalEconomySectorNewResponse);
   rpc Create(CreateNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
-  rpc Read(SingleNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
+  rpc Get(SingleNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
   rpc Update(UpdateNationalEconomySectorNewRequest) returns (SuccessResponse);
   rpc Delete(SingleNationalEconomySectorNewRequest) returns (SuccessResponse);
+}
+
+message ListNationalEconomySectorNewRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListNationalEconomySectorNewResponse {
+  repeated NationalEconomySectorNewProfileResponse new_national_economy_sectors = 1;
 }
 
 message CreateNationalEconomySectorNewRequest{
@@ -27,14 +37,19 @@ message CreateNationalEconomySectorNewRequest{
   string group2_name_uz = 16;
   string activation_date = 17;
   string deactivation_date = 18;
+  int32 cbu_reference_key = 19;
+  string flex_fin_id = 20;
 }
 
 message SingleNationalEconomySectorNewRequest{
-  int64 id = 1;
+  oneof new_national_economy_sector_identifier {
+    string id = 1;
+    string code = 2;
+  }
 }
 
 message NationalEconomySectorNewProfileResponse{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string name_uz = 4;
@@ -53,15 +68,17 @@ message NationalEconomySectorNewProfileResponse{
   string group2_name_uz = 17;
   string activation_date = 18;
   string deactivation_date = 19;
+  int32 cbu_reference_key = 20;
+  string flex_fin_id = 21;
+  string deleted_at = 22;
 }
 
 message SuccessResponse{
   string response = 1;
 }
 
-
 message UpdateNationalEconomySectorNewRequest{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string name_uz = 4;
@@ -80,13 +97,6 @@ message UpdateNationalEconomySectorNewRequest{
   string group2_name_uz = 17;
   string activation_date = 18;
   string deactivation_date = 19;
+  int32 cbu_reference_key = 20;
+  string flex_fin_id = 21;
 }
-
-/*
-protoc \
---proto_path=proto/national_economy_sector \
---go_out=proto/national_economy_sector \
---go_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto \
---go-grpc_out=proto/national_economy_sector \
---go-grpc_opt=paths=source_relative proto/national_economy_sector/national_economy_sector.proto
-*/

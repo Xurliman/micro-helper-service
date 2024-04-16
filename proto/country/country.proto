@@ -26,17 +26,20 @@ message CreateCountryRequest{
   string code_alpha2 = 5;
   string code_alpha3 = 6;
   int64 territory_code = 7;
+  string activation_date = 8;
+  string deactivation_date = 9;
+  string flex_fin_id = 10;
 }
 
 message SingleCountryRequest{
   oneof country_identifier {
-    int64 id = 1;
+    string id = 1;
     string code = 2;
   }
 }
 
 message CountryProfileResponse{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
@@ -44,16 +47,18 @@ message CountryProfileResponse{
   string code_alpha2 = 6;
   string code_alpha3 = 7;
   int64 territory_code = 8;
-  string deleted_at = 9;
+  string activation_date = 9;
+  string deactivation_date = 10;
+  string flex_fin_id = 11;
+  string deleted_at = 12;
 }
 
 message SuccessResponse{
   string response = 1;
 }
 
-
 message UpdateCountryRequest{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
@@ -61,14 +66,7 @@ message UpdateCountryRequest{
   string code_alpha2 = 6;
   string code_alpha3 = 7;
   int64 territory_code = 8;
+  string activation_date = 9;
+  string deactivation_date = 10;
+  string flex_fin_id = 11;
 }
-
-
-/*
-protoc \
---proto_path=proto/country \
---go_out=proto/country \
---go_opt=paths=source_relative proto/country/country.proto \
---go-grpc_out=proto/country \
---go-grpc_opt=paths=source_relative proto/country/country.proto
-*/

@@ -33,7 +33,7 @@ type BorrowerTypeServiceClient interface {
 	List(ctx context.Context, in *ListBorrowerTypeRequest, opts ...grpc.CallOption) (*ListBorrowerTypeResponse, error)
 	Create(ctx context.Context, in *CreateBorrowerTypeRequest, opts ...grpc.CallOption) (*BorrowerTypeProfileResponse, error)
 	Get(ctx context.Context, in *SingleBorrowerTypeRequest, opts ...grpc.CallOption) (*BorrowerTypeProfileResponse, error)
-	Update(ctx context.Context, in *SingleBorrowerTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateBorrowerTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleBorrowerTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
 
@@ -72,7 +72,7 @@ func (c *borrowerTypeServiceClient) Get(ctx context.Context, in *SingleBorrowerT
 	return out, nil
 }
 
-func (c *borrowerTypeServiceClient) Update(ctx context.Context, in *SingleBorrowerTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
+func (c *borrowerTypeServiceClient) Update(ctx context.Context, in *UpdateBorrowerTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
 	out := new(SuccessResponse)
 	err := c.cc.Invoke(ctx, BorrowerTypeService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -97,7 +97,7 @@ type BorrowerTypeServiceServer interface {
 	List(context.Context, *ListBorrowerTypeRequest) (*ListBorrowerTypeResponse, error)
 	Create(context.Context, *CreateBorrowerTypeRequest) (*BorrowerTypeProfileResponse, error)
 	Get(context.Context, *SingleBorrowerTypeRequest) (*BorrowerTypeProfileResponse, error)
-	Update(context.Context, *SingleBorrowerTypeRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateBorrowerTypeRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleBorrowerTypeRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedBorrowerTypeServiceServer()
 }
@@ -115,7 +115,7 @@ func (UnimplementedBorrowerTypeServiceServer) Create(context.Context, *CreateBor
 func (UnimplementedBorrowerTypeServiceServer) Get(context.Context, *SingleBorrowerTypeRequest) (*BorrowerTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedBorrowerTypeServiceServer) Update(context.Context, *SingleBorrowerTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedBorrowerTypeServiceServer) Update(context.Context, *UpdateBorrowerTypeRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedBorrowerTypeServiceServer) Delete(context.Context, *SingleBorrowerTypeRequest) (*SuccessResponse, error) {
@@ -189,7 +189,7 @@ func _BorrowerTypeService_Get_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _BorrowerTypeService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleBorrowerTypeRequest)
+	in := new(UpdateBorrowerTypeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func _BorrowerTypeService_Update_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: BorrowerTypeService_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BorrowerTypeServiceServer).Update(ctx, req.(*SingleBorrowerTypeRequest))
+		return srv.(BorrowerTypeServiceServer).Update(ctx, req.(*UpdateBorrowerTypeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

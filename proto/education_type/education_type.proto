@@ -1,0 +1,51 @@
+syntax = "proto3";
+option go_package="proto.education.type";
+
+service EducationTypeService {
+  rpc List(ListEducationTypeRequest) returns (ListEducationTypeResponse);
+  rpc Create(CreateEducationTypeRequest) returns (EducationTypeProfileResponse);
+  rpc Get(SingleEducationTypeRequest) returns (EducationTypeProfileResponse);
+  rpc Update(UpdateEducationTypeRequest) returns (SuccessResponse);
+  rpc Delete(SingleEducationTypeRequest) returns (SuccessResponse);
+}
+
+message ListEducationTypeRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListEducationTypeResponse {
+  repeated EducationTypeProfileResponse education_types = 1;
+}
+
+message CreateEducationTypeRequest{
+  string code = 1;
+  string name = 2;
+  string flex_fin_id = 3;
+}
+
+message SingleEducationTypeRequest{
+  oneof education_type_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message EducationTypeProfileResponse{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+  string deleted_at = 5;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+message UpdateEducationTypeRequest{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+}

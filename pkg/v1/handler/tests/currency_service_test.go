@@ -23,11 +23,14 @@ func TestCreateCurrency(t *testing.T) {
 	currency := proto.NewCurrencyServiceClient(conn)
 
 	request := &proto.CreateCurrencyRequest{
-		Code:      12345,
-		Name:      "test",
-		ShortName: "tt",
-		Scale:     1,
-		ScaleName: "Kolner Str. 200",
+		Code:             "12345",
+		Name:             "test",
+		ShortName:        "tt",
+		Scale:            1,
+		ScaleName:        "Kolner Str. 200",
+		ActivationDate:   "2024-03-20",
+		DeactivationDate: "2024-03-20",
+		FlexFinId:        "23",
 	}
 
 	res, err := currency.Create(context.Background(), request)
@@ -43,7 +46,7 @@ func TestCreateCurrency(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

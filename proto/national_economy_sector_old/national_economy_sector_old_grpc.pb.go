@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	NationalEconomySectorOldService_List_FullMethodName   = "/NationalEconomySectorOldService/List"
 	NationalEconomySectorOldService_Create_FullMethodName = "/NationalEconomySectorOldService/Create"
-	NationalEconomySectorOldService_Read_FullMethodName   = "/NationalEconomySectorOldService/Read"
+	NationalEconomySectorOldService_Get_FullMethodName    = "/NationalEconomySectorOldService/Get"
 	NationalEconomySectorOldService_Update_FullMethodName = "/NationalEconomySectorOldService/Update"
 	NationalEconomySectorOldService_Delete_FullMethodName = "/NationalEconomySectorOldService/Delete"
 )
@@ -29,8 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NationalEconomySectorOldServiceClient interface {
+	List(ctx context.Context, in *ListNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*ListNationalEconomySectorOldResponse, error)
 	Create(ctx context.Context, in *CreateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
-	Read(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
+	Get(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
 	Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -43,6 +45,15 @@ func NewNationalEconomySectorOldServiceClient(cc grpc.ClientConnInterface) Natio
 	return &nationalEconomySectorOldServiceClient{cc}
 }
 
+func (c *nationalEconomySectorOldServiceClient) List(ctx context.Context, in *ListNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*ListNationalEconomySectorOldResponse, error) {
+	out := new(ListNationalEconomySectorOldResponse)
+	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nationalEconomySectorOldServiceClient) Create(ctx context.Context, in *CreateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error) {
 	out := new(NationalEconomySectorOldProfileResponse)
 	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_Create_FullMethodName, in, out, opts...)
@@ -52,9 +63,9 @@ func (c *nationalEconomySectorOldServiceClient) Create(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *nationalEconomySectorOldServiceClient) Read(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error) {
+func (c *nationalEconomySectorOldServiceClient) Get(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error) {
 	out := new(NationalEconomySectorOldProfileResponse)
-	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_Read_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,8 +94,9 @@ func (c *nationalEconomySectorOldServiceClient) Delete(ctx context.Context, in *
 // All implementations must embed UnimplementedNationalEconomySectorOldServiceServer
 // for forward compatibility
 type NationalEconomySectorOldServiceServer interface {
+	List(context.Context, *ListNationalEconomySectorOldRequest) (*ListNationalEconomySectorOldResponse, error)
 	Create(context.Context, *CreateNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
-	Read(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
+	Get(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
 	Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedNationalEconomySectorOldServiceServer()
@@ -94,11 +106,14 @@ type NationalEconomySectorOldServiceServer interface {
 type UnimplementedNationalEconomySectorOldServiceServer struct {
 }
 
+func (UnimplementedNationalEconomySectorOldServiceServer) List(context.Context, *ListNationalEconomySectorOldRequest) (*ListNationalEconomySectorOldResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
 func (UnimplementedNationalEconomySectorOldServiceServer) Create(context.Context, *CreateNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedNationalEconomySectorOldServiceServer) Read(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedNationalEconomySectorOldServiceServer) Get(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedNationalEconomySectorOldServiceServer) Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -120,6 +135,24 @@ func RegisterNationalEconomySectorOldServiceServer(s grpc.ServiceRegistrar, srv 
 	s.RegisterService(&NationalEconomySectorOldService_ServiceDesc, srv)
 }
 
+func _NationalEconomySectorOldService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNationalEconomySectorOldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NationalEconomySectorOldServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NationalEconomySectorOldService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NationalEconomySectorOldServiceServer).List(ctx, req.(*ListNationalEconomySectorOldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NationalEconomySectorOldService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
@@ -138,20 +171,20 @@ func _NationalEconomySectorOldService_Create_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NationalEconomySectorOldService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NationalEconomySectorOldService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SingleNationalEconomySectorOldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorOldServiceServer).Read(ctx, in)
+		return srv.(NationalEconomySectorOldServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NationalEconomySectorOldService_Read_FullMethodName,
+		FullMethod: NationalEconomySectorOldService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorOldServiceServer).Read(ctx, req.(*SingleNationalEconomySectorOldRequest))
+		return srv.(NationalEconomySectorOldServiceServer).Get(ctx, req.(*SingleNationalEconomySectorOldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -200,12 +233,16 @@ var NationalEconomySectorOldService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NationalEconomySectorOldServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "List",
+			Handler:    _NationalEconomySectorOldService_List_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _NationalEconomySectorOldService_Create_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _NationalEconomySectorOldService_Read_Handler,
+			MethodName: "Get",
+			Handler:    _NationalEconomySectorOldService_Get_Handler,
 		},
 		{
 			MethodName: "Update",

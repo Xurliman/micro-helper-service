@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	NationalEconomySectorNewService_List_FullMethodName   = "/NationalEconomySectorNewService/List"
 	NationalEconomySectorNewService_Create_FullMethodName = "/NationalEconomySectorNewService/Create"
-	NationalEconomySectorNewService_Read_FullMethodName   = "/NationalEconomySectorNewService/Read"
+	NationalEconomySectorNewService_Get_FullMethodName    = "/NationalEconomySectorNewService/Get"
 	NationalEconomySectorNewService_Update_FullMethodName = "/NationalEconomySectorNewService/Update"
 	NationalEconomySectorNewService_Delete_FullMethodName = "/NationalEconomySectorNewService/Delete"
 )
@@ -29,8 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NationalEconomySectorNewServiceClient interface {
+	List(ctx context.Context, in *CreateNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*ListNationalEconomySectorNewResponse, error)
 	Create(ctx context.Context, in *CreateNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error)
-	Read(ctx context.Context, in *SingleNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error)
+	Get(ctx context.Context, in *SingleNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error)
 	Update(ctx context.Context, in *UpdateNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -43,6 +45,15 @@ func NewNationalEconomySectorNewServiceClient(cc grpc.ClientConnInterface) Natio
 	return &nationalEconomySectorNewServiceClient{cc}
 }
 
+func (c *nationalEconomySectorNewServiceClient) List(ctx context.Context, in *CreateNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*ListNationalEconomySectorNewResponse, error) {
+	out := new(ListNationalEconomySectorNewResponse)
+	err := c.cc.Invoke(ctx, NationalEconomySectorNewService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *nationalEconomySectorNewServiceClient) Create(ctx context.Context, in *CreateNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error) {
 	out := new(NationalEconomySectorNewProfileResponse)
 	err := c.cc.Invoke(ctx, NationalEconomySectorNewService_Create_FullMethodName, in, out, opts...)
@@ -52,9 +63,9 @@ func (c *nationalEconomySectorNewServiceClient) Create(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *nationalEconomySectorNewServiceClient) Read(ctx context.Context, in *SingleNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error) {
+func (c *nationalEconomySectorNewServiceClient) Get(ctx context.Context, in *SingleNationalEconomySectorNewRequest, opts ...grpc.CallOption) (*NationalEconomySectorNewProfileResponse, error) {
 	out := new(NationalEconomySectorNewProfileResponse)
-	err := c.cc.Invoke(ctx, NationalEconomySectorNewService_Read_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, NationalEconomySectorNewService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,8 +94,9 @@ func (c *nationalEconomySectorNewServiceClient) Delete(ctx context.Context, in *
 // All implementations must embed UnimplementedNationalEconomySectorNewServiceServer
 // for forward compatibility
 type NationalEconomySectorNewServiceServer interface {
+	List(context.Context, *CreateNationalEconomySectorNewRequest) (*ListNationalEconomySectorNewResponse, error)
 	Create(context.Context, *CreateNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error)
-	Read(context.Context, *SingleNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error)
+	Get(context.Context, *SingleNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error)
 	Update(context.Context, *UpdateNationalEconomySectorNewRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleNationalEconomySectorNewRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedNationalEconomySectorNewServiceServer()
@@ -94,11 +106,14 @@ type NationalEconomySectorNewServiceServer interface {
 type UnimplementedNationalEconomySectorNewServiceServer struct {
 }
 
+func (UnimplementedNationalEconomySectorNewServiceServer) List(context.Context, *CreateNationalEconomySectorNewRequest) (*ListNationalEconomySectorNewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
 func (UnimplementedNationalEconomySectorNewServiceServer) Create(context.Context, *CreateNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedNationalEconomySectorNewServiceServer) Read(context.Context, *SingleNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedNationalEconomySectorNewServiceServer) Get(context.Context, *SingleNationalEconomySectorNewRequest) (*NationalEconomySectorNewProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedNationalEconomySectorNewServiceServer) Update(context.Context, *UpdateNationalEconomySectorNewRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -120,6 +135,24 @@ func RegisterNationalEconomySectorNewServiceServer(s grpc.ServiceRegistrar, srv 
 	s.RegisterService(&NationalEconomySectorNewService_ServiceDesc, srv)
 }
 
+func _NationalEconomySectorNewService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNationalEconomySectorNewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NationalEconomySectorNewServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NationalEconomySectorNewService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NationalEconomySectorNewServiceServer).List(ctx, req.(*CreateNationalEconomySectorNewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NationalEconomySectorNewService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateNationalEconomySectorNewRequest)
 	if err := dec(in); err != nil {
@@ -138,20 +171,20 @@ func _NationalEconomySectorNewService_Create_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NationalEconomySectorNewService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NationalEconomySectorNewService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SingleNationalEconomySectorNewRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NationalEconomySectorNewServiceServer).Read(ctx, in)
+		return srv.(NationalEconomySectorNewServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NationalEconomySectorNewService_Read_FullMethodName,
+		FullMethod: NationalEconomySectorNewService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NationalEconomySectorNewServiceServer).Read(ctx, req.(*SingleNationalEconomySectorNewRequest))
+		return srv.(NationalEconomySectorNewServiceServer).Get(ctx, req.(*SingleNationalEconomySectorNewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -200,12 +233,16 @@ var NationalEconomySectorNewService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NationalEconomySectorNewServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "List",
+			Handler:    _NationalEconomySectorNewService_List_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _NationalEconomySectorNewService_Create_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _NationalEconomySectorNewService_Read_Handler,
+			MethodName: "Get",
+			Handler:    _NationalEconomySectorNewService_Get_Handler,
 		},
 		{
 			MethodName: "Update",

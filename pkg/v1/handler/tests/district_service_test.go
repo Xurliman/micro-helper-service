@@ -23,12 +23,14 @@ func TestCreateDistrict(t *testing.T) {
 	district := proto.NewDistrictServiceClient(conn)
 
 	request := &proto.CreateDistrictRequest{
-		Code:             12345,
+		Code:             "12345",
 		Name:             "test",
 		RegionId:         1,
-		ActivationDate:   "2024-02-20",
-		DeactivationDate: "2024-03-20",
 		OldCode:          2024,
+		OldName:          "2024",
+		ActivationDate:   "2024-03-20",
+		DeactivationDate: "2024-03-20",
+		FlexFinId:        "23",
 	}
 
 	res, err := district.Create(context.Background(), request)
@@ -44,7 +46,7 @@ func TestCreateDistrict(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

@@ -23,12 +23,14 @@ func TestCreatePaymentType(t *testing.T) {
 	paymentType := proto.NewPaymentTypeServiceClient(conn)
 
 	request := &proto.CreatePaymentTypeRequest{
+		Code:             "12345",
 		Name:             "test",
-		Code:             12345,
 		ActivationDate:   "2024-02-20",
 		DeactivationDate: "2024-03-20",
 		OldName:          "Kolner Str. 200",
 		OldCode:          2024,
+		NameUz:           "2024",
+		FlexFinId:        "2024",
 	}
 
 	res, err := paymentType.Create(context.Background(), request)
@@ -44,7 +46,7 @@ func TestCreatePaymentType(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

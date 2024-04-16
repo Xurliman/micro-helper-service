@@ -1,0 +1,63 @@
+syntax = "proto3";
+option go_package="proto.passport.type";
+
+service PassportTypeService {
+  rpc List(ListPassportTypeRequest) returns (ListPassportTypeResponse);
+  rpc Create(CreatePassportTypeRequest) returns (PassportTypeProfileResponse);
+  rpc Get(SinglePassportTypeRequest) returns (PassportTypeProfileResponse);
+  rpc Update(UpdatePassportTypeRequest) returns (SuccessResponse);
+  rpc Delete(SinglePassportTypeRequest) returns (SuccessResponse);
+}
+
+message ListPassportTypeRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListPassportTypeResponse {
+  repeated PassportTypeProfileResponse passport_types = 1;
+}
+
+message CreatePassportTypeRequest{
+  string code = 1;
+  string name = 2;
+  string old_code = 3;
+  string old_name = 4;
+  string activation_date = 5;
+  string deactivation_date = 6;
+  string flex_fin_id = 7;
+}
+
+message SinglePassportTypeRequest{
+  oneof passport_type_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message PassportTypeProfileResponse{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string old_code = 4;
+  string old_name = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
+  string deleted_at = 9;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+message UpdatePassportTypeRequest{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string old_code = 4;
+  string old_name = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
+}

@@ -6,6 +6,7 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/payment_type"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +22,7 @@ func NewServer(grpcServer *grpc.Server, paymentTypeCase interfaces.PaymentTypeCa
 
 func (service *PaymentTypeService) Create(context context.Context, request *proto.CreatePaymentTypeRequest) (*proto.PaymentTypeProfileResponse, error) {
 	data := service.transformPaymentTypeRPC(request)
-	if data.Code == 0 || data.Name == "" {
+	if data.Code == "" || data.Name == "" {
 		return &proto.PaymentTypeProfileResponse{}, errors.New("please provide all fields")
 	}
 
@@ -34,10 +35,10 @@ func (service *PaymentTypeService) Create(context context.Context, request *prot
 
 func (service *PaymentTypeService) Get(context context.Context, request *proto.SinglePaymentTypeRequest) (*proto.PaymentTypeProfileResponse, error) {
 	id := request.GetId()
-	if id == 0 {
+	if id == "" {
 		return &proto.PaymentTypeProfileResponse{}, errors.New("id cannot be blank")
 	}
-	paymentType, err := service.paymentTypeCase.Get(id)
+	paymentType, err := service.paymentTypeCase.Get(uuid.MustParse(id))
 
 	if err != nil {
 		return &proto.PaymentTypeProfileResponse{}, err
@@ -48,23 +49,27 @@ func (service *PaymentTypeService) Get(context context.Context, request *proto.S
 
 func (service *PaymentTypeService) transformPaymentTypeRPC(request *proto.CreatePaymentTypeRequest) models.PaymentType {
 	return models.PaymentType{
-		Name:             request.GetName(),
 		Code:             request.GetCode(),
+		Name:             request.GetName(),
 		ActivationDate:   request.GetActivationDate(),
 		DeactivationDate: request.GetDeactivationDate(),
 		OldCode:          request.GetOldCode(),
 		OldName:          request.GetOldName(),
+		NameUz:           request.GetNameUz(),
+		FlexFinId:        request.GetFlexFinId(),
 	}
 }
 
 func (service *PaymentTypeService) transformPaymentTypeModel(paymentType models.PaymentType) *proto.PaymentTypeProfileResponse {
 	return &proto.PaymentTypeProfileResponse{
-		Id:               int64(paymentType.ID),
+		Id:               paymentType.ID.String(),
 		Name:             paymentType.Name,
 		Code:             paymentType.Code,
 		ActivationDate:   paymentType.ActivationDate,
 		DeactivationDate: paymentType.DeactivationDate,
 		OldCode:          paymentType.OldCode,
 		OldName:          paymentType.OldName,
+		NameUz:           paymentType.NameUz,
+		FlexFinId:        paymentType.FlexFinId,
 	}
 }

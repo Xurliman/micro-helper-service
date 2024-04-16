@@ -7,6 +7,6 @@ type ResidencyType struct {
 	Name             string
 	ActivationDate   string
 	DeactivationDate string
-	FlexFinId        string
 	NameUz           string
+	FlexFinId        string
 }

@@ -4,7 +4,7 @@ option go_package = "proto.client.type.classifier";
 service ClientTypeClassifierService {
   rpc List(ListClientTypeClassifierRequest) returns (ListClientTypeClassifierResponse);
   rpc Create(CreateClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
-  rpc Read(SingleClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
+  rpc Get(SingleClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
   rpc Update(UpdateClientTypeClassifierRequest) returns (SuccessResponse);
   rpc Delete(SingleClientTypeClassifierRequest) returns (SuccessResponse);
 }
@@ -15,7 +15,7 @@ message ListClientTypeClassifierRequest {
 }
 
 message ListClientTypeClassifierResponse {
-  repeated ClientTypeClassifierProfileResponse client_type_classifier = 1;
+  repeated ClientTypeClassifierProfileResponse client_type_classifiers = 1;
 }
 
 message CreateClientTypeClassifierRequest {
@@ -28,17 +28,19 @@ message CreateClientTypeClassifierRequest {
   int32 cbu_reference_key = 7;
   int32 old_code = 8;
   string old_name = 9;
+  string name_uz = 10;
+  string flex_fin_id = 11;
 }
 
 message SingleClientTypeClassifierRequest {
   oneof client_type_classifier_identifier {
-    int64 id = 1;
+    string id = 1;
     string code = 2;
   }
 }
 
 message ClientTypeClassifierProfileResponse {
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
@@ -48,7 +50,9 @@ message ClientTypeClassifierProfileResponse {
   int32 cbu_reference_key = 8;
   int32 old_code = 9;
   string old_name = 10;
-  string deleted_at = 11;
+  string name_uz = 11;
+  string flex_fin_id = 12;
+  string deleted_at = 13;
 }
 
 message SuccessResponse {
@@ -56,7 +60,7 @@ message SuccessResponse {
 }
 
 message UpdateClientTypeClassifierRequest {
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
@@ -66,14 +70,6 @@ message UpdateClientTypeClassifierRequest {
   int32 cbu_reference_key = 8;
   int32 old_code = 9;
   string old_name = 10;
+  string name_uz = 11;
+  string flex_fin_id = 12;
 }
-
-
-/*
-protoc \
---proto_path=proto/client_type_classifier \
---go_out=proto/client_type_classifier \
---go_opt=paths=source_relative proto/client_type_classifier/client_type_classifier.proto \
---go-grpc_out=proto/client_type_classifier \
---go-grpc_opt=paths=source_relative proto/client_type_classifier/client_type_classifier.proto
-*/

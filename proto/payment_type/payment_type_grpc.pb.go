@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	PaymentTypeService_List_FullMethodName   = "/PaymentTypeService/List"
 	PaymentTypeService_Create_FullMethodName = "/PaymentTypeService/Create"
-	PaymentTypeService_Read_FullMethodName   = "/PaymentTypeService/Read"
+	PaymentTypeService_Get_FullMethodName    = "/PaymentTypeService/Get"
 	PaymentTypeService_Update_FullMethodName = "/PaymentTypeService/Update"
 	PaymentTypeService_Delete_FullMethodName = "/PaymentTypeService/Delete"
 )
@@ -29,8 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentTypeServiceClient interface {
+	List(ctx context.Context, in *ListPaymentTypeRequest, opts ...grpc.CallOption) (*ListPaymentTypeResponse, error)
 	Create(ctx context.Context, in *CreatePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error)
-	Read(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error)
+	Get(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error)
 	Update(ctx context.Context, in *UpdatePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -43,6 +45,15 @@ func NewPaymentTypeServiceClient(cc grpc.ClientConnInterface) PaymentTypeService
 	return &paymentTypeServiceClient{cc}
 }
 
+func (c *paymentTypeServiceClient) List(ctx context.Context, in *ListPaymentTypeRequest, opts ...grpc.CallOption) (*ListPaymentTypeResponse, error) {
+	out := new(ListPaymentTypeResponse)
+	err := c.cc.Invoke(ctx, PaymentTypeService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentTypeServiceClient) Create(ctx context.Context, in *CreatePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error) {
 	out := new(PaymentTypeProfileResponse)
 	err := c.cc.Invoke(ctx, PaymentTypeService_Create_FullMethodName, in, out, opts...)
@@ -52,9 +63,9 @@ func (c *paymentTypeServiceClient) Create(ctx context.Context, in *CreatePayment
 	return out, nil
 }
 
-func (c *paymentTypeServiceClient) Read(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error) {
+func (c *paymentTypeServiceClient) Get(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error) {
 	out := new(PaymentTypeProfileResponse)
-	err := c.cc.Invoke(ctx, PaymentTypeService_Read_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, PaymentTypeService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,8 +94,9 @@ func (c *paymentTypeServiceClient) Delete(ctx context.Context, in *SinglePayment
 // All implementations must embed UnimplementedPaymentTypeServiceServer
 // for forward compatibility
 type PaymentTypeServiceServer interface {
+	List(context.Context, *ListPaymentTypeRequest) (*ListPaymentTypeResponse, error)
 	Create(context.Context, *CreatePaymentTypeRequest) (*PaymentTypeProfileResponse, error)
-	Read(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error)
+	Get(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error)
 	Update(context.Context, *UpdatePaymentTypeRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SinglePaymentTypeRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedPaymentTypeServiceServer()
@@ -94,11 +106,14 @@ type PaymentTypeServiceServer interface {
 type UnimplementedPaymentTypeServiceServer struct {
 }
 
+func (UnimplementedPaymentTypeServiceServer) List(context.Context, *ListPaymentTypeRequest) (*ListPaymentTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
 func (UnimplementedPaymentTypeServiceServer) Create(context.Context, *CreatePaymentTypeRequest) (*PaymentTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedPaymentTypeServiceServer) Read(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedPaymentTypeServiceServer) Get(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedPaymentTypeServiceServer) Update(context.Context, *UpdatePaymentTypeRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -119,6 +134,24 @@ func RegisterPaymentTypeServiceServer(s grpc.ServiceRegistrar, srv PaymentTypeSe
 	s.RegisterService(&PaymentTypeService_ServiceDesc, srv)
 }
 
+func _PaymentTypeService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentTypeServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentTypeService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentTypeServiceServer).List(ctx, req.(*ListPaymentTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PaymentTypeService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePaymentTypeRequest)
 	if err := dec(in); err != nil {
@@ -137,20 +170,20 @@ func _PaymentTypeService_Create_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentTypeService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PaymentTypeService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SinglePaymentTypeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentTypeServiceServer).Read(ctx, in)
+		return srv.(PaymentTypeServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentTypeService_Read_FullMethodName,
+		FullMethod: PaymentTypeService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentTypeServiceServer).Read(ctx, req.(*SinglePaymentTypeRequest))
+		return srv.(PaymentTypeServiceServer).Get(ctx, req.(*SinglePaymentTypeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -199,12 +232,16 @@ var PaymentTypeService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PaymentTypeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "List",
+			Handler:    _PaymentTypeService_List_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _PaymentTypeService_Create_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _PaymentTypeService_Read_Handler,
+			MethodName: "Get",
+			Handler:    _PaymentTypeService_Get_Handler,
 		},
 		{
 			MethodName: "Update",

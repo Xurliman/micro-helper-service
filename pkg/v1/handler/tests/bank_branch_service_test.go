@@ -23,15 +23,17 @@ func TestCreateBankBranch(t *testing.T) {
 	bankBranch := proto.NewBankBranchServiceClient(conn)
 
 	request := &proto.CreateBankBranchRequest{
-		Code:       12345,
-		Name:       "test",
-		BankId:     1,
-		RegionId:   1,
-		DistrictId: 1,
-		Address:    "Kolner Str. 200",
-		OpenDate:   "2024-02-20",
-		CloseDate:  "2024-03-20",
-		CrudDates:  "2024-03-20",
+		Code:             "12345",
+		Name:             "test",
+		BankId:           1,
+		RegionId:         1,
+		DistrictId:       1,
+		Address:          "Kolner Str. 200",
+		OpenDate:         "2024-02-20",
+		CloseDate:        "2024-03-20",
+		ActivationDate:   "2024-03-20",
+		DeactivationDate: "2024-03-20",
+		FlexFinId:        "23",
 	}
 
 	res, err := bankBranch.Create(context.Background(), request)
@@ -47,7 +49,7 @@ func TestCreateBankBranch(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

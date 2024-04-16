@@ -1,0 +1,51 @@
+syntax = "proto3";
+option go_package="proto.registration.place";
+
+service RegistrationPlaceService {
+  rpc List(ListRegistrationPlaceRequest) returns (ListRegistrationPlaceResponse);
+  rpc Create(CreateRegistrationPlaceRequest) returns (RegistrationPlaceProfileResponse);
+  rpc Get(SingleRegistrationPlaceRequest) returns (RegistrationPlaceProfileResponse);
+  rpc Update(UpdateRegistrationPlaceRequest) returns (SuccessResponse);
+  rpc Delete(SingleRegistrationPlaceRequest) returns (SuccessResponse);
+}
+
+message ListRegistrationPlaceRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListRegistrationPlaceResponse {
+  repeated RegistrationPlaceProfileResponse registration_places = 1;
+}
+
+message CreateRegistrationPlaceRequest{
+  string code = 1;
+  string name = 2;
+  string flex_fin_id = 3;
+}
+
+message SingleRegistrationPlaceRequest{
+  oneof registration_place_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message RegistrationPlaceProfileResponse{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+  string deleted_at = 5;
+}
+
+message SuccessResponse{
+  string response = 1;
+}
+
+message UpdateRegistrationPlaceRequest{
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+}

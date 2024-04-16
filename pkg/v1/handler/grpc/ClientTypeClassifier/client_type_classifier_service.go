@@ -6,6 +6,7 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/client_type_classifier"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +22,7 @@ func NewServer(grpcServer *grpc.Server, classifierCase interfaces.ClientTypeClas
 
 func (service *ClientTypeClassifierService) Create(context context.Context, request *proto.CreateClientTypeClassifierRequest) (*proto.ClientTypeClassifierProfileResponse, error) {
 	data := service.transformClassifierRpc(request)
-	if data.Code == 0 || data.Name == "" {
+	if data.Code == "" || data.Name == "" {
 		return &proto.ClientTypeClassifierProfileResponse{}, errors.New("please provide all fields")
 	}
 
@@ -34,11 +35,11 @@ func (service *ClientTypeClassifierService) Create(context context.Context, requ
 
 func (service *ClientTypeClassifierService) Get(context context.Context, request *proto.SingleClientTypeClassifierRequest) (*proto.ClientTypeClassifierProfileResponse, error) {
 	id := request.GetId()
-	if id == 0 {
+	if id == "" {
 		return &proto.ClientTypeClassifierProfileResponse{}, errors.New("id cannot be blank")
 	}
 
-	classifier, err := service.classifierCase.Get(id)
+	classifier, err := service.classifierCase.Get(uuid.MustParse(id))
 	if err != nil {
 		return &proto.ClientTypeClassifierProfileResponse{}, err
 	}
@@ -48,20 +49,23 @@ func (service *ClientTypeClassifierService) Get(context context.Context, request
 
 func (service *ClientTypeClassifierService) transformClassifierRpc(request *proto.CreateClientTypeClassifierRequest) models.ClientTypeClassifier {
 	return models.ClientTypeClassifier{
-		Code:             request.Code,
-		Name:             request.Name,
-		ShortName:        request.ShortName,
-		ClientType:       request.ClientType,
-		ActivationDate:   request.ActivationDate,
-		DeactivationDate: request.DeactivationDate,
-		CBUReferenceKey:  request.CbuReferenceKey,
-		OldCode:          request.OldCode,
-		OldName:          request.OldName,
+		Code:             request.GetCode(),
+		Name:             request.GetName(),
+		ShortName:        request.GetShortName(),
+		ClientType:       request.GetClientType(),
+		ActivationDate:   request.GetActivationDate(),
+		DeactivationDate: request.GetDeactivationDate(),
+		CBUReferenceKey:  request.GetCbuReferenceKey(),
+		OldCode:          request.GetOldCode(),
+		OldName:          request.GetOldName(),
+		NameUz:           request.GetNameUz(),
+		FlexFinId:        request.GetFlexFinId(),
 	}
 }
 
 func (service *ClientTypeClassifierService) transformClassifierModel(classifier models.ClientTypeClassifier) *proto.ClientTypeClassifierProfileResponse {
 	return &proto.ClientTypeClassifierProfileResponse{
+		Id:               classifier.ID.String(),
 		Code:             classifier.Code,
 		Name:             classifier.Name,
 		ShortName:        classifier.ShortName,
@@ -71,5 +75,7 @@ func (service *ClientTypeClassifierService) transformClassifierModel(classifier 
 		CbuReferenceKey:  classifier.CBUReferenceKey,
 		OldCode:          classifier.OldCode,
 		OldName:          classifier.OldName,
+		NameUz:           classifier.NameUz,
+		FlexFinId:        classifier.FlexFinId,
 	}
 }

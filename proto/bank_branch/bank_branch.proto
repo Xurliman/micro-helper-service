@@ -27,6 +27,9 @@ message CreateBankBranchRequest{
   string address = 6;
   string open_date = 7;
   string close_date = 8;
+  string activation_date = 9;
+  string deactivation_date = 10;
+  string flex_fin_id = 11;
 }
 
 message SingleBankBranchRequest{
@@ -37,16 +40,18 @@ message SingleBankBranchRequest{
 }
 
 message BankBranchProfileResponse{
-  int64 id = 1;
-  string name = 2;
-  string code = 3;
+  string id = 1;
+  string code = 2;
+  string name = 3;
   int64 bank_id = 4;
   int64 region_id = 5;
   int64 district_id = 6;
   string address = 7;
   string open_date = 8;
   string close_date = 9;
-  string deleted_at = 10;
+  string activation_date = 10;
+  string deactivation_date = 11;
+  string flex_fin_id = 12;
 }
 
 message SuccessResponse{
@@ -54,23 +59,16 @@ message SuccessResponse{
 }
 
 message UpdateBankBranchRequest {
-  int64 id = 1;
-  string name = 2;
-  string code = 3;
+  string id = 1;
+  string code = 2;
+  string name = 3;
   int64 bank_id = 4;
   int64 region_id = 5;
   int64 district_id = 6;
   string address = 7;
   string open_date = 8;
   string close_date = 9;
+  string activation_date = 10;
+  string deactivation_date = 11;
+  string flex_fin_id = 12;
 }
-
-
-/*
-protoc \
---proto_path=proto/bank_branch \
---go_out=proto/bank_branch \
---go_opt=paths=source_relative proto/bank_branch/bank_branch.proto \
---go-grpc_out=proto/bank_branch \
---go-grpc_opt=paths=source_relative proto/bank_branch/bank_branch.proto
-*/

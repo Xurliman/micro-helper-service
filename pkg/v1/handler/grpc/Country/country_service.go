@@ -5,6 +5,7 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/country"
+	"github.com/google/uuid"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -21,7 +22,7 @@ func NewServer(grpcServer *grpc.Server, countryCase interfaces.CountryCaseInterf
 
 func (service *CountryService) Create(context context.Context, request *proto.CreateCountryRequest) (*proto.CountryProfileResponse, error) {
 	data := service.transformCountryRpc(request)
-	if data.Code == 0 || data.Name == "" {
+	if data.Code == "" || data.Name == "" {
 		return &proto.CountryProfileResponse{}, errors.New("please provide all fields")
 	}
 
@@ -34,10 +35,10 @@ func (service *CountryService) Create(context context.Context, request *proto.Cr
 
 func (service *CountryService) Get(context context.Context, request *proto.SingleCountryRequest) (*proto.CountryProfileResponse, error) {
 	id := request.GetId()
-	if id == 0 {
+	if id == "" {
 		return &proto.CountryProfileResponse{}, errors.New("id cannot be blank")
 	}
-	country, err := service.countryCase.Get(id)
+	country, err := service.countryCase.Get(uuid.MustParse(id))
 
 	if err != nil {
 		return &proto.CountryProfileResponse{}, err
@@ -48,27 +49,31 @@ func (service *CountryService) Get(context context.Context, request *proto.Singl
 
 func (service *CountryService) transformCountryRpc(request *proto.CreateCountryRequest) models.Country {
 	return models.Country{
-		Code:          request.GetCode(),
-		Name:          request.GetName(),
-		ShortName:     request.GetShortName(),
-		CurrencyID:    request.GetCurrencyId(),
-		CodeAlpha2:    request.GetCodeAlpha2(),
-		CodeAlpha3:    request.GetCodeAlpha3(),
-		TerritoryCode: request.GetTerritoryCode(),
-		CrudDates:     request.GetCrudDates(),
+		Code:             request.GetCode(),
+		Name:             request.GetName(),
+		ShortName:        request.GetShortName(),
+		CurrencyId:       request.GetCurrencyId(),
+		CodeAlpha2:       request.GetCodeAlpha2(),
+		CodeAlpha3:       request.GetCodeAlpha3(),
+		TerritoryCode:    request.GetTerritoryCode(),
+		ActivationDate:   request.GetActivationDate(),
+		DeactivationDate: request.GetDeactivationDate(),
+		FlexFinId:        request.GetFlexFinId(),
 	}
 }
 
 func (service *CountryService) transformCountryModel(country models.Country) *proto.CountryProfileResponse {
 	return &proto.CountryProfileResponse{
-		Id:            int64(country.ID),
-		Code:          country.Code,
-		Name:          country.Name,
-		ShortName:     country.ShortName,
-		CurrencyId:    country.CurrencyID,
-		CodeAlpha2:    country.CodeAlpha2,
-		CodeAlpha3:    country.CodeAlpha3,
-		TerritoryCode: country.TerritoryCode,
-		CrudDates:     country.CrudDates,
+		Id:               country.ID.String(),
+		Code:             country.Code,
+		Name:             country.Name,
+		ShortName:        country.ShortName,
+		CurrencyId:       country.CurrencyId,
+		CodeAlpha2:       country.CodeAlpha2,
+		CodeAlpha3:       country.CodeAlpha3,
+		TerritoryCode:    country.TerritoryCode,
+		ActivationDate:   country.ActivationDate,
+		DeactivationDate: country.DeactivationDate,
+		FlexFinId:        country.FlexFinId,
 	}
 }

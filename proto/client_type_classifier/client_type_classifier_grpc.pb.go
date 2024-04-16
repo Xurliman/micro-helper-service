@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	ClientTypeClassifierService_List_FullMethodName   = "/ClientTypeClassifierService/List"
 	ClientTypeClassifierService_Create_FullMethodName = "/ClientTypeClassifierService/Create"
-	ClientTypeClassifierService_Read_FullMethodName   = "/ClientTypeClassifierService/Read"
+	ClientTypeClassifierService_Get_FullMethodName    = "/ClientTypeClassifierService/Get"
 	ClientTypeClassifierService_Update_FullMethodName = "/ClientTypeClassifierService/Update"
 	ClientTypeClassifierService_Delete_FullMethodName = "/ClientTypeClassifierService/Delete"
 )
@@ -32,7 +32,7 @@ const (
 type ClientTypeClassifierServiceClient interface {
 	List(ctx context.Context, in *ListClientTypeClassifierRequest, opts ...grpc.CallOption) (*ListClientTypeClassifierResponse, error)
 	Create(ctx context.Context, in *CreateClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error)
-	Read(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error)
+	Get(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error)
 	Update(ctx context.Context, in *UpdateClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -63,9 +63,9 @@ func (c *clientTypeClassifierServiceClient) Create(ctx context.Context, in *Crea
 	return out, nil
 }
 
-func (c *clientTypeClassifierServiceClient) Read(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error) {
+func (c *clientTypeClassifierServiceClient) Get(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error) {
 	out := new(ClientTypeClassifierProfileResponse)
-	err := c.cc.Invoke(ctx, ClientTypeClassifierService_Read_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ClientTypeClassifierService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ func (c *clientTypeClassifierServiceClient) Delete(ctx context.Context, in *Sing
 type ClientTypeClassifierServiceServer interface {
 	List(context.Context, *ListClientTypeClassifierRequest) (*ListClientTypeClassifierResponse, error)
 	Create(context.Context, *CreateClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error)
-	Read(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error)
+	Get(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error)
 	Update(context.Context, *UpdateClientTypeClassifierRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleClientTypeClassifierRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedClientTypeClassifierServiceServer()
@@ -112,8 +112,8 @@ func (UnimplementedClientTypeClassifierServiceServer) List(context.Context, *Lis
 func (UnimplementedClientTypeClassifierServiceServer) Create(context.Context, *CreateClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedClientTypeClassifierServiceServer) Read(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedClientTypeClassifierServiceServer) Get(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedClientTypeClassifierServiceServer) Update(context.Context, *UpdateClientTypeClassifierRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -171,20 +171,20 @@ func _ClientTypeClassifierService_Create_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClientTypeClassifierService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ClientTypeClassifierService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SingleClientTypeClassifierRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientTypeClassifierServiceServer).Read(ctx, in)
+		return srv.(ClientTypeClassifierServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClientTypeClassifierService_Read_FullMethodName,
+		FullMethod: ClientTypeClassifierService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientTypeClassifierServiceServer).Read(ctx, req.(*SingleClientTypeClassifierRequest))
+		return srv.(ClientTypeClassifierServiceServer).Get(ctx, req.(*SingleClientTypeClassifierRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -241,8 +241,8 @@ var ClientTypeClassifierService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClientTypeClassifierService_Create_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _ClientTypeClassifierService_Read_Handler,
+			MethodName: "Get",
+			Handler:    _ClientTypeClassifierService_Get_Handler,
 		},
 		{
 			MethodName: "Update",

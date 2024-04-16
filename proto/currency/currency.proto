@@ -24,45 +24,43 @@ message CreateCurrencyRequest{
   string short_name = 3;
   int64 scale = 4;
   string scale_name = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
 }
 
 message SingleCurrencyRequest{
   oneof currency_identifier {
-    int64 id = 1;
+    string id = 1;
     string code = 2;
   }
 }
 
 message CurrencyProfileResponse{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
   int64 scale = 5;
   string scale_name = 6;
-  string deleted_at = 7;
+  string activation_date = 7;
+  string deactivation_date = 8;
+  string flex_fin_id = 9;
+  string deleted_at = 10;
 }
 
 message SuccessResponse{
   string response = 1;
 }
 
-
 message UpdateCurrencyRequest{
-  int64 id = 1;
+  string id = 1;
   string code = 2;
   string name = 3;
   string short_name = 4;
   int64 scale = 5;
   string scale_name = 6;
+  string activation_date = 7;
+  string deactivation_date = 8;
+  string flex_fin_id = 9;
 }
-
-
-/*
-protoc \
---proto_path=proto/currency \
---go_out=proto/currency \
---go_opt=paths=source_relative proto/currency/currency.proto \
---go-grpc_out=proto/currency \
---go-grpc_opt=paths=source_relative proto/currency/currency.proto
-*/

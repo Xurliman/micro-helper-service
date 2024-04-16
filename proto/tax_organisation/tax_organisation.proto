@@ -1,0 +1,51 @@
+syntax = "proto3";
+option go_package = "proto.tax.organisation";
+
+service TaxOrganisationService {
+  rpc List(ListTaxOrganisationRequest) returns (ListTaxOrganisationResponse);
+  rpc Create(CreateTaxOrganisationRequest) returns (TaxOrganisationProfileResponse);
+  rpc Get(SingleTaxOrganisationRequest) returns (TaxOrganisationProfileResponse);
+  rpc Update(UpdateTaxOrganisationRequest) returns (SuccessResponse);
+  rpc Delete(SingleTaxOrganisationRequest) returns (SuccessResponse);
+}
+
+message ListTaxOrganisationRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message ListTaxOrganisationResponse {
+  repeated TaxOrganisationProfileResponse tax_organisations = 1;
+}
+
+message CreateTaxOrganisationRequest {
+  string code = 1;
+  string name = 2;
+  string flex_fin_id = 3;
+}
+
+message SingleTaxOrganisationRequest {
+  oneof tax_organisation_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message TaxOrganisationProfileResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+  string deleted_at = 5;
+}
+
+message SuccessResponse {
+  string response = 1;
+}
+
+message UpdateTaxOrganisationRequest {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string flex_fin_id = 4;
+}

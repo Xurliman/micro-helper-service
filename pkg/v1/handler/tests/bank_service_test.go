@@ -23,7 +23,7 @@ func TestCreateBank(t *testing.T) {
 	bank := proto.NewBankServiceClient(conn)
 
 	request := &proto.CreateBankRequest{
-		Code:             12345,
+		Code:             "12345",
 		Name:             "test",
 		ShortName:        "tt",
 		CountryId:        1,
@@ -31,6 +31,7 @@ func TestCreateBank(t *testing.T) {
 		CloseDate:        "2024-03-20",
 		ActivationDate:   "2024-02-20",
 		DeactivationDate: "2024-03-20",
+		FlexFinId:        "2024-03-20",
 	}
 
 	res, err := bank.Create(context.Background(), request)
@@ -46,7 +47,7 @@ func TestCreateBank(t *testing.T) {
 		t.Errorf("CREATE returned incorrect Name, expected %v got %v", request.Name, res.Name)
 	}
 
-	if res.GetId() == 0 {
+	if res.GetId() == "" {
 		t.Error("CREATE function didnot returned id as the response")
 	}
 }

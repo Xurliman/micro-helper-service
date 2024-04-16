@@ -19,49 +19,48 @@ message ListDistrictResponse {
 }
 
 message CreateDistrictRequest{
-  int64 code = 1;
+  string code = 1;
   string name = 2;
   int64 region_id = 3;
-  string activation_date = 4;
-  string deactivation_date = 5;
-  int64 old_code = 6;
+  int64 old_code = 4;
+  string old_name = 5;
+  string activation_date = 6;
+  string deactivation_date = 7;
+  string flex_fin_id = 8;
 }
 
 message SingleDistrictRequest{
-  int64 id = 1;
+  oneof district_identifier {
+    string id = 1;
+    string code = 2;
+  }
 }
 
 message DistrictProfileResponse{
-  int64 id = 1;
-  string name = 2;
-  int64 code = 3;
+  string id = 1;
+  string code = 2;
+  string name = 3;
   int64 region_id = 4;
-  string activation_date = 5;
-  string deactivation_date = 6;
-  int64 old_code = 7;
+  int64 old_code = 5;
+  string old_name = 6;
+  string activation_date = 7;
+  string deactivation_date = 8;
+  string flex_fin_id = 9;
+  int64 deleted_at = 10;
 }
 
 message SuccessResponse{
   string response = 1;
 }
 
-
 message UpdateDistrictRequest{
-  int64 id = 1;
-  string name = 2;
-  int64 code = 3;
+  string id = 1;
+  string code = 2;
+  string name = 3;
   int64 region_id = 4;
-  string activation_date = 5;
-  string deactivation_date = 6;
-  int64 old_code = 7;
+  int64 old_code = 5;
+  string old_name = 6;
+  string activation_date = 7;
+  string deactivation_date = 8;
+  string flex_fin_id = 9;
 }
-
-
-/*
-protoc \
---proto_path=proto/district \
---go_out=proto/district \
---go_opt=paths=source_relative proto/district/district.proto \
---go-grpc_out=proto/district \
---go-grpc_opt=paths=source_relative proto/district/district.proto
-*/

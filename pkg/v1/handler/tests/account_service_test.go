@@ -2,14 +2,17 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/account"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"os"
 	"testing"
 )
 
 func TestCreateAccount(t *testing.T) {
-	conn, err := grpc.Dial("localhost:5001", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	port := os.Getenv("APP_PORT")
+	conn, err := grpc.Dial(fmt.Sprintf("localhost:%v", port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		t.Fatal("the connection with the server cannot be established")
 	}
@@ -23,7 +26,7 @@ func TestCreateAccount(t *testing.T) {
 	account := proto.NewAccountServiceClient(conn)
 
 	request := &proto.CreateAccountRequest{
-		Code:        "12345",
+		Code:        "sjalksjalkj",
 		Name:        "test",
 		Description: "Kolner Str. 200",
 		FlexFinId:   "23",

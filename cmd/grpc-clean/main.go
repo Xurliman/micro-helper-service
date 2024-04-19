@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	database "github.com/Xurliman/banking-microservice/internal/db"
 	handlerAccount "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc/Account"
 	handlerBank "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc/Bank"
@@ -26,11 +27,13 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"net"
+	"os"
 )
 
 func main() {
 	db := database.DbConn()
-	listen, err := net.Listen("tcp", "localhost:5001")
+	port := os.Getenv("APP_PORT")
+	listen, err := net.Listen("tcp", fmt.Sprintf("localhost:%v", port))
 	if err != nil {
 		log.Fatalf("ERROR STARTING THE SERVER : %v", err)
 	}

@@ -2,14 +2,17 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/currency"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"os"
 	"testing"
 )
 
 func TestCreateCurrency(t *testing.T) {
-	conn, err := grpc.Dial("localhost:5001", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	port := os.Getenv("APP_PORT")
+	conn, err := grpc.Dial(fmt.Sprintf("localhost:%v", port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		t.Fatal("the connection with the server cannot be established")
 	}

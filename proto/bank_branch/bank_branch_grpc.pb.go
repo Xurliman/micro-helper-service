@@ -33,8 +33,8 @@ type BankBranchServiceClient interface {
 	List(ctx context.Context, in *ListBankBranchRequest, opts ...grpc.CallOption) (*ListBankBranchResponse, error)
 	Create(ctx context.Context, in *CreateBankBranchRequest, opts ...grpc.CallOption) (*BankBranchProfileResponse, error)
 	Get(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*BankBranchProfileResponse, error)
-	Update(ctx context.Context, in *UpdateBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateBankBranchRequest, opts ...grpc.CallOption) (*BankBranchSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*BankBranchSuccessResponse, error)
 }
 
 type bankBranchServiceClient struct {
@@ -72,8 +72,8 @@ func (c *bankBranchServiceClient) Get(ctx context.Context, in *SingleBankBranchR
 	return out, nil
 }
 
-func (c *bankBranchServiceClient) Update(ctx context.Context, in *UpdateBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *bankBranchServiceClient) Update(ctx context.Context, in *UpdateBankBranchRequest, opts ...grpc.CallOption) (*BankBranchSuccessResponse, error) {
+	out := new(BankBranchSuccessResponse)
 	err := c.cc.Invoke(ctx, BankBranchService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *bankBranchServiceClient) Update(ctx context.Context, in *UpdateBankBran
 	return out, nil
 }
 
-func (c *bankBranchServiceClient) Delete(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *bankBranchServiceClient) Delete(ctx context.Context, in *SingleBankBranchRequest, opts ...grpc.CallOption) (*BankBranchSuccessResponse, error) {
+	out := new(BankBranchSuccessResponse)
 	err := c.cc.Invoke(ctx, BankBranchService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type BankBranchServiceServer interface {
 	List(context.Context, *ListBankBranchRequest) (*ListBankBranchResponse, error)
 	Create(context.Context, *CreateBankBranchRequest) (*BankBranchProfileResponse, error)
 	Get(context.Context, *SingleBankBranchRequest) (*BankBranchProfileResponse, error)
-	Update(context.Context, *UpdateBankBranchRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleBankBranchRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateBankBranchRequest) (*BankBranchSuccessResponse, error)
+	Delete(context.Context, *SingleBankBranchRequest) (*BankBranchSuccessResponse, error)
 	mustEmbedUnimplementedBankBranchServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedBankBranchServiceServer) Create(context.Context, *CreateBankB
 func (UnimplementedBankBranchServiceServer) Get(context.Context, *SingleBankBranchRequest) (*BankBranchProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedBankBranchServiceServer) Update(context.Context, *UpdateBankBranchRequest) (*SuccessResponse, error) {
+func (UnimplementedBankBranchServiceServer) Update(context.Context, *UpdateBankBranchRequest) (*BankBranchSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedBankBranchServiceServer) Delete(context.Context, *SingleBankBranchRequest) (*SuccessResponse, error) {
+func (UnimplementedBankBranchServiceServer) Delete(context.Context, *SingleBankBranchRequest) (*BankBranchSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedBankBranchServiceServer) mustEmbedUnimplementedBankBranchServiceServer() {}

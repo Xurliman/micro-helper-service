@@ -5,8 +5,8 @@ service NationalEconomySectorNewService {
   rpc List(CreateNationalEconomySectorNewRequest) returns (ListNationalEconomySectorNewResponse);
   rpc Create(CreateNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
   rpc Get(SingleNationalEconomySectorNewRequest) returns (NationalEconomySectorNewProfileResponse);
-  rpc Update(UpdateNationalEconomySectorNewRequest) returns (SuccessResponse);
-  rpc Delete(SingleNationalEconomySectorNewRequest) returns (SuccessResponse);
+  rpc Update(UpdateNationalEconomySectorNewRequest) returns (NationalEconomySectorNewSuccessResponse);
+  rpc Delete(SingleNationalEconomySectorNewRequest) returns (NationalEconomySectorNewSuccessResponse);
 }
 
 message ListNationalEconomySectorNewRequest {
@@ -73,7 +73,7 @@ message NationalEconomySectorNewProfileResponse{
   string deleted_at = 22;
 }
 
-message SuccessResponse{
+message NationalEconomySectorNewSuccessResponse{
   string response = 1;
 }
 

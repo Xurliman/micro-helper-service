@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type RegionRepo struct {
 	db *gorm.DB
+}
+
+func NewRegion(db *gorm.DB) interfaces.RegionRepoInterface {
+	return &RegionRepo{db: db}
 }
 
 func (repo *RegionRepo) Create(region models.Region) (models.Region, error) {

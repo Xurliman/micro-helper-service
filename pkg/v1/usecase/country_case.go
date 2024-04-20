@@ -13,6 +13,10 @@ type CountryCase struct {
 	repo interfaces.CountryRepoInterface
 }
 
+func NewCountry(repo interfaces.CountryRepoInterface) interfaces.CountryCaseInterface {
+	return &CountryCase{repo: repo}
+}
+
 func (countryCase *CountryCase) Create(country models.Country) (models.Country, error) {
 	if _, err := countryCase.repo.GetByCode(country.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Country{}, errors.New("the code has already been taken")

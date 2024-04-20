@@ -5,8 +5,8 @@ service ClientTypeClassifierService {
   rpc List(ListClientTypeClassifierRequest) returns (ListClientTypeClassifierResponse);
   rpc Create(CreateClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
   rpc Get(SingleClientTypeClassifierRequest) returns (ClientTypeClassifierProfileResponse);
-  rpc Update(UpdateClientTypeClassifierRequest) returns (SuccessResponse);
-  rpc Delete(SingleClientTypeClassifierRequest) returns (SuccessResponse);
+  rpc Update(UpdateClientTypeClassifierRequest) returns (ClassifierSuccessResponse);
+  rpc Delete(SingleClientTypeClassifierRequest) returns (ClassifierSuccessResponse);
 }
 
 message ListClientTypeClassifierRequest {
@@ -55,7 +55,7 @@ message ClientTypeClassifierProfileResponse {
   string deleted_at = 13;
 }
 
-message SuccessResponse {
+message ClassifierSuccessResponse {
   string response = 1;
 }
 

@@ -15,9 +15,10 @@ type DistrictService struct {
 	proto.UnimplementedDistrictServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, districtCase interfaces.DistrictCaseInterface) {
+func NewServer(grpcServer *grpc.Server, districtCase interfaces.DistrictCaseInterface) *DistrictService {
 	districtGrpc := &DistrictService{districtCase: districtCase}
 	proto.RegisterDistrictServiceServer(grpcServer, districtGrpc)
+	return districtGrpc
 }
 
 func (service *DistrictService) Create(context context.Context, request *proto.CreateDistrictRequest) (*proto.DistrictProfileResponse, error) {

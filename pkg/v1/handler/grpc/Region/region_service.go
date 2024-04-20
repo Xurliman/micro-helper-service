@@ -15,9 +15,10 @@ type RegionService struct {
 	proto.UnimplementedRegionServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, regionCase interfaces.RegionCaseInterface) {
+func NewServer(grpcServer *grpc.Server, regionCase interfaces.RegionCaseInterface) *RegionService {
 	regionGrpc := &RegionService{regionCase: regionCase}
 	proto.RegisterRegionServiceServer(grpcServer, regionGrpc)
+	return regionGrpc
 }
 
 func (service *RegionService) Create(context context.Context, request *proto.CreateRegionRequest) (*proto.RegionProfileResponse, error) {

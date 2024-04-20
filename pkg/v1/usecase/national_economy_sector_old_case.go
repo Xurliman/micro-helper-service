@@ -13,6 +13,10 @@ type NationalEconomySectorOldCase struct {
 	repo interfaces.NationalEconomySectorOldRepoInterface
 }
 
+func NewNationalEconomySectorOld(repo interfaces.NationalEconomySectorOldRepoInterface) interfaces.NationalEconomySectorOldCaseInterface {
+	return &NationalEconomySectorOldCase{repo: repo}
+}
+
 func (nationalEconomySectorOldCase NationalEconomySectorOldCase) Create(nationalEconomySectorOld models.NationalEconomySectorOld) (models.NationalEconomySectorOld, error) {
 	if _, err := nationalEconomySectorOldCase.repo.GetByCode(nationalEconomySectorOld.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.NationalEconomySectorOld{}, errors.New("the code has already been taken")

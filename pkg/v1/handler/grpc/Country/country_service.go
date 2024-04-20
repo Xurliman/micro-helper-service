@@ -15,9 +15,10 @@ type CountryService struct {
 	proto.UnimplementedCountryServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, countryCase interfaces.CountryCaseInterface) {
+func NewServer(grpcServer *grpc.Server, countryCase interfaces.CountryCaseInterface) *CountryService {
 	countryGrpc := &CountryService{countryCase: countryCase}
 	proto.RegisterCountryServiceServer(grpcServer, countryGrpc)
+	return countryGrpc
 }
 
 func (service *CountryService) Create(context context.Context, request *proto.CreateCountryRequest) (*proto.CountryProfileResponse, error) {

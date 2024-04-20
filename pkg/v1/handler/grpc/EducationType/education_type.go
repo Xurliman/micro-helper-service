@@ -15,9 +15,10 @@ type EducationTypeService struct {
 	proto.UnimplementedEducationTypeServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, educationTypeCase interfaces.EducationTypeCaseInterface) {
+func NewServer(grpcServer *grpc.Server, educationTypeCase interfaces.EducationTypeCaseInterface) *EducationTypeService {
 	educationTypeGrpc := &EducationTypeService{educationTypeCase: educationTypeCase}
 	proto.RegisterEducationTypeServiceServer(grpcServer, educationTypeGrpc)
+	return educationTypeGrpc
 }
 
 func (service *EducationTypeService) Create(context context.Context, request *proto.CreateEducationTypeRequest) (*proto.EducationTypeProfileResponse, error) {

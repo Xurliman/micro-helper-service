@@ -13,6 +13,10 @@ type ResidencyTypeCase struct {
 	repo interfaces.ResidencyTypeRepoInterface
 }
 
+func NewResidencyType(repo interfaces.ResidencyTypeRepoInterface) interfaces.ResidencyTypeCaseInterface {
+	return &ResidencyTypeCase{repo: repo}
+}
+
 func (residencyTypeCase ResidencyTypeCase) Create(residencyType models.ResidencyType) (models.ResidencyType, error) {
 	if _, err := residencyTypeCase.repo.GetByCode(residencyType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.ResidencyType{}, errors.New("the code has already been taken")

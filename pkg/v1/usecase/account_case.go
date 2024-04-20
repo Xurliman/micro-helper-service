@@ -13,6 +13,10 @@ type AccountCase struct {
 	repo interfaces.AccountRepoInterface
 }
 
+func NewAccount(repo interfaces.AccountRepoInterface) interfaces.AccountCaseInterface {
+	return &AccountCase{repo: repo}
+}
+
 func (accountCase AccountCase) Create(account models.Account) (models.Account, error) {
 	if _, err := accountCase.repo.GetByCode(account.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Account{}, errors.New("the code has already been taken")

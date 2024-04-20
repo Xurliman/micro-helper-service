@@ -5,8 +5,8 @@ service CurrencyService {
   rpc List(ListCurrencyRequest) returns (ListCurrencyResponse);
   rpc Create(CreateCurrencyRequest) returns (CurrencyProfileResponse);
   rpc Get(SingleCurrencyRequest) returns (CurrencyProfileResponse);
-  rpc Update(UpdateCurrencyRequest) returns (SuccessResponse);
-  rpc Delete(SingleCurrencyRequest) returns (SuccessResponse);
+  rpc Update(UpdateCurrencyRequest) returns (CurrencySuccessResponse);
+  rpc Delete(SingleCurrencyRequest) returns (CurrencySuccessResponse);
 }
 
 message ListCurrencyRequest {
@@ -49,7 +49,7 @@ message CurrencyProfileResponse{
   string deleted_at = 10;
 }
 
-message SuccessResponse{
+message CurrencySuccessResponse{
   string response = 1;
 }
 

@@ -33,8 +33,8 @@ type EducationTypeServiceClient interface {
 	List(ctx context.Context, in *ListEducationTypeRequest, opts ...grpc.CallOption) (*ListEducationTypeResponse, error)
 	Create(ctx context.Context, in *CreateEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeProfileResponse, error)
 	Get(ctx context.Context, in *SingleEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeProfileResponse, error)
-	Update(ctx context.Context, in *UpdateEducationTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleEducationTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeSuccessResponse, error)
 }
 
 type educationTypeServiceClient struct {
@@ -72,8 +72,8 @@ func (c *educationTypeServiceClient) Get(ctx context.Context, in *SingleEducatio
 	return out, nil
 }
 
-func (c *educationTypeServiceClient) Update(ctx context.Context, in *UpdateEducationTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *educationTypeServiceClient) Update(ctx context.Context, in *UpdateEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeSuccessResponse, error) {
+	out := new(EducationTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, EducationTypeService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *educationTypeServiceClient) Update(ctx context.Context, in *UpdateEduca
 	return out, nil
 }
 
-func (c *educationTypeServiceClient) Delete(ctx context.Context, in *SingleEducationTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *educationTypeServiceClient) Delete(ctx context.Context, in *SingleEducationTypeRequest, opts ...grpc.CallOption) (*EducationTypeSuccessResponse, error) {
+	out := new(EducationTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, EducationTypeService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type EducationTypeServiceServer interface {
 	List(context.Context, *ListEducationTypeRequest) (*ListEducationTypeResponse, error)
 	Create(context.Context, *CreateEducationTypeRequest) (*EducationTypeProfileResponse, error)
 	Get(context.Context, *SingleEducationTypeRequest) (*EducationTypeProfileResponse, error)
-	Update(context.Context, *UpdateEducationTypeRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleEducationTypeRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateEducationTypeRequest) (*EducationTypeSuccessResponse, error)
+	Delete(context.Context, *SingleEducationTypeRequest) (*EducationTypeSuccessResponse, error)
 	mustEmbedUnimplementedEducationTypeServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedEducationTypeServiceServer) Create(context.Context, *CreateEd
 func (UnimplementedEducationTypeServiceServer) Get(context.Context, *SingleEducationTypeRequest) (*EducationTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedEducationTypeServiceServer) Update(context.Context, *UpdateEducationTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedEducationTypeServiceServer) Update(context.Context, *UpdateEducationTypeRequest) (*EducationTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedEducationTypeServiceServer) Delete(context.Context, *SingleEducationTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedEducationTypeServiceServer) Delete(context.Context, *SingleEducationTypeRequest) (*EducationTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedEducationTypeServiceServer) mustEmbedUnimplementedEducationTypeServiceServer() {}

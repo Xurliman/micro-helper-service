@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type CurrencyRepo struct {
 	db *gorm.DB
+}
+
+func NewCurrency(db *gorm.DB) interfaces.CurrencyRepoInterface {
+	return &CurrencyRepo{db: db}
 }
 
 func (repo *CurrencyRepo) Create(currency models.Currency) (models.Currency, error) {

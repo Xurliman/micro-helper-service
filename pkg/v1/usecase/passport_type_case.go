@@ -13,6 +13,10 @@ type PassportTypeCase struct {
 	repo interfaces.PassportTypeRepoInterface
 }
 
+func NewPassportType(repo interfaces.PassportTypeRepoInterface) interfaces.PassportTypeCaseInterface {
+	return &PassportTypeCase{repo: repo}
+}
+
 func (passportTypeCase PassportTypeCase) Create(passportType models.PassportType) (models.PassportType, error) {
 	if _, err := passportTypeCase.repo.GetByCode(passportType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.PassportType{}, errors.New("the code has already been taken")

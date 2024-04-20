@@ -11,6 +11,10 @@ type BankRepo struct {
 	db *gorm.DB
 }
 
+func NewBank(db *gorm.DB) interfaces.BankRepoInterface {
+	return &BankRepo{db: db}
+}
+
 func (repo *BankRepo) Create(bank models.Bank) (models.Bank, error) {
 	err := repo.db.Create(&bank).Error
 	return bank, err
@@ -53,8 +57,4 @@ func (repo *BankRepo) GetByCode(code string) (models.Bank, error) {
 	err := repo.db.Where("code = ?", code).First(&bank).Error
 
 	return bank, err
-}
-
-func NewBank(db *gorm.DB) interfaces.BankRepoInterface {
-	return &BankRepo{db: db}
 }

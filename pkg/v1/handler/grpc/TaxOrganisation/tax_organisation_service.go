@@ -15,9 +15,10 @@ type TaxOrganisationService struct {
 	proto.UnimplementedTaxOrganisationServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, taxOrganisationCase interfaces.TaxOrganisationCaseInterface) {
+func NewServer(grpcServer *grpc.Server, taxOrganisationCase interfaces.TaxOrganisationCaseInterface) *TaxOrganisationService {
 	taxOrganisationGrpc := &TaxOrganisationService{taxOrganisationCase: taxOrganisationCase}
 	proto.RegisterTaxOrganisationServiceServer(grpcServer, taxOrganisationGrpc)
+	return taxOrganisationGrpc
 }
 
 func (service *TaxOrganisationService) Create(context context.Context, request *proto.CreateTaxOrganisationRequest) (*proto.TaxOrganisationProfileResponse, error) {

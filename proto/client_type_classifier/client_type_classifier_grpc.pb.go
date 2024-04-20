@@ -33,8 +33,8 @@ type ClientTypeClassifierServiceClient interface {
 	List(ctx context.Context, in *ListClientTypeClassifierRequest, opts ...grpc.CallOption) (*ListClientTypeClassifierResponse, error)
 	Create(ctx context.Context, in *CreateClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error)
 	Get(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClientTypeClassifierProfileResponse, error)
-	Update(ctx context.Context, in *UpdateClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClassifierSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClassifierSuccessResponse, error)
 }
 
 type clientTypeClassifierServiceClient struct {
@@ -72,8 +72,8 @@ func (c *clientTypeClassifierServiceClient) Get(ctx context.Context, in *SingleC
 	return out, nil
 }
 
-func (c *clientTypeClassifierServiceClient) Update(ctx context.Context, in *UpdateClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *clientTypeClassifierServiceClient) Update(ctx context.Context, in *UpdateClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClassifierSuccessResponse, error) {
+	out := new(ClassifierSuccessResponse)
 	err := c.cc.Invoke(ctx, ClientTypeClassifierService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *clientTypeClassifierServiceClient) Update(ctx context.Context, in *Upda
 	return out, nil
 }
 
-func (c *clientTypeClassifierServiceClient) Delete(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *clientTypeClassifierServiceClient) Delete(ctx context.Context, in *SingleClientTypeClassifierRequest, opts ...grpc.CallOption) (*ClassifierSuccessResponse, error) {
+	out := new(ClassifierSuccessResponse)
 	err := c.cc.Invoke(ctx, ClientTypeClassifierService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type ClientTypeClassifierServiceServer interface {
 	List(context.Context, *ListClientTypeClassifierRequest) (*ListClientTypeClassifierResponse, error)
 	Create(context.Context, *CreateClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error)
 	Get(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error)
-	Update(context.Context, *UpdateClientTypeClassifierRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleClientTypeClassifierRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateClientTypeClassifierRequest) (*ClassifierSuccessResponse, error)
+	Delete(context.Context, *SingleClientTypeClassifierRequest) (*ClassifierSuccessResponse, error)
 	mustEmbedUnimplementedClientTypeClassifierServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedClientTypeClassifierServiceServer) Create(context.Context, *C
 func (UnimplementedClientTypeClassifierServiceServer) Get(context.Context, *SingleClientTypeClassifierRequest) (*ClientTypeClassifierProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedClientTypeClassifierServiceServer) Update(context.Context, *UpdateClientTypeClassifierRequest) (*SuccessResponse, error) {
+func (UnimplementedClientTypeClassifierServiceServer) Update(context.Context, *UpdateClientTypeClassifierRequest) (*ClassifierSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedClientTypeClassifierServiceServer) Delete(context.Context, *SingleClientTypeClassifierRequest) (*SuccessResponse, error) {
+func (UnimplementedClientTypeClassifierServiceServer) Delete(context.Context, *SingleClientTypeClassifierRequest) (*ClassifierSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedClientTypeClassifierServiceServer) mustEmbedUnimplementedClientTypeClassifierServiceServer() {

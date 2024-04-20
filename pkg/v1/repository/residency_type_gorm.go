@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type ResidencyTypeRepo struct {
 	db *gorm.DB
+}
+
+func NewResidencyType(db *gorm.DB) interfaces.ResidencyTypeRepoInterface {
+	return &ResidencyTypeRepo{db: db}
 }
 
 func (repo *ResidencyTypeRepo) Create(residencyType models.ResidencyType) (models.ResidencyType, error) {

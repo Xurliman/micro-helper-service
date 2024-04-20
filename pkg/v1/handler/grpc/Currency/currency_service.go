@@ -15,9 +15,10 @@ type CurrencyServer struct {
 	proto.UnimplementedCurrencyServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, currencyCase interfaces.CurrencyCaseInterface) {
+func NewServer(grpcServer *grpc.Server, currencyCase interfaces.CurrencyCaseInterface) *CurrencyServer {
 	currencyGrpc := &CurrencyServer{currencyCase: currencyCase}
 	proto.RegisterCurrencyServiceServer(grpcServer, currencyGrpc)
+	return currencyGrpc
 }
 
 func (service *CurrencyServer) Create(context context.Context, request *proto.CreateCurrencyRequest) (*proto.CurrencyProfileResponse, error) {

@@ -33,8 +33,8 @@ type PaymentTypeServiceClient interface {
 	List(ctx context.Context, in *ListPaymentTypeRequest, opts ...grpc.CallOption) (*ListPaymentTypeResponse, error)
 	Create(ctx context.Context, in *CreatePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error)
 	Get(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeProfileResponse, error)
-	Update(ctx context.Context, in *UpdatePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdatePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeSuccessResponse, error)
+	Delete(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeSuccessResponse, error)
 }
 
 type paymentTypeServiceClient struct {
@@ -72,8 +72,8 @@ func (c *paymentTypeServiceClient) Get(ctx context.Context, in *SinglePaymentTyp
 	return out, nil
 }
 
-func (c *paymentTypeServiceClient) Update(ctx context.Context, in *UpdatePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *paymentTypeServiceClient) Update(ctx context.Context, in *UpdatePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeSuccessResponse, error) {
+	out := new(PaymentTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, PaymentTypeService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *paymentTypeServiceClient) Update(ctx context.Context, in *UpdatePayment
 	return out, nil
 }
 
-func (c *paymentTypeServiceClient) Delete(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *paymentTypeServiceClient) Delete(ctx context.Context, in *SinglePaymentTypeRequest, opts ...grpc.CallOption) (*PaymentTypeSuccessResponse, error) {
+	out := new(PaymentTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, PaymentTypeService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type PaymentTypeServiceServer interface {
 	List(context.Context, *ListPaymentTypeRequest) (*ListPaymentTypeResponse, error)
 	Create(context.Context, *CreatePaymentTypeRequest) (*PaymentTypeProfileResponse, error)
 	Get(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error)
-	Update(context.Context, *UpdatePaymentTypeRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SinglePaymentTypeRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdatePaymentTypeRequest) (*PaymentTypeSuccessResponse, error)
+	Delete(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeSuccessResponse, error)
 	mustEmbedUnimplementedPaymentTypeServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedPaymentTypeServiceServer) Create(context.Context, *CreatePaym
 func (UnimplementedPaymentTypeServiceServer) Get(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPaymentTypeServiceServer) Update(context.Context, *UpdatePaymentTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedPaymentTypeServiceServer) Update(context.Context, *UpdatePaymentTypeRequest) (*PaymentTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedPaymentTypeServiceServer) Delete(context.Context, *SinglePaymentTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedPaymentTypeServiceServer) Delete(context.Context, *SinglePaymentTypeRequest) (*PaymentTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedPaymentTypeServiceServer) mustEmbedUnimplementedPaymentTypeServiceServer() {}

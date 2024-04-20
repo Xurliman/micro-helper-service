@@ -5,8 +5,8 @@ service RegistrationPlaceService {
   rpc List(ListRegistrationPlaceRequest) returns (ListRegistrationPlaceResponse);
   rpc Create(CreateRegistrationPlaceRequest) returns (RegistrationPlaceProfileResponse);
   rpc Get(SingleRegistrationPlaceRequest) returns (RegistrationPlaceProfileResponse);
-  rpc Update(UpdateRegistrationPlaceRequest) returns (SuccessResponse);
-  rpc Delete(SingleRegistrationPlaceRequest) returns (SuccessResponse);
+  rpc Update(UpdateRegistrationPlaceRequest) returns (RegistrationPlaceSuccessResponse);
+  rpc Delete(SingleRegistrationPlaceRequest) returns (RegistrationPlaceSuccessResponse);
 }
 
 message ListRegistrationPlaceRequest {
@@ -39,7 +39,7 @@ message RegistrationPlaceProfileResponse{
   string deleted_at = 5;
 }
 
-message SuccessResponse{
+message RegistrationPlaceSuccessResponse{
   string response = 1;
 }
 

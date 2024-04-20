@@ -5,8 +5,8 @@ service BankBranchService {
   rpc List(ListBankBranchRequest) returns (ListBankBranchResponse);
   rpc Create(CreateBankBranchRequest) returns (BankBranchProfileResponse);
   rpc Get(SingleBankBranchRequest) returns (BankBranchProfileResponse);
-  rpc Update(UpdateBankBranchRequest) returns (SuccessResponse);
-  rpc Delete(SingleBankBranchRequest) returns (SuccessResponse);
+  rpc Update(UpdateBankBranchRequest) returns (BankBranchSuccessResponse);
+  rpc Delete(SingleBankBranchRequest) returns (BankBranchSuccessResponse);
 }
 
 message ListBankBranchRequest {
@@ -54,7 +54,7 @@ message BankBranchProfileResponse{
   string flex_fin_id = 12;
 }
 
-message SuccessResponse{
+message BankBranchSuccessResponse{
   string response = 1;
 }
 

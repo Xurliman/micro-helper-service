@@ -33,8 +33,8 @@ type CurrencyServiceClient interface {
 	List(ctx context.Context, in *ListCurrencyRequest, opts ...grpc.CallOption) (*ListCurrencyResponse, error)
 	Create(ctx context.Context, in *CreateCurrencyRequest, opts ...grpc.CallOption) (*CurrencyProfileResponse, error)
 	Get(ctx context.Context, in *SingleCurrencyRequest, opts ...grpc.CallOption) (*CurrencyProfileResponse, error)
-	Update(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleCurrencyRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*CurrencySuccessResponse, error)
+	Delete(ctx context.Context, in *SingleCurrencyRequest, opts ...grpc.CallOption) (*CurrencySuccessResponse, error)
 }
 
 type currencyServiceClient struct {
@@ -72,8 +72,8 @@ func (c *currencyServiceClient) Get(ctx context.Context, in *SingleCurrencyReque
 	return out, nil
 }
 
-func (c *currencyServiceClient) Update(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *currencyServiceClient) Update(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*CurrencySuccessResponse, error) {
+	out := new(CurrencySuccessResponse)
 	err := c.cc.Invoke(ctx, CurrencyService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *currencyServiceClient) Update(ctx context.Context, in *UpdateCurrencyRe
 	return out, nil
 }
 
-func (c *currencyServiceClient) Delete(ctx context.Context, in *SingleCurrencyRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *currencyServiceClient) Delete(ctx context.Context, in *SingleCurrencyRequest, opts ...grpc.CallOption) (*CurrencySuccessResponse, error) {
+	out := new(CurrencySuccessResponse)
 	err := c.cc.Invoke(ctx, CurrencyService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type CurrencyServiceServer interface {
 	List(context.Context, *ListCurrencyRequest) (*ListCurrencyResponse, error)
 	Create(context.Context, *CreateCurrencyRequest) (*CurrencyProfileResponse, error)
 	Get(context.Context, *SingleCurrencyRequest) (*CurrencyProfileResponse, error)
-	Update(context.Context, *UpdateCurrencyRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleCurrencyRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateCurrencyRequest) (*CurrencySuccessResponse, error)
+	Delete(context.Context, *SingleCurrencyRequest) (*CurrencySuccessResponse, error)
 	mustEmbedUnimplementedCurrencyServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedCurrencyServiceServer) Create(context.Context, *CreateCurrenc
 func (UnimplementedCurrencyServiceServer) Get(context.Context, *SingleCurrencyRequest) (*CurrencyProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedCurrencyServiceServer) Update(context.Context, *UpdateCurrencyRequest) (*SuccessResponse, error) {
+func (UnimplementedCurrencyServiceServer) Update(context.Context, *UpdateCurrencyRequest) (*CurrencySuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedCurrencyServiceServer) Delete(context.Context, *SingleCurrencyRequest) (*SuccessResponse, error) {
+func (UnimplementedCurrencyServiceServer) Delete(context.Context, *SingleCurrencyRequest) (*CurrencySuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedCurrencyServiceServer) mustEmbedUnimplementedCurrencyServiceServer() {}

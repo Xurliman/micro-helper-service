@@ -13,6 +13,10 @@ type EducationTypeCase struct {
 	repo interfaces.EducationTypeRepoInterface
 }
 
+func NewEducationType(repo interfaces.EducationTypeRepoInterface) interfaces.EducationTypeCaseInterface {
+	return &EducationTypeCase{repo: repo}
+}
+
 func (educationTypeCase EducationTypeCase) Create(educationType models.EducationType) (models.EducationType, error) {
 	if _, err := educationTypeCase.repo.GetByCode(educationType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.EducationType{}, errors.New("the code has already been taken")

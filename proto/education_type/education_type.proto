@@ -5,8 +5,8 @@ service EducationTypeService {
   rpc List(ListEducationTypeRequest) returns (ListEducationTypeResponse);
   rpc Create(CreateEducationTypeRequest) returns (EducationTypeProfileResponse);
   rpc Get(SingleEducationTypeRequest) returns (EducationTypeProfileResponse);
-  rpc Update(UpdateEducationTypeRequest) returns (SuccessResponse);
-  rpc Delete(SingleEducationTypeRequest) returns (SuccessResponse);
+  rpc Update(UpdateEducationTypeRequest) returns (EducationTypeSuccessResponse);
+  rpc Delete(SingleEducationTypeRequest) returns (EducationTypeSuccessResponse);
 }
 
 message ListEducationTypeRequest {
@@ -39,7 +39,7 @@ message EducationTypeProfileResponse{
   string deleted_at = 5;
 }
 
-message SuccessResponse{
+message EducationTypeSuccessResponse{
   string response = 1;
 }
 

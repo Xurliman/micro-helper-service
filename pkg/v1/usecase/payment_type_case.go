@@ -13,6 +13,10 @@ type PaymentTypeCase struct {
 	repo interfaces.PaymentTypeRepoInterface
 }
 
+func NewPaymentType(repo interfaces.PaymentTypeRepoInterface) interfaces.PaymentTypeCaseInterface {
+	return &PaymentTypeCase{repo: repo}
+}
+
 func (paymentTypeCase PaymentTypeCase) Create(paymentType models.PaymentType) (models.PaymentType, error) {
 	if _, err := paymentTypeCase.repo.GetByCode(paymentType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.PaymentType{}, errors.New("the code has already been taken")

@@ -15,9 +15,10 @@ type DirectOrganService struct {
 	proto.UnimplementedDirectOrganServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, directOrganCase interfaces.DirectOrganCaseInterface) {
+func NewServer(grpcServer *grpc.Server, directOrganCase interfaces.DirectOrganCaseInterface) *DirectOrganService {
 	directOrganGrpc := &DirectOrganService{directOrganCase: directOrganCase}
 	proto.RegisterDirectOrganServiceServer(grpcServer, directOrganGrpc)
+	return directOrganGrpc
 }
 
 func (service *DirectOrganService) Create(context context.Context, request *proto.CreateDirectOrganRequest) (*proto.DirectOrganProfileResponse, error) {

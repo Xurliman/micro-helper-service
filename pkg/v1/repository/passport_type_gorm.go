@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type PassportTypeRepo struct {
 	db *gorm.DB
+}
+
+func NewPassportType(db *gorm.DB) interfaces.PassportTypeRepoInterface {
+	return &PassportTypeRepo{db: db}
 }
 
 func (repo *PassportTypeRepo) Create(passportType models.PassportType) (models.PassportType, error) {

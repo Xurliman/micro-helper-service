@@ -5,8 +5,8 @@ service PassportTypeService {
   rpc List(ListPassportTypeRequest) returns (ListPassportTypeResponse);
   rpc Create(CreatePassportTypeRequest) returns (PassportTypeProfileResponse);
   rpc Get(SinglePassportTypeRequest) returns (PassportTypeProfileResponse);
-  rpc Update(UpdatePassportTypeRequest) returns (SuccessResponse);
-  rpc Delete(SinglePassportTypeRequest) returns (SuccessResponse);
+  rpc Update(UpdatePassportTypeRequest) returns (PassportTypeSuccessResponse);
+  rpc Delete(SinglePassportTypeRequest) returns (PassportTypeSuccessResponse);
 }
 
 message ListPassportTypeRequest {
@@ -47,7 +47,7 @@ message PassportTypeProfileResponse{
   string deleted_at = 9;
 }
 
-message SuccessResponse{
+message PassportTypeSuccessResponse{
   string response = 1;
 }
 

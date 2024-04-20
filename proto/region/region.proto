@@ -5,8 +5,8 @@ service RegionService {
   rpc List(ListRegionRequest) returns (ListRegionResponse);
   rpc Create(CreateRegionRequest) returns (RegionProfileResponse);
   rpc Get(SingleRegionRequest) returns (RegionProfileResponse);
-  rpc Update(UpdateRegionRequest) returns (SuccessResponse);
-  rpc Delete(SingleRegionRequest) returns (SuccessResponse);
+  rpc Update(UpdateRegionRequest) returns (RegionSuccessResponse);
+  rpc Delete(SingleRegionRequest) returns (RegionSuccessResponse);
 }
 
 message ListRegionRequest {
@@ -49,7 +49,7 @@ message RegionProfileResponse{
   string deleted_at = 10;
 }
 
-message SuccessResponse{
+message RegionSuccessResponse{
   string response = 1;
 }
 

@@ -59,6 +59,6 @@ func TestCreateNationalEconomySectorNew(t *testing.T) {
 	}
 
 	if res.GetId() == "" {
-		t.Error("CREATE function didnot returned id as the response")
+		t.Error("CREATE function didn't return id as the response")
 	}
 }

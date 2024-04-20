@@ -33,8 +33,8 @@ type ResidencyTypeServiceClient interface {
 	List(ctx context.Context, in *ListResidencyTypeRequest, opts ...grpc.CallOption) (*ListResidencyTypeResponse, error)
 	Create(ctx context.Context, in *CreateResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeProfileResponse, error)
 	Get(ctx context.Context, in *SingleResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeProfileResponse, error)
-	Update(ctx context.Context, in *UpdateResidencyTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleResidencyTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeSuccessResponse, error)
 }
 
 type residencyTypeServiceClient struct {
@@ -72,8 +72,8 @@ func (c *residencyTypeServiceClient) Get(ctx context.Context, in *SingleResidenc
 	return out, nil
 }
 
-func (c *residencyTypeServiceClient) Update(ctx context.Context, in *UpdateResidencyTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *residencyTypeServiceClient) Update(ctx context.Context, in *UpdateResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeSuccessResponse, error) {
+	out := new(ResidencyTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, ResidencyTypeService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *residencyTypeServiceClient) Update(ctx context.Context, in *UpdateResid
 	return out, nil
 }
 
-func (c *residencyTypeServiceClient) Delete(ctx context.Context, in *SingleResidencyTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *residencyTypeServiceClient) Delete(ctx context.Context, in *SingleResidencyTypeRequest, opts ...grpc.CallOption) (*ResidencyTypeSuccessResponse, error) {
+	out := new(ResidencyTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, ResidencyTypeService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type ResidencyTypeServiceServer interface {
 	List(context.Context, *ListResidencyTypeRequest) (*ListResidencyTypeResponse, error)
 	Create(context.Context, *CreateResidencyTypeRequest) (*ResidencyTypeProfileResponse, error)
 	Get(context.Context, *SingleResidencyTypeRequest) (*ResidencyTypeProfileResponse, error)
-	Update(context.Context, *UpdateResidencyTypeRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleResidencyTypeRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateResidencyTypeRequest) (*ResidencyTypeSuccessResponse, error)
+	Delete(context.Context, *SingleResidencyTypeRequest) (*ResidencyTypeSuccessResponse, error)
 	mustEmbedUnimplementedResidencyTypeServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedResidencyTypeServiceServer) Create(context.Context, *CreateRe
 func (UnimplementedResidencyTypeServiceServer) Get(context.Context, *SingleResidencyTypeRequest) (*ResidencyTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedResidencyTypeServiceServer) Update(context.Context, *UpdateResidencyTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedResidencyTypeServiceServer) Update(context.Context, *UpdateResidencyTypeRequest) (*ResidencyTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedResidencyTypeServiceServer) Delete(context.Context, *SingleResidencyTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedResidencyTypeServiceServer) Delete(context.Context, *SingleResidencyTypeRequest) (*ResidencyTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedResidencyTypeServiceServer) mustEmbedUnimplementedResidencyTypeServiceServer() {}

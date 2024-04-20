@@ -13,6 +13,10 @@ type BorrowerTypeCase struct {
 	repo interfaces.BorrowerTypeRepoInterface
 }
 
+func NewBorrowerType(repo interfaces.BorrowerTypeRepoInterface) interfaces.BorrowerTypeCaseInterface {
+	return &BorrowerTypeCase{repo: repo}
+}
+
 func (borrowerTypeCase BorrowerTypeCase) Create(borrowerType models.BorrowerType) (models.BorrowerType, error) {
 	if _, err := borrowerTypeCase.repo.GetByCode(borrowerType.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.BorrowerType{}, errors.New("the code has already been taken")

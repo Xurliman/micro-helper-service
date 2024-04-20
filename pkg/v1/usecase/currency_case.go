@@ -13,6 +13,10 @@ type CurrencyCase struct {
 	repo interfaces.CurrencyRepoInterface
 }
 
+func NewCurrency(repo interfaces.CurrencyRepoInterface) interfaces.CurrencyCaseInterface {
+	return &CurrencyCase{repo: repo}
+}
+
 func (currencyCase *CurrencyCase) Create(currency models.Currency) (models.Currency, error) {
 	if _, err := currencyCase.repo.GetByCode(currency.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Currency{}, errors.New("the code has already been taken")

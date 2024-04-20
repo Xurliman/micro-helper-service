@@ -13,6 +13,10 @@ type TaxOrganisationCase struct {
 	repo interfaces.TaxOrganisationRepoInterface
 }
 
+func NewTaxOrganisation(repo interfaces.TaxOrganisationRepoInterface) interfaces.TaxOrganisationCaseInterface {
+	return &TaxOrganisationCase{repo: repo}
+}
+
 func (taxOrganisationCase TaxOrganisationCase) Create(taxOrganisation models.TaxOrganisation) (models.TaxOrganisation, error) {
 	if _, err := taxOrganisationCase.repo.GetByCode(taxOrganisation.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.TaxOrganisation{}, errors.New("the code has already been taken")

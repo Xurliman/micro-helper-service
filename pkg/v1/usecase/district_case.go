@@ -13,6 +13,10 @@ type DistrictCase struct {
 	repo interfaces.DistrictRepoInterface
 }
 
+func NewDistrict(repo interfaces.DistrictRepoInterface) interfaces.DistrictCaseInterface {
+	return &DistrictCase{repo: repo}
+}
+
 func (districtCase *DistrictCase) Create(district models.District) (models.District, error) {
 	if _, err := districtCase.repo.GetByCode(district.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.District{}, errors.New("the code has already been taken")

@@ -5,8 +5,8 @@ service TaxOrganisationService {
   rpc List(ListTaxOrganisationRequest) returns (ListTaxOrganisationResponse);
   rpc Create(CreateTaxOrganisationRequest) returns (TaxOrganisationProfileResponse);
   rpc Get(SingleTaxOrganisationRequest) returns (TaxOrganisationProfileResponse);
-  rpc Update(UpdateTaxOrganisationRequest) returns (SuccessResponse);
-  rpc Delete(SingleTaxOrganisationRequest) returns (SuccessResponse);
+  rpc Update(UpdateTaxOrganisationRequest) returns (TaxOrganisationSuccessResponse);
+  rpc Delete(SingleTaxOrganisationRequest) returns (TaxOrganisationSuccessResponse);
 }
 
 message ListTaxOrganisationRequest {
@@ -39,7 +39,7 @@ message TaxOrganisationProfileResponse {
   string deleted_at = 5;
 }
 
-message SuccessResponse {
+message TaxOrganisationSuccessResponse {
   string response = 1;
 }
 

@@ -15,9 +15,10 @@ type PaymentTypeService struct {
 	proto.UnimplementedPaymentTypeServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, paymentTypeCase interfaces.PaymentTypeCaseInterface) {
+func NewServer(grpcServer *grpc.Server, paymentTypeCase interfaces.PaymentTypeCaseInterface) *PaymentTypeService {
 	paymentTypeGrpc := &PaymentTypeService{paymentTypeCase: paymentTypeCase}
 	proto.RegisterPaymentTypeServiceServer(grpcServer, paymentTypeGrpc)
+	return paymentTypeGrpc
 }
 
 func (service *PaymentTypeService) Create(context context.Context, request *proto.CreatePaymentTypeRequest) (*proto.PaymentTypeProfileResponse, error) {

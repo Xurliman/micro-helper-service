@@ -14,7 +14,10 @@ import (
 var DB *gorm.DB
 
 func DbConn() *gorm.DB {
-	godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		log.Printf("Error loading .env file: %v", err)
+	}
 	dbUser := os.Getenv("DB_USERNAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbName := os.Getenv("DB_NAME")
@@ -33,7 +36,7 @@ func DbConn() *gorm.DB {
 }
 
 func AutoMigrate(connection *gorm.DB) {
-	connection.Debug().AutoMigrate(
+	err := connection.AutoMigrate(
 		&models.Account{},
 		&models.Bank{},
 		&models.BankBranch{},
@@ -53,4 +56,7 @@ func AutoMigrate(connection *gorm.DB) {
 		&models.ResidencyType{},
 		&models.TaxOrganisation{},
 	)
+	if err != nil {
+		log.Printf("err when automigrate: %v", err)
+	}
 }

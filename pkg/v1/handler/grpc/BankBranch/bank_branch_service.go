@@ -15,9 +15,10 @@ type BankBranchService struct {
 	proto.UnimplementedBankBranchServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, bankBranchCase interfaces.BankBranchCaseInterface) {
+func NewServer(grpcServer *grpc.Server, bankBranchCase interfaces.BankBranchCaseInterface) *BankBranchService {
 	bankBranchGrpc := &BankBranchService{bankBranchCase: bankBranchCase}
 	proto.RegisterBankBranchServiceServer(grpcServer, bankBranchGrpc)
+	return bankBranchGrpc
 }
 
 func (service *BankBranchService) Create(context context.Context, request *proto.CreateBankBranchRequest) (*proto.BankBranchProfileResponse, error) {

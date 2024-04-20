@@ -11,8 +11,8 @@ import (
 
 func InitializeServer() grpc.Server {
 	wire.Build(
-		grpc.NewServer,
 		database.DbConn,
+		grpc.NewServer,
 		repository.NewBank,
 		handler.NewServer,
 		usecase.NewBank,

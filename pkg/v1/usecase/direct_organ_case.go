@@ -13,6 +13,10 @@ type DirectOrganCase struct {
 	repo interfaces.DirectOrganRepoInterface
 }
 
+func NewDirectOrgan(repo interfaces.DirectOrganRepoInterface) interfaces.DirectOrganCaseInterface {
+	return &DirectOrganCase{repo: repo}
+}
+
 func (directOrganCase *DirectOrganCase) Create(directOrgan models.DirectOrgan) (models.DirectOrgan, error) {
 	if _, err := directOrganCase.repo.GetByCode(directOrgan.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.DirectOrgan{}, errors.New("the code has already been taken")

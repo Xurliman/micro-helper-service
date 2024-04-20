@@ -13,6 +13,10 @@ type RegionCase struct {
 	repo interfaces.RegionRepoInterface
 }
 
+func NewRegion(repo interfaces.RegionRepoInterface) interfaces.RegionCaseInterface {
+	return &RegionCase{repo: repo}
+}
+
 func (regionCase RegionCase) Create(region models.Region) (models.Region, error) {
 	if _, err := regionCase.repo.GetByCode(region.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.Region{}, errors.New("the code has already been taken")

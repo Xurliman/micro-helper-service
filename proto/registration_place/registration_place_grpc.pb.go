@@ -33,8 +33,8 @@ type RegistrationPlaceServiceClient interface {
 	List(ctx context.Context, in *ListRegistrationPlaceRequest, opts ...grpc.CallOption) (*ListRegistrationPlaceResponse, error)
 	Create(ctx context.Context, in *CreateRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceProfileResponse, error)
 	Get(ctx context.Context, in *SingleRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceProfileResponse, error)
-	Update(ctx context.Context, in *UpdateRegistrationPlaceRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleRegistrationPlaceRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceSuccessResponse, error)
 }
 
 type registrationPlaceServiceClient struct {
@@ -72,8 +72,8 @@ func (c *registrationPlaceServiceClient) Get(ctx context.Context, in *SingleRegi
 	return out, nil
 }
 
-func (c *registrationPlaceServiceClient) Update(ctx context.Context, in *UpdateRegistrationPlaceRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *registrationPlaceServiceClient) Update(ctx context.Context, in *UpdateRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceSuccessResponse, error) {
+	out := new(RegistrationPlaceSuccessResponse)
 	err := c.cc.Invoke(ctx, RegistrationPlaceService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *registrationPlaceServiceClient) Update(ctx context.Context, in *UpdateR
 	return out, nil
 }
 
-func (c *registrationPlaceServiceClient) Delete(ctx context.Context, in *SingleRegistrationPlaceRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *registrationPlaceServiceClient) Delete(ctx context.Context, in *SingleRegistrationPlaceRequest, opts ...grpc.CallOption) (*RegistrationPlaceSuccessResponse, error) {
+	out := new(RegistrationPlaceSuccessResponse)
 	err := c.cc.Invoke(ctx, RegistrationPlaceService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type RegistrationPlaceServiceServer interface {
 	List(context.Context, *ListRegistrationPlaceRequest) (*ListRegistrationPlaceResponse, error)
 	Create(context.Context, *CreateRegistrationPlaceRequest) (*RegistrationPlaceProfileResponse, error)
 	Get(context.Context, *SingleRegistrationPlaceRequest) (*RegistrationPlaceProfileResponse, error)
-	Update(context.Context, *UpdateRegistrationPlaceRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleRegistrationPlaceRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateRegistrationPlaceRequest) (*RegistrationPlaceSuccessResponse, error)
+	Delete(context.Context, *SingleRegistrationPlaceRequest) (*RegistrationPlaceSuccessResponse, error)
 	mustEmbedUnimplementedRegistrationPlaceServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedRegistrationPlaceServiceServer) Create(context.Context, *Crea
 func (UnimplementedRegistrationPlaceServiceServer) Get(context.Context, *SingleRegistrationPlaceRequest) (*RegistrationPlaceProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedRegistrationPlaceServiceServer) Update(context.Context, *UpdateRegistrationPlaceRequest) (*SuccessResponse, error) {
+func (UnimplementedRegistrationPlaceServiceServer) Update(context.Context, *UpdateRegistrationPlaceRequest) (*RegistrationPlaceSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedRegistrationPlaceServiceServer) Delete(context.Context, *SingleRegistrationPlaceRequest) (*SuccessResponse, error) {
+func (UnimplementedRegistrationPlaceServiceServer) Delete(context.Context, *SingleRegistrationPlaceRequest) (*RegistrationPlaceSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedRegistrationPlaceServiceServer) mustEmbedUnimplementedRegistrationPlaceServiceServer() {

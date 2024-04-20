@@ -33,8 +33,8 @@ type CountryServiceClient interface {
 	List(ctx context.Context, in *ListCountryRequest, opts ...grpc.CallOption) (*ListCountryResponse, error)
 	Create(ctx context.Context, in *CreateCountryRequest, opts ...grpc.CallOption) (*CountryProfileResponse, error)
 	Get(ctx context.Context, in *SingleCountryRequest, opts ...grpc.CallOption) (*CountryProfileResponse, error)
-	Update(ctx context.Context, in *UpdateCountryRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleCountryRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateCountryRequest, opts ...grpc.CallOption) (*CountrySuccessResponse, error)
+	Delete(ctx context.Context, in *SingleCountryRequest, opts ...grpc.CallOption) (*CountrySuccessResponse, error)
 }
 
 type countryServiceClient struct {
@@ -72,8 +72,8 @@ func (c *countryServiceClient) Get(ctx context.Context, in *SingleCountryRequest
 	return out, nil
 }
 
-func (c *countryServiceClient) Update(ctx context.Context, in *UpdateCountryRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *countryServiceClient) Update(ctx context.Context, in *UpdateCountryRequest, opts ...grpc.CallOption) (*CountrySuccessResponse, error) {
+	out := new(CountrySuccessResponse)
 	err := c.cc.Invoke(ctx, CountryService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *countryServiceClient) Update(ctx context.Context, in *UpdateCountryRequ
 	return out, nil
 }
 
-func (c *countryServiceClient) Delete(ctx context.Context, in *SingleCountryRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *countryServiceClient) Delete(ctx context.Context, in *SingleCountryRequest, opts ...grpc.CallOption) (*CountrySuccessResponse, error) {
+	out := new(CountrySuccessResponse)
 	err := c.cc.Invoke(ctx, CountryService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type CountryServiceServer interface {
 	List(context.Context, *ListCountryRequest) (*ListCountryResponse, error)
 	Create(context.Context, *CreateCountryRequest) (*CountryProfileResponse, error)
 	Get(context.Context, *SingleCountryRequest) (*CountryProfileResponse, error)
-	Update(context.Context, *UpdateCountryRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleCountryRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateCountryRequest) (*CountrySuccessResponse, error)
+	Delete(context.Context, *SingleCountryRequest) (*CountrySuccessResponse, error)
 	mustEmbedUnimplementedCountryServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedCountryServiceServer) Create(context.Context, *CreateCountryR
 func (UnimplementedCountryServiceServer) Get(context.Context, *SingleCountryRequest) (*CountryProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedCountryServiceServer) Update(context.Context, *UpdateCountryRequest) (*SuccessResponse, error) {
+func (UnimplementedCountryServiceServer) Update(context.Context, *UpdateCountryRequest) (*CountrySuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedCountryServiceServer) Delete(context.Context, *SingleCountryRequest) (*SuccessResponse, error) {
+func (UnimplementedCountryServiceServer) Delete(context.Context, *SingleCountryRequest) (*CountrySuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedCountryServiceServer) mustEmbedUnimplementedCountryServiceServer() {}

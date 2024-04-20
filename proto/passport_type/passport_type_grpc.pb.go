@@ -33,8 +33,8 @@ type PassportTypeServiceClient interface {
 	List(ctx context.Context, in *ListPassportTypeRequest, opts ...grpc.CallOption) (*ListPassportTypeResponse, error)
 	Create(ctx context.Context, in *CreatePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeProfileResponse, error)
 	Get(ctx context.Context, in *SinglePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeProfileResponse, error)
-	Update(ctx context.Context, in *UpdatePassportTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SinglePassportTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdatePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeSuccessResponse, error)
+	Delete(ctx context.Context, in *SinglePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeSuccessResponse, error)
 }
 
 type passportTypeServiceClient struct {
@@ -72,8 +72,8 @@ func (c *passportTypeServiceClient) Get(ctx context.Context, in *SinglePassportT
 	return out, nil
 }
 
-func (c *passportTypeServiceClient) Update(ctx context.Context, in *UpdatePassportTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *passportTypeServiceClient) Update(ctx context.Context, in *UpdatePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeSuccessResponse, error) {
+	out := new(PassportTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, PassportTypeService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *passportTypeServiceClient) Update(ctx context.Context, in *UpdatePasspo
 	return out, nil
 }
 
-func (c *passportTypeServiceClient) Delete(ctx context.Context, in *SinglePassportTypeRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *passportTypeServiceClient) Delete(ctx context.Context, in *SinglePassportTypeRequest, opts ...grpc.CallOption) (*PassportTypeSuccessResponse, error) {
+	out := new(PassportTypeSuccessResponse)
 	err := c.cc.Invoke(ctx, PassportTypeService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type PassportTypeServiceServer interface {
 	List(context.Context, *ListPassportTypeRequest) (*ListPassportTypeResponse, error)
 	Create(context.Context, *CreatePassportTypeRequest) (*PassportTypeProfileResponse, error)
 	Get(context.Context, *SinglePassportTypeRequest) (*PassportTypeProfileResponse, error)
-	Update(context.Context, *UpdatePassportTypeRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SinglePassportTypeRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdatePassportTypeRequest) (*PassportTypeSuccessResponse, error)
+	Delete(context.Context, *SinglePassportTypeRequest) (*PassportTypeSuccessResponse, error)
 	mustEmbedUnimplementedPassportTypeServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedPassportTypeServiceServer) Create(context.Context, *CreatePas
 func (UnimplementedPassportTypeServiceServer) Get(context.Context, *SinglePassportTypeRequest) (*PassportTypeProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPassportTypeServiceServer) Update(context.Context, *UpdatePassportTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedPassportTypeServiceServer) Update(context.Context, *UpdatePassportTypeRequest) (*PassportTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedPassportTypeServiceServer) Delete(context.Context, *SinglePassportTypeRequest) (*SuccessResponse, error) {
+func (UnimplementedPassportTypeServiceServer) Delete(context.Context, *SinglePassportTypeRequest) (*PassportTypeSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedPassportTypeServiceServer) mustEmbedUnimplementedPassportTypeServiceServer() {}

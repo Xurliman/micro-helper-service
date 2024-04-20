@@ -33,8 +33,8 @@ type DistrictServiceClient interface {
 	List(ctx context.Context, in *ListDistrictRequest, opts ...grpc.CallOption) (*ListDistrictResponse, error)
 	Create(ctx context.Context, in *CreateDistrictRequest, opts ...grpc.CallOption) (*DistrictProfileResponse, error)
 	Get(ctx context.Context, in *SingleDistrictRequest, opts ...grpc.CallOption) (*DistrictProfileResponse, error)
-	Update(ctx context.Context, in *UpdateDistrictRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleDistrictRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateDistrictRequest, opts ...grpc.CallOption) (*DistrictSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleDistrictRequest, opts ...grpc.CallOption) (*DistrictSuccessResponse, error)
 }
 
 type districtServiceClient struct {
@@ -72,8 +72,8 @@ func (c *districtServiceClient) Get(ctx context.Context, in *SingleDistrictReque
 	return out, nil
 }
 
-func (c *districtServiceClient) Update(ctx context.Context, in *UpdateDistrictRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *districtServiceClient) Update(ctx context.Context, in *UpdateDistrictRequest, opts ...grpc.CallOption) (*DistrictSuccessResponse, error) {
+	out := new(DistrictSuccessResponse)
 	err := c.cc.Invoke(ctx, DistrictService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *districtServiceClient) Update(ctx context.Context, in *UpdateDistrictRe
 	return out, nil
 }
 
-func (c *districtServiceClient) Delete(ctx context.Context, in *SingleDistrictRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *districtServiceClient) Delete(ctx context.Context, in *SingleDistrictRequest, opts ...grpc.CallOption) (*DistrictSuccessResponse, error) {
+	out := new(DistrictSuccessResponse)
 	err := c.cc.Invoke(ctx, DistrictService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type DistrictServiceServer interface {
 	List(context.Context, *ListDistrictRequest) (*ListDistrictResponse, error)
 	Create(context.Context, *CreateDistrictRequest) (*DistrictProfileResponse, error)
 	Get(context.Context, *SingleDistrictRequest) (*DistrictProfileResponse, error)
-	Update(context.Context, *UpdateDistrictRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleDistrictRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateDistrictRequest) (*DistrictSuccessResponse, error)
+	Delete(context.Context, *SingleDistrictRequest) (*DistrictSuccessResponse, error)
 	mustEmbedUnimplementedDistrictServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedDistrictServiceServer) Create(context.Context, *CreateDistric
 func (UnimplementedDistrictServiceServer) Get(context.Context, *SingleDistrictRequest) (*DistrictProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedDistrictServiceServer) Update(context.Context, *UpdateDistrictRequest) (*SuccessResponse, error) {
+func (UnimplementedDistrictServiceServer) Update(context.Context, *UpdateDistrictRequest) (*DistrictSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedDistrictServiceServer) Delete(context.Context, *SingleDistrictRequest) (*SuccessResponse, error) {
+func (UnimplementedDistrictServiceServer) Delete(context.Context, *SingleDistrictRequest) (*DistrictSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedDistrictServiceServer) mustEmbedUnimplementedDistrictServiceServer() {}

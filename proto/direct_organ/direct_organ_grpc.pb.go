@@ -33,8 +33,8 @@ type DirectOrganServiceClient interface {
 	List(ctx context.Context, in *ListDirectOrganRequest, opts ...grpc.CallOption) (*ListDirectOrganResponse, error)
 	Create(ctx context.Context, in *CreateDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganProfileResponse, error)
 	Get(ctx context.Context, in *SingleDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganProfileResponse, error)
-	Update(ctx context.Context, in *UpdateDirectOrganRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleDirectOrganRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganSuccessResponse, error)
 }
 
 type directOrganServiceClient struct {
@@ -72,8 +72,8 @@ func (c *directOrganServiceClient) Get(ctx context.Context, in *SingleDirectOrga
 	return out, nil
 }
 
-func (c *directOrganServiceClient) Update(ctx context.Context, in *UpdateDirectOrganRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *directOrganServiceClient) Update(ctx context.Context, in *UpdateDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganSuccessResponse, error) {
+	out := new(DirectOrganSuccessResponse)
 	err := c.cc.Invoke(ctx, DirectOrganService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *directOrganServiceClient) Update(ctx context.Context, in *UpdateDirectO
 	return out, nil
 }
 
-func (c *directOrganServiceClient) Delete(ctx context.Context, in *SingleDirectOrganRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *directOrganServiceClient) Delete(ctx context.Context, in *SingleDirectOrganRequest, opts ...grpc.CallOption) (*DirectOrganSuccessResponse, error) {
+	out := new(DirectOrganSuccessResponse)
 	err := c.cc.Invoke(ctx, DirectOrganService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type DirectOrganServiceServer interface {
 	List(context.Context, *ListDirectOrganRequest) (*ListDirectOrganResponse, error)
 	Create(context.Context, *CreateDirectOrganRequest) (*DirectOrganProfileResponse, error)
 	Get(context.Context, *SingleDirectOrganRequest) (*DirectOrganProfileResponse, error)
-	Update(context.Context, *UpdateDirectOrganRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleDirectOrganRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateDirectOrganRequest) (*DirectOrganSuccessResponse, error)
+	Delete(context.Context, *SingleDirectOrganRequest) (*DirectOrganSuccessResponse, error)
 	mustEmbedUnimplementedDirectOrganServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedDirectOrganServiceServer) Create(context.Context, *CreateDire
 func (UnimplementedDirectOrganServiceServer) Get(context.Context, *SingleDirectOrganRequest) (*DirectOrganProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedDirectOrganServiceServer) Update(context.Context, *UpdateDirectOrganRequest) (*SuccessResponse, error) {
+func (UnimplementedDirectOrganServiceServer) Update(context.Context, *UpdateDirectOrganRequest) (*DirectOrganSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedDirectOrganServiceServer) Delete(context.Context, *SingleDirectOrganRequest) (*SuccessResponse, error) {
+func (UnimplementedDirectOrganServiceServer) Delete(context.Context, *SingleDirectOrganRequest) (*DirectOrganSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedDirectOrganServiceServer) mustEmbedUnimplementedDirectOrganServiceServer() {}

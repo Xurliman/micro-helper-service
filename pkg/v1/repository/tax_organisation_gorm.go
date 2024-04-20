@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type TaxOrganisationRepo struct {
 	db *gorm.DB
+}
+
+func NewTaxOrganisation(db *gorm.DB) interfaces.TaxOrganisationRepoInterface {
+	return &TaxOrganisationRepo{db: db}
 }
 
 func (repo *TaxOrganisationRepo) Create(taxOrganisation models.TaxOrganisation) (models.TaxOrganisation, error) {

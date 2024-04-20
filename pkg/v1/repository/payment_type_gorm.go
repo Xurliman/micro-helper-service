@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type PaymentTypeRepo struct {
 	db *gorm.DB
+}
+
+func NewPaymentType(db *gorm.DB) interfaces.PaymentTypeRepoInterface {
+	return &PaymentTypeRepo{db: db}
 }
 
 func (repo *PaymentTypeRepo) Create(paymentType models.PaymentType) (models.PaymentType, error) {

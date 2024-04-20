@@ -33,8 +33,8 @@ type NationalEconomySectorOldServiceClient interface {
 	List(ctx context.Context, in *ListNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*ListNationalEconomySectorOldResponse, error)
 	Create(ctx context.Context, in *CreateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
 	Get(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldProfileResponse, error)
-	Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldSuccessResponse, error)
 }
 
 type nationalEconomySectorOldServiceClient struct {
@@ -72,8 +72,8 @@ func (c *nationalEconomySectorOldServiceClient) Get(ctx context.Context, in *Sin
 	return out, nil
 }
 
-func (c *nationalEconomySectorOldServiceClient) Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *nationalEconomySectorOldServiceClient) Update(ctx context.Context, in *UpdateNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldSuccessResponse, error) {
+	out := new(NationalEconomySectorOldSuccessResponse)
 	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *nationalEconomySectorOldServiceClient) Update(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *nationalEconomySectorOldServiceClient) Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *nationalEconomySectorOldServiceClient) Delete(ctx context.Context, in *SingleNationalEconomySectorOldRequest, opts ...grpc.CallOption) (*NationalEconomySectorOldSuccessResponse, error) {
+	out := new(NationalEconomySectorOldSuccessResponse)
 	err := c.cc.Invoke(ctx, NationalEconomySectorOldService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type NationalEconomySectorOldServiceServer interface {
 	List(context.Context, *ListNationalEconomySectorOldRequest) (*ListNationalEconomySectorOldResponse, error)
 	Create(context.Context, *CreateNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
 	Get(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error)
-	Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*NationalEconomySectorOldSuccessResponse, error)
+	Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldSuccessResponse, error)
 	mustEmbedUnimplementedNationalEconomySectorOldServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedNationalEconomySectorOldServiceServer) Create(context.Context
 func (UnimplementedNationalEconomySectorOldServiceServer) Get(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedNationalEconomySectorOldServiceServer) Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*SuccessResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Update(context.Context, *UpdateNationalEconomySectorOldRequest) (*NationalEconomySectorOldSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedNationalEconomySectorOldServiceServer) Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*SuccessResponse, error) {
+func (UnimplementedNationalEconomySectorOldServiceServer) Delete(context.Context, *SingleNationalEconomySectorOldRequest) (*NationalEconomySectorOldSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedNationalEconomySectorOldServiceServer) mustEmbedUnimplementedNationalEconomySectorOldServiceServer() {

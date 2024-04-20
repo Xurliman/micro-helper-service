@@ -5,8 +5,8 @@ service DirectOrganService {
   rpc List(ListDirectOrganRequest) returns (ListDirectOrganResponse);
   rpc Create(CreateDirectOrganRequest) returns (DirectOrganProfileResponse);
   rpc Get(SingleDirectOrganRequest) returns (DirectOrganProfileResponse);
-  rpc Update(UpdateDirectOrganRequest) returns (SuccessResponse);
-  rpc Delete(SingleDirectOrganRequest) returns (SuccessResponse);
+  rpc Update(UpdateDirectOrganRequest) returns (DirectOrganSuccessResponse);
+  rpc Delete(SingleDirectOrganRequest) returns (DirectOrganSuccessResponse);
 }
 
 message ListDirectOrganRequest {
@@ -47,7 +47,7 @@ message DirectOrganProfileResponse{
   string deleted_at = 9;
 }
 
-message SuccessResponse{
+message DirectOrganSuccessResponse{
   string response = 1;
 }
 

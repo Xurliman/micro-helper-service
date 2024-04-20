@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type NationalEconomySectorNewRepo struct {
 	db *gorm.DB
+}
+
+func NewNationalEconomySectorNew(db *gorm.DB) interfaces.NationalEconomySectorNewRepoInterface {
+	return &NationalEconomySectorNewRepo{db: db}
 }
 
 func (repo *NationalEconomySectorNewRepo) Create(nationalEconomySectorNew models.NationalEconomySectorNew) (models.NationalEconomySectorNew, error) {

@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type CountryRepo struct {
 	db *gorm.DB
+}
+
+func NewCountry(db *gorm.DB) interfaces.CountryRepoInterface {
+	return &CountryRepo{db: db}
 }
 
 func (repo *CountryRepo) Create(country models.Country) (models.Country, error) {

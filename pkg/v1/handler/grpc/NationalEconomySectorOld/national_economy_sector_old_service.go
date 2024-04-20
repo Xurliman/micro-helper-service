@@ -15,9 +15,10 @@ type NationalEconomySectorOldService struct {
 	proto.UnimplementedNationalEconomySectorOldServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, nationalEconomySectorOldCase interfaces.NationalEconomySectorOldCaseInterface) {
+func NewServer(grpcServer *grpc.Server, nationalEconomySectorOldCase interfaces.NationalEconomySectorOldCaseInterface) *NationalEconomySectorOldService {
 	nationalEconomySectorOldGrpc := &NationalEconomySectorOldService{nationalEconomySectorOldCase: nationalEconomySectorOldCase}
 	proto.RegisterNationalEconomySectorOldServiceServer(grpcServer, nationalEconomySectorOldGrpc)
+	return nationalEconomySectorOldGrpc
 }
 
 func (service *NationalEconomySectorOldService) Create(context context.Context, request *proto.CreateNationalEconomySectorOldRequest) (*proto.NationalEconomySectorOldProfileResponse, error) {

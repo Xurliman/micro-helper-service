@@ -5,8 +5,8 @@ service CountryService {
   rpc List(ListCountryRequest) returns (ListCountryResponse);
   rpc Create(CreateCountryRequest) returns (CountryProfileResponse);
   rpc Get(SingleCountryRequest) returns (CountryProfileResponse);
-  rpc Update(UpdateCountryRequest) returns (SuccessResponse);
-  rpc Delete(SingleCountryRequest) returns (SuccessResponse);
+  rpc Update(UpdateCountryRequest) returns (CountrySuccessResponse);
+  rpc Delete(SingleCountryRequest) returns (CountrySuccessResponse);
 }
 
 message ListCountryRequest {
@@ -53,7 +53,7 @@ message CountryProfileResponse{
   string deleted_at = 12;
 }
 
-message SuccessResponse{
+message CountrySuccessResponse{
   string response = 1;
 }
 

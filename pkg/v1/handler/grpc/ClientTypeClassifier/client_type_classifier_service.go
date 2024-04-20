@@ -15,9 +15,10 @@ type ClientTypeClassifierService struct {
 	proto.UnimplementedClientTypeClassifierServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, classifierCase interfaces.ClientTypeClassifierCaseInterface) {
+func NewServer(grpcServer *grpc.Server, classifierCase interfaces.ClientTypeClassifierCaseInterface) *ClientTypeClassifierService {
 	classifierGrpc := &ClientTypeClassifierService{classifierCase: classifierCase}
 	proto.RegisterClientTypeClassifierServiceServer(grpcServer, classifierGrpc)
+	return classifierGrpc
 }
 
 func (service *ClientTypeClassifierService) Create(context context.Context, request *proto.CreateClientTypeClassifierRequest) (*proto.ClientTypeClassifierProfileResponse, error) {

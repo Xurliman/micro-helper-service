@@ -5,8 +5,8 @@ service BorrowerTypeService {
   rpc List(ListBorrowerTypeRequest) returns (ListBorrowerTypeResponse);
   rpc Create(CreateBorrowerTypeRequest) returns (BorrowerTypeProfileResponse);
   rpc Get(SingleBorrowerTypeRequest) returns (BorrowerTypeProfileResponse);
-  rpc Update(UpdateBorrowerTypeRequest) returns (SuccessResponse);
-  rpc Delete(SingleBorrowerTypeRequest) returns (SuccessResponse);
+  rpc Update(UpdateBorrowerTypeRequest) returns (BorrowerTypeSuccessResponse);
+  rpc Delete(SingleBorrowerTypeRequest) returns (BorrowerTypeSuccessResponse);
 }
 
 message ListBorrowerTypeRequest {
@@ -50,7 +50,7 @@ message BorrowerTypeProfileResponse {
   string deleted_at = 10;
 }
 
-message SuccessResponse {
+message BorrowerTypeSuccessResponse {
   string response = 1;
 }
 

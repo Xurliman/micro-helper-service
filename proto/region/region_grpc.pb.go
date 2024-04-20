@@ -33,8 +33,8 @@ type RegionServiceClient interface {
 	List(ctx context.Context, in *ListRegionRequest, opts ...grpc.CallOption) (*ListRegionResponse, error)
 	Create(ctx context.Context, in *CreateRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error)
 	Get(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionProfileResponse, error)
-	Update(ctx context.Context, in *UpdateRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateRegionRequest, opts ...grpc.CallOption) (*RegionSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionSuccessResponse, error)
 }
 
 type regionServiceClient struct {
@@ -72,8 +72,8 @@ func (c *regionServiceClient) Get(ctx context.Context, in *SingleRegionRequest, 
 	return out, nil
 }
 
-func (c *regionServiceClient) Update(ctx context.Context, in *UpdateRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *regionServiceClient) Update(ctx context.Context, in *UpdateRegionRequest, opts ...grpc.CallOption) (*RegionSuccessResponse, error) {
+	out := new(RegionSuccessResponse)
 	err := c.cc.Invoke(ctx, RegionService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *regionServiceClient) Update(ctx context.Context, in *UpdateRegionReques
 	return out, nil
 }
 
-func (c *regionServiceClient) Delete(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *regionServiceClient) Delete(ctx context.Context, in *SingleRegionRequest, opts ...grpc.CallOption) (*RegionSuccessResponse, error) {
+	out := new(RegionSuccessResponse)
 	err := c.cc.Invoke(ctx, RegionService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type RegionServiceServer interface {
 	List(context.Context, *ListRegionRequest) (*ListRegionResponse, error)
 	Create(context.Context, *CreateRegionRequest) (*RegionProfileResponse, error)
 	Get(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error)
-	Update(context.Context, *UpdateRegionRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleRegionRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateRegionRequest) (*RegionSuccessResponse, error)
+	Delete(context.Context, *SingleRegionRequest) (*RegionSuccessResponse, error)
 	mustEmbedUnimplementedRegionServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedRegionServiceServer) Create(context.Context, *CreateRegionReq
 func (UnimplementedRegionServiceServer) Get(context.Context, *SingleRegionRequest) (*RegionProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedRegionServiceServer) Update(context.Context, *UpdateRegionRequest) (*SuccessResponse, error) {
+func (UnimplementedRegionServiceServer) Update(context.Context, *UpdateRegionRequest) (*RegionSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedRegionServiceServer) Delete(context.Context, *SingleRegionRequest) (*SuccessResponse, error) {
+func (UnimplementedRegionServiceServer) Delete(context.Context, *SingleRegionRequest) (*RegionSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedRegionServiceServer) mustEmbedUnimplementedRegionServiceServer() {}

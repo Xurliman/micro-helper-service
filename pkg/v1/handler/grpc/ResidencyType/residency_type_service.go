@@ -15,9 +15,10 @@ type ResidencyTypeService struct {
 	proto.UnimplementedResidencyTypeServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, residencyTypeCase interfaces.ResidencyTypeCaseInterface) {
+func NewServer(grpcServer *grpc.Server, residencyTypeCase interfaces.ResidencyTypeCaseInterface) *ResidencyTypeService {
 	residencyTypeGrpc := &ResidencyTypeService{residencyTypeCase: residencyTypeCase}
 	proto.RegisterResidencyTypeServiceServer(grpcServer, residencyTypeGrpc)
+	return residencyTypeGrpc
 }
 
 func (service *ResidencyTypeService) Create(context context.Context, request *proto.CreateResidencyTypeRequest) (*proto.ResidencyTypeProfileResponse, error) {

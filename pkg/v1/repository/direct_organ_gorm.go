@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type DirectOrganRepo struct {
 	db *gorm.DB
+}
+
+func NewDirectOrgan(db *gorm.DB) interfaces.DirectOrganRepoInterface {
+	return &DirectOrganRepo{db: db}
 }
 
 func (repo *DirectOrganRepo) Create(directOrgan models.DirectOrgan) (models.DirectOrgan, error) {

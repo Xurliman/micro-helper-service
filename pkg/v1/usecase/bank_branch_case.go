@@ -13,6 +13,10 @@ type BankBranchCase struct {
 	repo interfaces.BankBranchRepoInterface
 }
 
+func NewBankBranch(repo interfaces.BankBranchRepoInterface) interfaces.BankBranchCaseInterface {
+	return &BankBranchCase{repo: repo}
+}
+
 func (bankBranchCase BankBranchCase) Create(bankBranch models.BankBranch) (models.BankBranch, error) {
 	if _, err := bankBranchCase.repo.GetByCode(bankBranch.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.BankBranch{}, errors.New("the code has already been taken")

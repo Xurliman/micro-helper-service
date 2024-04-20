@@ -13,6 +13,10 @@ type RegistrationPlaceCase struct {
 	repo interfaces.RegistrationPlaceRepoInterface
 }
 
+func NewRegistrationPlace(repo interfaces.RegistrationPlaceRepoInterface) interfaces.RegistrationPlaceCaseInterface {
+	return &RegistrationPlaceCase{repo: repo}
+}
+
 func (registrationPlaceCase RegistrationPlaceCase) Create(registrationPlace models.RegistrationPlace) (models.RegistrationPlace, error) {
 	if _, err := registrationPlaceCase.repo.GetByCode(registrationPlace.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.RegistrationPlace{}, errors.New("the code has already been taken")

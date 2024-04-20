@@ -5,8 +5,8 @@ service ResidencyTypeService {
   rpc List(ListResidencyTypeRequest) returns (ListResidencyTypeResponse);
   rpc Create(CreateResidencyTypeRequest) returns (ResidencyTypeProfileResponse);
   rpc Get(SingleResidencyTypeRequest) returns (ResidencyTypeProfileResponse);
-  rpc Update(UpdateResidencyTypeRequest) returns (SuccessResponse);
-  rpc Delete(SingleResidencyTypeRequest) returns (SuccessResponse);
+  rpc Update(UpdateResidencyTypeRequest) returns (ResidencyTypeSuccessResponse);
+  rpc Delete(SingleResidencyTypeRequest) returns (ResidencyTypeSuccessResponse);
 }
 
 message ListResidencyTypeRequest {
@@ -45,7 +45,7 @@ message ResidencyTypeProfileResponse {
   string deleted_at = 8;
 }
 
-message SuccessResponse {
+message ResidencyTypeSuccessResponse {
   string response = 1;
 }
 

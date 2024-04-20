@@ -33,8 +33,8 @@ type TaxOrganisationServiceClient interface {
 	List(ctx context.Context, in *ListTaxOrganisationRequest, opts ...grpc.CallOption) (*ListTaxOrganisationResponse, error)
 	Create(ctx context.Context, in *CreateTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationProfileResponse, error)
 	Get(ctx context.Context, in *SingleTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationProfileResponse, error)
-	Update(ctx context.Context, in *UpdateTaxOrganisationRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	Delete(ctx context.Context, in *SingleTaxOrganisationRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Update(ctx context.Context, in *UpdateTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationSuccessResponse, error)
+	Delete(ctx context.Context, in *SingleTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationSuccessResponse, error)
 }
 
 type taxOrganisationServiceClient struct {
@@ -72,8 +72,8 @@ func (c *taxOrganisationServiceClient) Get(ctx context.Context, in *SingleTaxOrg
 	return out, nil
 }
 
-func (c *taxOrganisationServiceClient) Update(ctx context.Context, in *UpdateTaxOrganisationRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *taxOrganisationServiceClient) Update(ctx context.Context, in *UpdateTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationSuccessResponse, error) {
+	out := new(TaxOrganisationSuccessResponse)
 	err := c.cc.Invoke(ctx, TaxOrganisationService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *taxOrganisationServiceClient) Update(ctx context.Context, in *UpdateTax
 	return out, nil
 }
 
-func (c *taxOrganisationServiceClient) Delete(ctx context.Context, in *SingleTaxOrganisationRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	out := new(SuccessResponse)
+func (c *taxOrganisationServiceClient) Delete(ctx context.Context, in *SingleTaxOrganisationRequest, opts ...grpc.CallOption) (*TaxOrganisationSuccessResponse, error) {
+	out := new(TaxOrganisationSuccessResponse)
 	err := c.cc.Invoke(ctx, TaxOrganisationService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,8 +97,8 @@ type TaxOrganisationServiceServer interface {
 	List(context.Context, *ListTaxOrganisationRequest) (*ListTaxOrganisationResponse, error)
 	Create(context.Context, *CreateTaxOrganisationRequest) (*TaxOrganisationProfileResponse, error)
 	Get(context.Context, *SingleTaxOrganisationRequest) (*TaxOrganisationProfileResponse, error)
-	Update(context.Context, *UpdateTaxOrganisationRequest) (*SuccessResponse, error)
-	Delete(context.Context, *SingleTaxOrganisationRequest) (*SuccessResponse, error)
+	Update(context.Context, *UpdateTaxOrganisationRequest) (*TaxOrganisationSuccessResponse, error)
+	Delete(context.Context, *SingleTaxOrganisationRequest) (*TaxOrganisationSuccessResponse, error)
 	mustEmbedUnimplementedTaxOrganisationServiceServer()
 }
 
@@ -115,10 +115,10 @@ func (UnimplementedTaxOrganisationServiceServer) Create(context.Context, *Create
 func (UnimplementedTaxOrganisationServiceServer) Get(context.Context, *SingleTaxOrganisationRequest) (*TaxOrganisationProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedTaxOrganisationServiceServer) Update(context.Context, *UpdateTaxOrganisationRequest) (*SuccessResponse, error) {
+func (UnimplementedTaxOrganisationServiceServer) Update(context.Context, *UpdateTaxOrganisationRequest) (*TaxOrganisationSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedTaxOrganisationServiceServer) Delete(context.Context, *SingleTaxOrganisationRequest) (*SuccessResponse, error) {
+func (UnimplementedTaxOrganisationServiceServer) Delete(context.Context, *SingleTaxOrganisationRequest) (*TaxOrganisationSuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedTaxOrganisationServiceServer) mustEmbedUnimplementedTaxOrganisationServiceServer() {

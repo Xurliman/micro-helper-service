@@ -15,9 +15,10 @@ type PassportTypeService struct {
 	proto.UnimplementedPassportTypeServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, passportTypeCase interfaces.PassportTypeCaseInterface) {
+func NewServer(grpcServer *grpc.Server, passportTypeCase interfaces.PassportTypeCaseInterface) *PassportTypeService {
 	passportTypeGrpc := &PassportTypeService{passportTypeCase: passportTypeCase}
 	proto.RegisterPassportTypeServiceServer(grpcServer, passportTypeGrpc)
+	return passportTypeGrpc
 }
 
 func (service *PassportTypeService) Create(context context.Context, request *proto.CreatePassportTypeRequest) (*proto.PassportTypeProfileResponse, error) {

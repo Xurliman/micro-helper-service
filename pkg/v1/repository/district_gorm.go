@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type DistrictRepo struct {
 	db *gorm.DB
+}
+
+func NewDistrict(db *gorm.DB) interfaces.DistrictRepoInterface {
+	return &DistrictRepo{db: db}
 }
 
 func (repo *DistrictRepo) Create(district models.District) (models.District, error) {

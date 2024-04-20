@@ -15,9 +15,10 @@ type BorrowerTypeService struct {
 	proto.UnimplementedBorrowerTypeServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, borrowerTypeCase interfaces.BorrowerTypeCaseInterface) {
+func NewServer(grpcServer *grpc.Server, borrowerTypeCase interfaces.BorrowerTypeCaseInterface) *BorrowerTypeService {
 	borrowerTypeGrpc := &BorrowerTypeService{borrowerTypeCase: borrowerTypeCase}
 	proto.RegisterBorrowerTypeServiceServer(grpcServer, borrowerTypeGrpc)
+	return borrowerTypeGrpc
 }
 
 func (service *BorrowerTypeService) Create(context context.Context, request *proto.CreateBorrowerTypeRequest) (*proto.BorrowerTypeProfileResponse, error) {

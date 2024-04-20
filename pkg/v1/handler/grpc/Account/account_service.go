@@ -15,9 +15,10 @@ type AccountService struct {
 	proto.UnimplementedAccountServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, accountCase interfaces.AccountCaseInterface) {
+func NewServer(grpcServer *grpc.Server, accountCase interfaces.AccountCaseInterface) *AccountService {
 	accountGrpc := &AccountService{accountCase: accountCase}
 	proto.RegisterAccountServiceServer(grpcServer, accountGrpc)
+	return accountGrpc
 }
 
 func (service *AccountService) Create(context context.Context, request *proto.CreateAccountRequest) (*proto.AccountProfileResponse, error) {

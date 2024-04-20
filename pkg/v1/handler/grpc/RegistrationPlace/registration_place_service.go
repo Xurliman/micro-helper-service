@@ -15,9 +15,10 @@ type RegistrationPlaceService struct {
 	proto.UnimplementedRegistrationPlaceServiceServer
 }
 
-func NewServer(grpcServer *grpc.Server, registrationPlaceCase interfaces.RegistrationPlaceCaseInterface) {
+func NewServer(grpcServer *grpc.Server, registrationPlaceCase interfaces.RegistrationPlaceCaseInterface) *RegistrationPlaceService {
 	registrationPlaceGrpc := &RegistrationPlaceService{registrationPlaceCase: registrationPlaceCase}
 	proto.RegisterRegistrationPlaceServiceServer(grpcServer, registrationPlaceGrpc)
+	return registrationPlaceGrpc
 }
 
 func (service *RegistrationPlaceService) Create(context context.Context, request *proto.CreateRegistrationPlaceRequest) (*proto.RegistrationPlaceProfileResponse, error) {

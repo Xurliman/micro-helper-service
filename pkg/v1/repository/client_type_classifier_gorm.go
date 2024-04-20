@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type ClientTypeClassifierRepo struct {
 	db *gorm.DB
+}
+
+func NewClientTypeClassifier(db *gorm.DB) interfaces.ClientTypeClassifierRepoInterface {
+	return &ClientTypeClassifierRepo{db: db}
 }
 
 func (repo *ClientTypeClassifierRepo) Create(classifier models.ClientTypeClassifier) (models.ClientTypeClassifier, error) {

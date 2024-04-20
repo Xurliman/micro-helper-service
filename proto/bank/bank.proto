@@ -5,8 +5,8 @@ service BankService {
   rpc List(ListBankRequest) returns (ListBankResponse);
   rpc Create(CreateBankRequest) returns (BankProfileResponse);
   rpc Get(SingleBankRequest) returns (BankProfileResponse);
-  rpc Update(UpdateBankRequest) returns (SuccessResponse);
-  rpc Delete(SingleBankRequest) returns (SuccessResponse);
+  rpc Update(UpdateBankRequest) returns (BankSuccessResponse);
+  rpc Delete(SingleBankRequest) returns (BankSuccessResponse);
 }
 
 message ListBankRequest {
@@ -51,7 +51,7 @@ message BankProfileResponse{
   string deleted_at = 11;
 }
 
-message SuccessResponse{
+message BankSuccessResponse{
   string response = 1;
 }
 

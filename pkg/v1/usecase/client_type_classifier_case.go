@@ -13,6 +13,10 @@ type ClientTypeClassifierCase struct {
 	repo interfaces.ClientTypeClassifierRepoInterface
 }
 
+func NewClientTypeClassifier(repo interfaces.ClientTypeClassifierRepoInterface) interfaces.ClientTypeClassifierCaseInterface {
+	return &ClientTypeClassifierCase{repo: repo}
+}
+
 func (classifierCase *ClientTypeClassifierCase) Create(classifier models.ClientTypeClassifier) (models.ClientTypeClassifier, error) {
 	if _, err := classifierCase.repo.GetByCode(classifier.Code); !errors.Is(err, gorm.ErrRecordNotFound) {
 		return models.ClientTypeClassifier{}, errors.New("the code has already been taken")

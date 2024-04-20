@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type RegistrationPlaceRepo struct {
 	db *gorm.DB
+}
+
+func NewRegistrationPlace(db *gorm.DB) interfaces.RegistrationPlaceRepoInterface {
+	return &RegistrationPlaceRepo{db: db}
 }
 
 func (repo *RegistrationPlaceRepo) Create(registrationPlace models.RegistrationPlace) (models.RegistrationPlace, error) {

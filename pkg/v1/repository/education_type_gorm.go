@@ -2,12 +2,17 @@ package repository
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type EducationTypeRepo struct {
 	db *gorm.DB
+}
+
+func NewEducationType(db *gorm.DB) interfaces.EducationTypeRepoInterface {
+	return &EducationTypeRepo{db: db}
 }
 
 func (repo *EducationTypeRepo) Create(educationType models.EducationType) (models.EducationType, error) {

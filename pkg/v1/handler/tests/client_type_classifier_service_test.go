@@ -4,11 +4,15 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/client_type_classifier"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -32,17 +36,17 @@ func TestCreateClientTypeClassifier(t *testing.T) {
 	clientTypeClassifier := proto.NewClientTypeClassifierServiceClient(conn)
 
 	request := &proto.CreateClientTypeClassifierRequest{
-		Code:             "12345",
-		Name:             "test",
-		ShortName:        "test",
-		ClientType:       545,
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		CbuReferenceKey:  879,
-		OldCode:          474,
-		OldName:          "2024-03-20",
-		NameUz:           "23",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		ShortName:        faker.LastName(),
+		ClientType:       rand2.Int32(),
+		ActivationDate:   faker.MacAddress(),
+		DeactivationDate: faker.MacAddress(),
+		CbuReferenceKey:  rand2.Int32(),
+		OldCode:          rand2.Int32(),
+		OldName:          faker.MacAddress(),
+		NameUz:           faker.Word(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := clientTypeClassifier.Create(context.Background(), request)

@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/account"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateAccount(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,10 +35,10 @@ func TestCreateAccount(t *testing.T) {
 	account := proto.NewAccountServiceClient(conn)
 
 	request := &proto.CreateAccountRequest{
-		Code:        "sjalksjalkj",
-		Name:        "test",
-		Description: "Kolner Str. 200",
-		FlexFinId:   "23",
+		Code:        faker.Word(),
+		Name:        faker.Name(),
+		Description: faker.MacAddress(),
+		FlexFinId:   strconv.Itoa(rand.Int()),
 	}
 
 	res, err := account.Create(context.Background(), request)

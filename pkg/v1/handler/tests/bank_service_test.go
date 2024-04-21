@@ -4,11 +4,14 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/bank"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -32,15 +35,15 @@ func TestCreateBank(t *testing.T) {
 	bank := proto.NewBankServiceClient(conn)
 
 	request := &proto.CreateBankRequest{
-		Code:             "12345",
-		Name:             "test",
-		ShortName:        "tt",
-		CountryId:        1,
-		OpenDate:         "2024-02-20",
-		CloseDate:        "2024-03-20",
-		ActivationDate:   "2024-02-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "2024-03-20",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		ShortName:        faker.LastName(),
+		CountryId:        int64(rand.Int()),
+		OpenDate:         faker.Date(),
+		CloseDate:        faker.Date(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := bank.Create(context.Background(), request)

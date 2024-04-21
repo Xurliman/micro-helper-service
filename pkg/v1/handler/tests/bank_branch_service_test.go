@@ -4,11 +4,14 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/bank_branch"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -32,17 +35,17 @@ func TestCreateBankBranch(t *testing.T) {
 	bankBranch := proto.NewBankBranchServiceClient(conn)
 
 	request := &proto.CreateBankBranchRequest{
-		Code:             "12345",
-		Name:             "test",
-		BankId:           1,
-		RegionId:         1,
-		DistrictId:       1,
-		Address:          "Kolner Str. 200",
-		OpenDate:         "2024-02-20",
-		CloseDate:        "2024-03-20",
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		BankId:           int64(rand.Int()),
+		RegionId:         int64(rand.Int()),
+		DistrictId:       int64(rand.Int()),
+		Address:          faker.MacAddress(),
+		OpenDate:         faker.Date(),
+		CloseDate:        faker.Date(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := bankBranch.Create(context.Background(), request)

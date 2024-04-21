@@ -4,11 +4,15 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/country"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -32,16 +36,16 @@ func TestCreateCountry(t *testing.T) {
 	country := proto.NewCountryServiceClient(conn)
 
 	request := &proto.CreateCountryRequest{
-		Code:             "12345",
-		Name:             "test",
-		ShortName:        "tt",
-		CurrencyId:       1,
-		CodeAlpha2:       "Kolner Str. 200",
-		CodeAlpha3:       "2024-02-20",
-		TerritoryCode:    2024,
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		ShortName:        faker.Name(),
+		CurrencyId:       rand2.Int64(),
+		CodeAlpha2:       faker.Word(),
+		CodeAlpha3:       faker.Word(),
+		TerritoryCode:    rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := country.Create(context.Background(), request)

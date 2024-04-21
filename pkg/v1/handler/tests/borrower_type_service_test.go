@@ -4,11 +4,14 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/borrower_type"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -32,14 +35,14 @@ func TestCreateBorrowerType(t *testing.T) {
 	borrowerType := proto.NewBorrowerTypeServiceClient(conn)
 
 	request := &proto.CreateBorrowerTypeRequest{
-		Code:             "12345",
-		Name:             "test",
-		OldCode:          "2024-02-20",
-		OldName:          "2024-03-20",
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
-		NameUz:           "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		OldName:          faker.Name(),
+		OldCode:          faker.Name(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
+		NameUz:           faker.Name(),
 	}
 
 	res, err := borrowerType.Create(context.Background(), request)

@@ -1,8 +1,10 @@
 package database
 
 import (
+	"flag"
 	"fmt"
 	"github.com/Xurliman/banking-microservice/internal/models"
+	"github.com/Xurliman/banking-microservice/seeds"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -31,8 +33,21 @@ func DbConn() *gorm.DB {
 		log.Fatalf("There was error connecting to the database: %v", err)
 	}
 	DB = db
-	AutoMigrate(db)
+	//AutoMigrate(db)
+	Seeder(db)
 	return DB
+}
+
+func Seeder(db *gorm.DB) {
+	flag.Parse()
+	arguments := flag.Args()
+
+	if len(arguments) >= 1 {
+		switch arguments[0] {
+		case "seed":
+			seeds.Execute(db, arguments[1:]...)
+		}
+	}
 }
 
 func AutoMigrate(connection *gorm.DB) {

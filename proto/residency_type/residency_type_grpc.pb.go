@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: residency_type.proto
+// source: residency_type/residency_type.proto
 
 package proto_residency_type
 
@@ -253,5 +253,5 @@ var ResidencyTypeService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "residency_type.proto",
+	Metadata: "residency_type/residency_type.proto",
 }

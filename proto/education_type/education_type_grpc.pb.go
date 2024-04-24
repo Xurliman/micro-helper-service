@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: education_type.proto
+// source: education_type/education_type.proto
 
 package proto_education_type
 
@@ -253,5 +253,5 @@ var EducationTypeService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "education_type.proto",
+	Metadata: "education_type/education_type.proto",
 }

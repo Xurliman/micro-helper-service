@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: client_type_classifier.proto
+// source: client_type_classifier/client_type_classifier.proto
 
 package proto_client_type_classifier
 
@@ -254,5 +254,5 @@ var ClientTypeClassifierService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "client_type_classifier.proto",
+	Metadata: "client_type_classifier/client_type_classifier.proto",
 }

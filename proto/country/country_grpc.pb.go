@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: country.proto
+// source: country/country.proto
 
 package proto_country
 
@@ -253,5 +253,5 @@ var CountryService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "country.proto",
+	Metadata: "country/country.proto",
 }

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: borrower_type.proto
+// source: borrower_type/borrower_type.proto
 
 package proto_borrower_type
 
@@ -253,5 +253,5 @@ var BorrowerTypeService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "borrower_type.proto",
+	Metadata: "borrower_type/borrower_type.proto",
 }

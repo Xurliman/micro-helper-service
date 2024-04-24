@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: district.proto
+// source: district/district.proto
 
 package proto_district
 
@@ -253,5 +253,5 @@ var DistrictService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "district.proto",
+	Metadata: "district/district.proto",
 }

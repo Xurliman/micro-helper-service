@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: tax_organisation.proto
+// source: tax_organisation/tax_organisation.proto
 
 package proto_tax_organisation
 
@@ -254,5 +254,5 @@ var TaxOrganisationService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "tax_organisation.proto",
+	Metadata: "tax_organisation/tax_organisation.proto",
 }

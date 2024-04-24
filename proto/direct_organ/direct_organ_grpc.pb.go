@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: direct_organ.proto
+// source: direct_organ/direct_organ.proto
 
 package proto_direct_organ
 
@@ -253,5 +253,5 @@ var DirectOrganService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "direct_organ.proto",
+	Metadata: "direct_organ/direct_organ.proto",
 }

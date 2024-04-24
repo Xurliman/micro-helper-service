@@ -17,10 +17,10 @@ proto: $(PROTO_FILE_NAMES)
 $(PROTO_FILE_NAMES):
 	@echo "Generating Protocol Buffer files for $(@)..."
 	protoc \
-	--proto_path=proto/$(@) \
-    --go_out=proto/$(@) \
+	--proto_path=proto/ \
+    --go_out=proto/ \
     --go_opt=paths=source_relative proto/$(@)/$(@).proto \
-    --go-grpc_out=proto/$(@) \
+    --go-grpc_out=proto/ \
     --go-grpc_opt=paths=source_relative proto/$(@)/$(@).proto
 
 clean:

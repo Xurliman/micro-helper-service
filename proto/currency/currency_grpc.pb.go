@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: currency.proto
+// source: currency/currency.proto
 
 package proto_currency
 
@@ -253,5 +253,5 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "currency.proto",
+	Metadata: "currency/currency.proto",
 }

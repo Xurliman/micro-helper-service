@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: registration_place.proto
+// source: registration_place/registration_place.proto
 
 package proto_registration_place
 
@@ -254,5 +254,5 @@ var RegistrationPlaceService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "registration_place.proto",
+	Metadata: "registration_place/registration_place.proto",
 }

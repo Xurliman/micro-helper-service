@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.21.12
-// source: national_economy_sector_old.proto
+// source: national_economy_sector_old/national_economy_sector_old.proto
 
 package proto_national_economy_sector_old
 
@@ -254,5 +254,5 @@ var NationalEconomySectorOldService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "national_economy_sector_old.proto",
+	Metadata: "national_economy_sector_old/national_economy_sector_old.proto",
 }

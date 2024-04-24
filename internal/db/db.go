@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Xurliman/banking-microservice/internal/models"
-	"github.com/Xurliman/banking-microservice/seeds"
+	"github.com/Xurliman/banking-microservice/seeders"
 	"github.com/joho/godotenv"
 	"log"
 	"os"

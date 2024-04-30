@@ -4,16 +4,20 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/district"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateDistrict(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,14 +36,14 @@ func TestCreateDistrict(t *testing.T) {
 	district := proto.NewDistrictServiceClient(conn)
 
 	request := &proto.CreateDistrictRequest{
-		Code:             "12345",
-		Name:             "test",
-		RegionId:         1,
-		OldCode:          2024,
-		OldName:          "2024",
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		RegionId:         rand2.Int64(),
+		OldName:          faker.Name(),
+		OldCode:          rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := district.Create(context.Background(), request)

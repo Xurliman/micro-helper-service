@@ -4,16 +4,18 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/region"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	rand2 "math/rand/v2"
 	"os"
 	"testing"
 )
 
 func TestCreateRegion(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,12 +34,12 @@ func TestCreateRegion(t *testing.T) {
 	country := proto.NewRegionServiceClient(conn)
 
 	request := &proto.CreateRegionRequest{
-		Code:             "12345",
-		Name:             "test",
-		CountryId:        1,
-		ActivationDate:   "2024-02-20",
-		DeactivationDate: "2024-03-20",
-		OldName:          "Kolner Str. 200",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		CountryId:        rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		OldName:          faker.Name(),
 	}
 
 	res, err := country.Create(context.Background(), request)

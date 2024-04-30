@@ -6,8 +6,16 @@ PROTO_FILES := $(shell find $(PROTO_SRC_DIR) -name '*.proto')
 GENERATED_PROTO_FILES := $(shell find $(PROTO_SRC_DIR) -name '*.pb.go')
 PROTO_FILE_NAMES := $(foreach proto_dir,$(sort $(dir $(PROTO_FILES))),$(proto_dir:proto/%/=%))
 
+test := internal/seeders/bank_seeder.go
+expected := bank_seeder
+
+SEED_SRC_DIR := internal/seeders
+SEEDER_FILES := $(shell find $(SEED_SRC_DIR) -name '*seeder.go')
+SEEDER_FILE_NAMES := $(foreach seeder_dir,$(sort $(dir $(SEEDER_FILES))),$(seeder_dir:$(SEED_SRC_DIR)/%.go=%))
+
+
 #Targets
-.PHONY:all proto clean
+.PHONY:all proto clean migrate seed
 
 all: proto
 
@@ -23,8 +31,15 @@ $(PROTO_FILE_NAMES):
     --go-grpc_out=proto/ \
     --go-grpc_opt=paths=source_relative proto/$(@)/$(@).proto
 
+run:
+	@go run cmd/grpc-clean/main.go
+
 migrate:
 	@go run cmd/grpc-clean/main.go migrate
+
+seed:
+	@echo $^
+#	@go run cmd/grpc-clean/main.go seed
 
 clean:
 	@echo "Cleaning generated files..."

@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/registration_place"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateRegistrationPlace(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,9 +35,9 @@ func TestCreateRegistrationPlace(t *testing.T) {
 	registrationPlace := proto.NewRegistrationPlaceServiceClient(conn)
 
 	request := &proto.CreateRegistrationPlaceRequest{
-		Code:      "12345",
-		Name:      "test",
-		FlexFinId: "23",
+		Code:      faker.Word(),
+		Name:      faker.Name(),
+		FlexFinId: strconv.Itoa(rand.Int()),
 	}
 
 	res, err := registrationPlace.Create(context.Background(), request)

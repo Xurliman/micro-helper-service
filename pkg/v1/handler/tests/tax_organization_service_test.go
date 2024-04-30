@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/tax_organisation"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateTaxOrganisation(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,9 +35,9 @@ func TestCreateTaxOrganisation(t *testing.T) {
 	directOrgan := proto.NewTaxOrganisationServiceClient(conn)
 
 	request := &proto.CreateTaxOrganisationRequest{
-		Code:      "12345",
-		Name:      "test",
-		FlexFinId: "23",
+		Code:      faker.Word(),
+		Name:      faker.Name(),
+		FlexFinId: strconv.Itoa(rand.Int()),
 	}
 
 	res, err := directOrgan.Create(context.Background(), request)

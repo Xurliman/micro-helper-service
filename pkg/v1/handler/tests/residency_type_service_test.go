@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/residency_type"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateResidencyType(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,12 +35,12 @@ func TestCreateResidencyType(t *testing.T) {
 	residencyType := proto.NewResidencyTypeServiceClient(conn)
 
 	request := &proto.CreateResidencyTypeRequest{
-		Code:             "12345",
-		Name:             "test",
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
-		NameUz:           "tt",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
+		NameUz:           faker.Name(),
 	}
 
 	res, err := residencyType.Create(context.Background(), request)

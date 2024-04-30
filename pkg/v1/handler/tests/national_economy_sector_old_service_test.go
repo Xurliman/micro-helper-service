@@ -4,16 +4,20 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector_old"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateNationalEconomySectorOld(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,14 +36,14 @@ func TestCreateNationalEconomySectorOld(t *testing.T) {
 	nationalEconomySectorOld := proto.NewNationalEconomySectorOldServiceClient(conn)
 
 	request := &proto.CreateNationalEconomySectorOldRequest{
-		Code:             "12345",
-		Name:             "test",
-		CbuCode:          1,
-		CbuGroupCode:     1,
-		ActivationDate:   "2024-02-20",
-		DeactivationDate: "2024-03-20",
-		CbuReferenceKey:  1,
-		FlexFinId:        "128",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		CbuCode:          rand2.Int64(),
+		CbuGroupCode:     rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		CbuReferenceKey:  rand2.Int32(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := nationalEconomySectorOld.Create(context.Background(), request)

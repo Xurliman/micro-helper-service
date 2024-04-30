@@ -4,16 +4,20 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/payment_type"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreatePaymentType(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,14 +36,14 @@ func TestCreatePaymentType(t *testing.T) {
 	paymentType := proto.NewPaymentTypeServiceClient(conn)
 
 	request := &proto.CreatePaymentTypeRequest{
-		Code:             "12345",
-		Name:             "test",
-		ActivationDate:   "2024-02-20",
-		DeactivationDate: "2024-03-20",
-		OldName:          "Kolner Str. 200",
-		OldCode:          2024,
-		NameUz:           "2024",
-		FlexFinId:        "2024",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		OldName:          faker.Name(),
+		OldCode:          rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		NameUz:           faker.Word(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := paymentType.Create(context.Background(), request)

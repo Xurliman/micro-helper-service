@@ -2,7 +2,7 @@ package seeds
 
 import (
 	"github.com/Xurliman/banking-microservice/internal/models"
-	"github.com/bxcodec/faker/v3"
+	"github.com/go-faker/faker/v4"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 	"log"

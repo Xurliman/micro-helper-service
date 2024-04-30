@@ -3,6 +3,7 @@ module github.com/Xurliman/banking-microservice
 go 1.22.0
 
 require (
+	github.com/go-faker/faker/v4 v4.4.1
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
 	github.com/joho/godotenv v1.5.1
@@ -14,9 +15,6 @@ require (
 )
 
 require (
-	github.com/bxcodec/faker/v3 v3.8.1 // indirect
-	github.com/bxcodec/faker/v4 v4.0.0-beta.3 // indirect
-	github.com/go-faker/faker/v4 v4.4.1 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20231201235250-de7065d80cb9 // indirect

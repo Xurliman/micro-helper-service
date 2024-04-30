@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/education_type"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateEducationType(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,9 +35,9 @@ func TestCreateEducationType(t *testing.T) {
 	educationType := proto.NewEducationTypeServiceClient(conn)
 
 	request := &proto.CreateEducationTypeRequest{
-		Code:      "12345",
-		Name:      "test",
-		FlexFinId: "23",
+		Code:      faker.Word(),
+		Name:      faker.Name(),
+		FlexFinId: strconv.Itoa(rand.Int()),
 	}
 
 	res, err := educationType.Create(context.Background(), request)

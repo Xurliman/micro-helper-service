@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/national_economy_sector_new"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateNationalEconomySectorNew(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,26 +35,26 @@ func TestCreateNationalEconomySectorNew(t *testing.T) {
 	nationalEconomySectorNew := proto.NewNationalEconomySectorNewServiceClient(conn)
 
 	request := &proto.CreateNationalEconomySectorNewRequest{
-		Code:             "12345",
-		Name:             "test",
-		NameUz:           "asjaklsj",
-		Section:          1,
-		SectionCode:      "2024-02-20",
-		SectionName:      "2024-03-20",
-		SectionNameUz:    "kljlk",
-		GroupCode:        "128",
-		GroupName:        "128",
-		GroupNameUz:      "128",
-		Group1Code:       "128",
-		Group1Name:       "128",
-		Group1NameUz:     "128",
-		Group2Code:       "128",
-		Group2Name:       "128",
-		Group2NameUz:     "128",
-		ActivationDate:   "128",
-		DeactivationDate: "128",
-		CbuReferenceKey:  128,
-		FlexFinId:        "128",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		NameUz:           faker.Name(),
+		Section:          rand2.Int32(),
+		SectionCode:      faker.Word(),
+		SectionName:      faker.Word(),
+		SectionNameUz:    faker.Word(),
+		GroupCode:        faker.Word(),
+		GroupName:        faker.Word(),
+		GroupNameUz:      faker.Word(),
+		Group1Code:       faker.Word(),
+		Group1Name:       faker.Word(),
+		Group1NameUz:     faker.Word(),
+		Group2Code:       faker.Word(),
+		Group2Name:       faker.Word(),
+		Group2NameUz:     faker.Word(),
+		ActivationDate:   faker.Word(),
+		DeactivationDate: faker.Word(),
+		CbuReferenceKey:  rand2.Int32(),
+		FlexFinId:        strconv.Itoa(rand2.Int()),
 	}
 
 	res, err := nationalEconomySectorNew.Create(context.Background(), request)

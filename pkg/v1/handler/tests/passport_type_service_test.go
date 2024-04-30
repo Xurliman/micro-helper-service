@@ -4,16 +4,19 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/passport_type"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreatePassportType(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,13 +35,13 @@ func TestCreatePassportType(t *testing.T) {
 	passportType := proto.NewPassportTypeServiceClient(conn)
 
 	request := &proto.CreatePassportTypeRequest{
-		Code:             "12345",
-		Name:             "test",
-		OldCode:          "2024",
-		OldName:          "2024",
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		OldName:          faker.Name(),
+		OldCode:          faker.Name(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := passportType.Create(context.Background(), request)

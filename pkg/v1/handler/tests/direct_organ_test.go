@@ -4,16 +4,20 @@ import (
 	"context"
 	"fmt"
 	proto "github.com/Xurliman/banking-microservice/proto/direct_organ"
+	"github.com/go-faker/faker/v4"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"math/rand"
+	rand2 "math/rand/v2"
 	"os"
+	"strconv"
 	"testing"
 )
 
 func TestCreateDirectOrgan(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
@@ -32,13 +36,13 @@ func TestCreateDirectOrgan(t *testing.T) {
 	directOrgan := proto.NewDirectOrganServiceClient(conn)
 
 	request := &proto.CreateDirectOrganRequest{
-		Code:             "12345",
-		Name:             "test",
-		ShortName:        "tt",
-		CbuCode:          2024,
-		ActivationDate:   "2024-03-20",
-		DeactivationDate: "2024-03-20",
-		FlexFinId:        "23",
+		Code:             faker.Word(),
+		Name:             faker.Name(),
+		ShortName:        faker.Name(),
+		CbuCode:          rand2.Int64(),
+		ActivationDate:   faker.Date(),
+		DeactivationDate: faker.Date(),
+		FlexFinId:        strconv.Itoa(rand.Int()),
 	}
 
 	res, err := directOrgan.Create(context.Background(), request)

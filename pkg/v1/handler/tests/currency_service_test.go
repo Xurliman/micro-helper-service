@@ -17,7 +17,7 @@ import (
 )
 
 func TestCreateCurrency(t *testing.T) {
-	err := godotenv.Load()
+	err := godotenv.Load("../../../../.env")
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}

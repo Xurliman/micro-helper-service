@@ -1,10 +1,8 @@
 package database
 
 import (
-	"flag"
 	"fmt"
-	"github.com/Xurliman/banking-microservice/internal/models"
-	"github.com/Xurliman/banking-microservice/seeders"
+	cli_command "github.com/Xurliman/banking-microservice/internal/cli-command"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -33,45 +31,6 @@ func DbConn() *gorm.DB {
 		log.Fatalf("There was error connecting to the database: %v", err)
 	}
 	DB = db
-	//AutoMigrate(db)
-	Seeder(db)
+	cli_command.Organize(db)
 	return DB
-}
-
-func Seeder(db *gorm.DB) {
-	flag.Parse()
-	arguments := flag.Args()
-
-	if len(arguments) >= 1 {
-		switch arguments[0] {
-		case "seed":
-			seeds.Execute(db, arguments[1:]...)
-		}
-	}
-}
-
-func AutoMigrate(connection *gorm.DB) {
-	err := connection.AutoMigrate(
-		&models.Account{},
-		&models.Bank{},
-		&models.BankBranch{},
-		&models.BorrowerType{},
-		&models.ClientTypeClassifier{},
-		&models.Country{},
-		&models.Currency{},
-		&models.DirectOrgan{},
-		&models.District{},
-		&models.EducationType{},
-		&models.NationalEconomySectorNew{},
-		&models.NationalEconomySectorOld{},
-		&models.PassportType{},
-		&models.PaymentType{},
-		&models.Region{},
-		&models.RegistrationPlace{},
-		&models.ResidencyType{},
-		&models.TaxOrganisation{},
-	)
-	if err != nil {
-		log.Printf("err when automigrate: %v", err)
-	}
 }

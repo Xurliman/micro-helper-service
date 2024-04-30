@@ -23,6 +23,9 @@ $(PROTO_FILE_NAMES):
     --go-grpc_out=proto/ \
     --go-grpc_opt=paths=source_relative proto/$(@)/$(@).proto
 
+migrate:
+	@go run cmd/grpc-clean/main.go migrate
+
 clean:
 	@echo "Cleaning generated files..."
 	@rm -rf $(GENERATED_PROTO_FILES)

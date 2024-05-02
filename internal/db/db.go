@@ -2,13 +2,12 @@ package database
 
 import (
 	"fmt"
+	"github.com/Xurliman/banking-microservice/config"
 	cli_command "github.com/Xurliman/banking-microservice/internal/cli-command"
 	"github.com/joho/godotenv"
-	"log"
-	"os"
-
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 )
 
 var DB *gorm.DB
@@ -18,11 +17,8 @@ func DbConn() *gorm.DB {
 	if err != nil {
 		log.Printf("Error loading .env file: %v", err)
 	}
-	dbUser := os.Getenv("DB_USERNAME")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
 
-	connection := fmt.Sprintf("host=localhost user=%s dbname=%s password=%s port=5432 sslmode=disable", dbUser, dbName, dbPassword)
+	connection := fmt.Sprintf("host=localhost user=%s dbname=%s password=%s port=5432 sslmode=disable", config.GetDatabaseUser(), config.GetDatabaseName(), config.GetDatabasePassword())
 
 	db, err := gorm.Open(
 		postgres.Open(connection), &gorm.Config{},

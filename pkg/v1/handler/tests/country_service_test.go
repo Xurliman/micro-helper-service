@@ -3,26 +3,19 @@ package tests
 import (
 	"context"
 	"fmt"
+	"github.com/Xurliman/banking-microservice/config"
 	proto "github.com/Xurliman/banking-microservice/proto/country"
 	"github.com/go-faker/faker/v4"
-	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
 	"math/rand"
 	rand2 "math/rand/v2"
-	"os"
 	"strconv"
 	"testing"
 )
 
 func TestCreateCountry(t *testing.T) {
-	err := godotenv.Load("../../../../.env")
-	if err != nil {
-		log.Printf("Error loading .env file: %v", err)
-	}
-	port := os.Getenv("APP_PORT")
-	conn, err := grpc.Dial(fmt.Sprintf("localhost:%v", port), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(fmt.Sprintf("localhost:%v", config.GetAppPort()), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		t.Fatal("the connection with the server cannot be established")
 	}

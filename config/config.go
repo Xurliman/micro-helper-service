@@ -25,7 +25,7 @@ func GetAppPort() string {
 func getEnvironmentValue(key string) string {
 	err := godotenv.Load()
 	if err != nil {
-		log.Printf("Error loading .env file: %v", err)
+		log.Fatalf("Error loading .env file: %v", err)
 	}
 	if os.Getenv(key) == "" {
 		log.Fatalf("%s environment variable is missing.", key)

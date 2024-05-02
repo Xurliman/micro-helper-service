@@ -8,6 +8,7 @@ import (
 	proto "github.com/Xurliman/banking-microservice/proto/account"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
+	"log"
 )
 
 type AccountService struct {
@@ -36,6 +37,7 @@ func (service *AccountService) Create(context context.Context, request *proto.Cr
 
 func (service *AccountService) Get(context context.Context, request *proto.SingleAccountRequest) (*proto.AccountProfileResponse, error) {
 	id := request.GetId()
+	log.Printf(id)
 	if id == "" {
 		return &proto.AccountProfileResponse{}, errors.New("id cannot be blank")
 	}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Xurliman/banking-microservice/config"
 	database "github.com/Xurliman/banking-microservice/internal/db"
 	handlerAccount "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc/Account"
 	handlerBank "github.com/Xurliman/banking-microservice/pkg/v1/handler/grpc/Bank"
@@ -24,21 +25,21 @@ import (
 	"github.com/Xurliman/banking-microservice/pkg/v1/repository"
 	"github.com/Xurliman/banking-microservice/pkg/v1/usecase"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"gorm.io/gorm"
 	"log"
 	"net"
-	"os"
 )
 
 func main() {
 	db := database.DbConn()
-	port := os.Getenv("APP_PORT")
-	listen, err := net.Listen("tcp", fmt.Sprintf("localhost:%v", port))
+	listen, err := net.Listen("tcp", fmt.Sprintf("localhost:%v", config.GetAppPort()))
 	if err != nil {
 		log.Fatalf("ERROR STARTING THE SERVER : %v", err)
 	}
 	grpcServer := grpc.NewServer()
 	initServers(db, grpcServer)
+	reflection.Register(grpcServer)
 	log.Fatal(grpcServer.Serve(listen))
 }
 

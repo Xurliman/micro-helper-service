@@ -41,6 +41,9 @@ seed:
 	@echo $^
 #	@go run cmd/grpc-clean/main.go seed
 
+test:
+	@go test /var/www/banking-microservice/pkg/v1/handler/tests
+
 clean:
 	@echo "Cleaning generated files..."
 	@rm -rf $(GENERATED_PROTO_FILES)

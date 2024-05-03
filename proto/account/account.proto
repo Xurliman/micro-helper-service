@@ -3,10 +3,10 @@ option go_package = "proto.account";
 
 service AccountService {
   rpc List(ListAccountRequest) returns (ListAccountResponse);
-  rpc Create(CreateAccountRequest) returns (AccountProfileResponse);
-  rpc Get(SingleAccountRequest) returns (AccountProfileResponse);
-  rpc Update(UpdateAccountRequest) returns (SuccessResponse);
-  rpc Delete(SingleAccountRequest) returns (SuccessResponse);
+  rpc Create(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc Get(GetAccountRequest) returns (GetAccountResponse);
+  rpc Update(UpdateAccountRequest) returns (UpdateAccountResponse);
+  rpc Delete(DeleteAccountRequest) returns (DeleteAccountResponse);
 }
 
 message ListAccountRequest {
@@ -15,7 +15,7 @@ message ListAccountRequest {
 }
 
 message ListAccountResponse {
-  repeated AccountProfileResponse accounts = 1;
+  repeated GetAccountResponse accounts = 1;
 }
 
 message CreateAccountRequest {
@@ -25,14 +25,7 @@ message CreateAccountRequest {
   string flex_fin_id = 4;
 }
 
-message SingleAccountRequest {
-  oneof account_identifier {
-    string id = 1;
-    string code = 2;
-  }
-}
-
-message AccountProfileResponse {
+message CreateAccountResponse {
   string id = 1;
   string code = 2;
   string name = 3;
@@ -41,8 +34,20 @@ message AccountProfileResponse {
   string deleted_at = 6;
 }
 
-message SuccessResponse {
-  string response = 1;
+message GetAccountRequest {
+  oneof account_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message GetAccountResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string flex_fin_id = 5;
+  string deleted_at = 6;
 }
 
 message UpdateAccountRequest {
@@ -51,4 +56,33 @@ message UpdateAccountRequest {
   string name = 3;
   string description = 4;
   string flex_fin_id = 5;
+}
+
+message UpdateAccountResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string flex_fin_id = 5;
+  string deleted_at = 6;
+}
+
+message DeleteAccountRequest {
+  oneof account_identifier {
+    string id = 1;
+    string code = 2;
+  }
+}
+
+message DeleteAccountResponse {
+  string response = 1;
+}
+
+message Account {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string flex_fin_id = 5;
+  string deleted_at = 6;
 }

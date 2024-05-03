@@ -10,7 +10,7 @@ type Migrator struct {
 	db *gorm.DB
 }
 
-func migrate(connection *gorm.DB) {
+func Execute(connection *gorm.DB) {
 	err := connection.AutoMigrate(
 		&models.Account{},
 		&models.Bank{},
@@ -34,8 +34,4 @@ func migrate(connection *gorm.DB) {
 	if err != nil {
 		log.Printf("err when automigrate: %v", err)
 	}
-}
-
-func Execute(db *gorm.DB) {
-	migrate(db)
 }

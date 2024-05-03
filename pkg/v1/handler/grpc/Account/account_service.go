@@ -6,6 +6,7 @@ import (
 	"github.com/Xurliman/banking-microservice/internal/models"
 	"github.com/Xurliman/banking-microservice/pkg/v1/interfaces"
 	proto "github.com/Xurliman/banking-microservice/proto/account"
+	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"log"
@@ -22,49 +23,69 @@ func NewServer(grpcServer *grpc.Server, accountCase interfaces.AccountCaseInterf
 	return accountGrpc
 }
 
-func (service *AccountService) Create(context context.Context, request *proto.CreateAccountRequest) (*proto.AccountProfileResponse, error) {
-	data := service.transformClassifierRpc(request)
-	if data.Code == "" || data.Name == "" {
-		return &proto.AccountProfileResponse{}, errors.New("please provide all fields")
-	}
+//func (services *AccountService) List(context context.Context, request *proto.ListAccountRequest) (*proto.ListAccountResponse, error) {
+//
+//}
 
-	account, err := service.accountCase.Create(data)
-	if err != nil {
-		return &proto.AccountProfileResponse{}, err
-	}
-	return service.transformClassifierModel(account), nil
-}
-
-func (service *AccountService) Get(context context.Context, request *proto.SingleAccountRequest) (*proto.AccountProfileResponse, error) {
-	id := request.GetId()
-	log.Printf(id)
-	if id == "" {
-		return &proto.AccountProfileResponse{}, errors.New("id cannot be blank")
-	}
-
-	account, err := service.accountCase.Get(uuid.MustParse(id))
-	if err != nil {
-		return &proto.AccountProfileResponse{}, err
-	}
-
-	return service.transformClassifierModel(account), nil
-}
-
-func (service *AccountService) transformClassifierRpc(request *proto.CreateAccountRequest) models.Account {
-	return models.Account{
+func (service *AccountService) Create(context context.Context, request *proto.CreateAccountRequest) (*proto.CreateAccountResponse, error) {
+	account := models.Account{
 		Code:        request.GetCode(),
 		Name:        request.GetName(),
 		Description: request.GetDescription(),
 		FlexFinId:   request.GetFlexFinId(),
 	}
+
+	validated := service.validated(account)
+	if !validated {
+		return &proto.CreateAccountResponse{}, errors.New("please provide all fields")
+	}
+
+	data, err := service.accountCase.Create(account)
+	if err != nil {
+		return &proto.CreateAccountResponse{}, err
+	}
+
+	return &proto.CreateAccountResponse{
+		Id:          data.ID.String(),
+		Code:        data.Code,
+		Name:        data.Name,
+		Description: data.Description,
+		FlexFinId:   data.FlexFinId,
+	}, nil
 }
 
-func (service *AccountService) transformClassifierModel(account models.Account) *proto.AccountProfileResponse {
-	return &proto.AccountProfileResponse{
-		Id:          account.ID.String(),
-		Code:        account.Code,
-		Name:        account.Name,
-		Description: account.Description,
-		FlexFinId:   account.FlexFinId,
+func (service *AccountService) Get(context context.Context, request *proto.GetAccountRequest) (*proto.GetAccountResponse, error) {
+	code := request.GetCode()
+	log.Printf("account code: %s", code)
+	if code == "" {
+		return &proto.GetAccountResponse{}, errors.New("id cannot be blank")
 	}
+
+	data, err := service.accountCase.Get(uuid.MustParse(request.GetId()))
+	if err != nil {
+		return &proto.GetAccountResponse{}, err
+	}
+
+	return &proto.GetAccountResponse{
+		Id:          data.ID.String(),
+		Code:        data.Code,
+		Name:        data.Name,
+		Description: data.Description,
+		FlexFinId:   data.FlexFinId,
+	}, nil
+}
+
+//func (services *AccountService) Update(context context.Context, request *proto.UpdateAccountRequest) (*proto.UpdateAccountResponse, error) {
+//
+//}
+
+func (service *AccountService) validated(account models.Account) bool {
+	validate := validator.New()
+
+	err := validate.Struct(account)
+	if err != nil {
+		log.Fatalf("Validation error: %s", err.(validator.ValidationErrors))
+		return false
+	}
+	return true
 }
